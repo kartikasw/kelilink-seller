@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@color/light_orange"/>
+            <size android:width="@dimen/button_store_menu"
+                android:height="@dimen/button_store_menu"/>
+        </shape>
+    </item>
+    <item android:gravity="center"
+        android:drawable="@drawable/ic_no_food"/>
+</layer-list>

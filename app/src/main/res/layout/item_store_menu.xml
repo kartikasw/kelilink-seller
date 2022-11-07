@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/ism_iv_menu"
+        android:layout_width="@dimen/button_store_menu"
+        android:layout_height="@dimen/button_store_menu"
+        android:src="@drawable/menu_profile"/>
+
+    <TextView
+        android:id="@+id/ism_tv_name"
+        style="@style/TextAppearance.KelilinkSeller.Caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_component_small"/>
+
+</LinearLayout>

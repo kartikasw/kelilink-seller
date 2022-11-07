@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/margin_component_more"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/ipm_iv_menu"
+        android:layout_width="@dimen/image_view_item_store"
+        android:layout_height="@dimen/image_view_item_store"
+        android:scaleType="centerInside"
+        android:layout_marginStart="@dimen/margin_layout"
+        android:src="@drawable/shimmer_placeholder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/ipm_tv_title"
+        style="@style/TextAppearance.KelilinkSeller.Body1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_component"
+        android:background="@drawable/shimmer_placeholder"
+        app:layout_constraintEnd_toStartOf="@+id/ipm_guideline1"
+        app:layout_constraintStart_toEndOf="@+id/ipm_iv_menu"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/ipm_tv_price_and_unit"
+        style="@style/TextAppearance.KelilinkSeller.Caption"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_component_small"
+        android:background="@drawable/shimmer_placeholder"
+        app:layout_constraintEnd_toStartOf="@+id/ipm_guideline2"
+        app:layout_constraintStart_toStartOf="@id/ipm_tv_title"
+        app:layout_constraintTop_toBottomOf="@+id/ipm_tv_title" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/shimmer_placeholder"
+        android:layout_marginTop="@dimen/margin_component_more"
+        app:layout_constraintTop_toBottomOf="@id/ipm_iv_menu"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/ipm_guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.7"
+        android:orientation="vertical"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/ipm_guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.5"
+        android:orientation="vertical"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

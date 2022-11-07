@@ -1,0 +1,68 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.KelilinkSeller" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorPrimaryVariant">@color/orange</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/yellow</item>
+        <item name="colorSecondaryVariant">@color/orange</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="editTextStyle">@style/Widget.KelilinkSeller.EditText</item>
+        <item name="toolbarStyle">@style/ToolbarTheme</item>
+        <item name="tabStyle">@style/TabTheme</item>
+        <item name="chipStyle">@style/Widget.KelilinkSeller.Chip.Choice</item>
+        <item name="materialAlertDialogTheme">@style/AlertDialogTheme</item>
+    </style>
+
+    <style name="Theme.KelilinkSeller.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/yellow</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logo</item>
+        <item name="windowSplashScreenAnimationDuration">200</item>
+        <item name="postSplashScreenTheme">@style/Theme.KelilinkSeller</item>
+    </style>
+
+    <!-- Chip Group -->
+    <style name="Widget.KelilinkSeller.Chip.Choice" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:textAppearance">@style/TextAppearance.KelilinkSeller.Button</item>
+        <item name="chipBackgroundColor">@color/selector_chip</item>
+        <item name="android:textColor">@drawable/selector_text_view</item>
+        <item name="chipStrokeColor">@color/orange</item>
+        <item name="chipCornerRadius">@dimen/corner_button</item>
+        <item name="chipStrokeWidth">1dp</item>
+    </style>
+
+    <!-- Bottom Navigation -->
+    <style name="BottomNavigationTheme" parent="Theme.KelilinkSeller">
+        <item name="colorPrimary">@color/orange</item>
+    </style>
+
+    <!-- Switch -->
+    <style name="SwitchTheme" parent="Theme.KelilinkSeller">
+        <item name="colorSwitchThumbNormal">@color/orange</item>
+    </style>
+
+    <!-- Tab Layout -->
+    <style name="ToolbarTheme" parent="Widget.AppCompat.Toolbar">
+        <item name="android:textColor">@color/black</item>
+        <item name="elevation">0dp</item>
+    </style>
+
+    <style name="TabTheme" parent="Widget.MaterialComponents.TabLayout">
+        <item name="tabMode">scrollable</item>
+        <item name="tabTextColor">@color/black</item>
+        <item name="tabTextAppearance">@style/TextAppearance.KelilinkSeller.Button</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="textAllCaps">false</item>
+        <item name="tabIndicatorColor">@color/orange</item>
+    </style>
+
+    <style name="Theme.KelilinkSeller.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+</resources>

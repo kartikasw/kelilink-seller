@@ -1,0 +1,100 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Kelilink Seller</string>
+
+    <string name="page_add_menu">Tambah Menu</string>
+    <string name="page_edit_menu">Ubah Menu</string>
+    <string name="page_edit_stock">Ubah Stok</string>
+    <string name="page_edit_store_profile">Ubah Profil Dagangan</string>
+    <string name="page_menu">Menu</string>
+    <string name="page_profile">Profil</string>
+    <string name="page_stock">Stok Habis</string>
+
+    <string name="bottom_nav_order">Pesanan</string>
+    <string name="bottom_nav_store">Dagangan</string>
+
+    <string name="menu_edit_profile">Ubah Profil Dagangan</string>
+    <string name="menu_logout">Keluar</string>
+
+    <string name="btn_add">Tambah</string>
+    <string name="btn_closed">Tutup</string>
+    <string name="btn_cancel">Batal</string>
+    <string name="btn_delete">Hapus</string>
+    <string name="btn_login">Masuk</string>
+    <string name="btn_logout">Keluar</string>
+    <string name="btn_open">Buka</string>
+    <string name="btn_register">Daftar</string>
+    <string name="btn_save">Simpan</string>
+
+    <string name="title_login">Selamat datang di Kelilink Seller!</string>
+    <string name="content_login">Kelola usaha Anda dengan satu gerakan tangan.</string>
+    <string name="title_register">Daftarkan Akun Anda</string>
+    <string name="content_register">Daftarkan Diri dan Dagangan Anda untuk Menggunakan Layanan Kelilink Seller</string>
+    <string name="content_have_account">Sudah punya akun?</string>
+    <string name="content_dont_have_account">Belum punya akun?</string>
+
+    <string name="title_input_store_image">Foto Dagangan</string>
+    <string name="content_input_store_image">Foto akan tampil dalam pada halaman detail dagangan Anda. Anda disarankan untuk mengunggah foto gerobak dagangan.</string>
+    <string name="title_input_category">Jenis Dagangan</string>
+    <string name="content_input_category">Jenis dagangan akan mencirikan jenis kuliner yang Anda jual. Pilih maksimal 3 kategori.</string>
+    <string name="title_input_menu_image">Foto Menu</string>
+    <string name="content_input_menu_image">Foto akan tampil pada deskripsi menu.</string>
+    <string name="content_unit">contoh: tusuk, posi, buah, biji, dll.</string>
+    <string name="title_store_status">Status Jualan</string>
+    <string name="content_store_status_closed">Tekan tombol merah untuk berhenti berjualan.</string>
+    <string name="content_store_status_open">Tekan tombol hijau untuk mulai berjualan.</string>
+    <string name="title_menu_empty">Belum ada menu di dagangan</string>
+    <string name="content_menu_empty">Tambahkan menu baru untuk mulai berjualan.</string>
+    <string name="title_stock_management">Stok tersedia</string>
+    <string name="content_stock_management">Menu dengan stok tersedia/aktif akan muncul di daftar menu dagangan dan dapat dipesan oleh pelanggan</string>
+
+    <string name="title_delete">Hapus</string>
+    <string name="content_delete_menu">Anda yakin ingin menghapus menu ini?</string>
+
+    <string name="title_account">Akun</string>
+    <string name="title_other">Lainnya</string>
+    <string name="title_logout">Keluar</string>
+    <string name="content_logout">Anda yakin ingin keluar?</string>
+
+    <string name="hint_name">Nama</string>
+    <string name="hint_price">Harga</string>
+    <string name="hint_unit">Satuan</string>
+    <string name="hint_store_name">Nama Dagangan</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Kata Sandi</string>
+
+    <string name="error_field_empty">Data harus diisi</string>
+    <string name="error_field_email">Email tidak valid</string>
+    <string name="error_field_password">Kata sandi terlalu pendek</string>
+    <string name="error_field">Periksa data Anda kembali</string>
+
+    <string name="state_loading" tools:ignore="TypographyEllipsis">Sedang memuat...</string>
+    <string name="state_no_location">Lokasi tidak ditemukan. Periksa GPS Anda.</string>
+    <string name="state_operating_closed">Tekan tombol hijau untuk mulai berjualan.</string>
+    <string name="state_operating_open">Tekan tombol merah untuk menutup dagangan.</string>
+    <string name="state_out_of_stock">Stok habis</string>
+
+    <string-array name="menu_name">
+        <item>Profil</item>
+        <item>Menu</item>
+        <item>Stok Habis</item>
+    </string-array>
+
+    <string-array name="menu_icon">
+        <item>@drawable/menu_profile</item>
+        <item>@drawable/menu_menu</item>
+        <item>@drawable/menu_stock</item>
+    </string-array>
+
+    <string-array name="category_name">
+        <item>Bakso</item>
+        <item>Minuman</item>
+        <item>Es Krim</item>
+        <item>Jajanan</item>
+        <item>Buah</item>
+        <item>Sayuran</item>
+        <item>Nasi</item>
+        <item>Sate</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

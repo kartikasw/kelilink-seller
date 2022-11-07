@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".features.store.profile.ProfileActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:liftOnScroll="true">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/p_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/p_iv_store_image"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/image_view_store"
+                android:scaleType="centerCrop"
+                android:src="@color/shimmer_placeholder"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription,ImageContrastCheck" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/p_layout_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:layout_constraintTop_toBottomOf="@id/p_iv_store_image">
+
+                <TextView
+                    android:id="@+id/p_tv_store_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/margin_layout"
+                    android:textAppearance="@style/TextAppearance.KelilinkSeller.Heading6"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="@dimen/margin_component_more"
+                    tools:layout_editor_absoluteX="16dp" />
+
+                <TextView
+                    android:id="@+id/p_tv_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.KelilinkSeller.Caption"
+                    app:layout_constraintStart_toStartOf="@id/p_tv_store_name"
+                    app:layout_constraintTop_toBottomOf="@id/p_tv_store_name"
+                    android:layout_marginTop="@dimen/margin_component_small"/>
+
+                <ImageView
+                    android:id="@+id/p_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="@dimen/margin_layout"
+                    android:layout_marginTop="@dimen/margin_component_more"
+                    android:src="@drawable/dots"
+                    app:layout_constraintTop_toBottomOf="@id/p_tv_category"
+                    tools:ignore="ContentDescription,ImageContrastCheck" />
+
+                <TextView
+                    android:id="@+id/p_tv_title_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_account"
+                    android:textAppearance="@style/TextAppearance.KelilinkSeller.Subtitle2"
+                    android:textColor="@color/orange"
+                    app:layout_constraintStart_toStartOf="@id/p_tv_store_name"
+                    app:layout_constraintTop_toBottomOf="@id/p_line"
+                    android:layout_marginTop="@dimen/margin_layout"/>
+
+                <TextView
+                    android:id="@+id/p_btn_edit_profile"
+                    android:layout_width="match_parent"
+                    android:textAppearance="@style/TextAppearance.KelilinkSeller.Body1"
+                    android:text="@string/menu_edit_profile"
+                    android:gravity="center_vertical"
+                    android:layout_marginHorizontal="@dimen/margin_layout"
+                    android:layout_height="@dimen/button_menu"
+                    app:layout_constraintTop_toBottomOf="@+id/p_tv_title_account"
+                    app:drawableEndCompat="@drawable/ic_next" />
+
+                <TextView
+                    android:id="@+id/p_tv_title_other"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_other"
+                    android:textAppearance="@style/TextAppearance.KelilinkSeller.Subtitle2"
+                    android:textColor="@color/orange"
+                    app:layout_constraintStart_toStartOf="@id/p_tv_store_name"
+                    app:layout_constraintTop_toBottomOf="@id/p_btn_edit_profile"
+                    android:layout_marginTop="@dimen/margin_layout"/>
+
+                <TextView
+                    android:id="@+id/p_btn_logout"
+                    android:layout_width="match_parent"
+                    android:textAppearance="@style/TextAppearance.KelilinkSeller.Body1"
+                    android:text="@string/menu_logout"
+                    android:textColor="@color/red"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="@dimen/margin_layout"
+                    android:layout_height="@dimen/button_menu"
+                    android:drawablePadding="@dimen/margin_component_small"
+                    app:layout_constraintTop_toBottomOf="@+id/p_tv_title_other"
+                    app:drawableStartCompat="@drawable/ic_exit"
+                    app:drawableTint="@color/red" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <include
+                android:id="@+id/p_loading"
+                layout="@layout/placeholder_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/p_iv_store_image" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

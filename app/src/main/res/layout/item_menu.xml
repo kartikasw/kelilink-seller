@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/margin_component_more"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/im_iv_menu"
+        android:layout_width="@dimen/image_view_item_store"
+        android:layout_height="@dimen/image_view_item_store"
+        android:scaleType="centerInside"
+        android:layout_marginStart="@dimen/margin_layout"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/im_tv_title"
+        style="@style/TextAppearance.KelilinkSeller.Body1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_component"
+        android:layout_marginEnd="@dimen/margin_component_more"
+        app:layout_constraintEnd_toStartOf="@+id/im_iv_next"
+        app:layout_constraintStart_toEndOf="@+id/im_iv_menu"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/im_tv_price_and_unit"
+        style="@style/TextAppearance.KelilinkSeller.Caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_component_small"
+        android:textColor="@color/dark_gray"
+        android:layout_marginTop="@dimen/margin_component_small"
+        app:layout_constraintStart_toStartOf="@id/im_tv_title"
+        app:layout_constraintTop_toBottomOf="@+id/im_tv_title" />
+
+    <ImageView
+        android:id="@+id/im_iv_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_next"
+        app:tint="@color/dark_gray"
+        android:layout_marginEnd="@dimen/margin_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray"
+        android:layout_marginTop="@dimen/margin_component_more"
+        app:layout_constraintTop_toBottomOf="@id/im_iv_menu"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".features.store.profile.edit.EditProfileActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:liftOnScroll="true">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/ep_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ep_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:id="@+id/ep_layout_store_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginHorizontal="@dimen/margin_layout"
+                    android:padding="@dimen/margin_layout"
+                    android:background="@drawable/bg_section_input"
+                    android:layout_marginTop="@dimen/margin_layout"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/title_input_store_image"
+                        android:textAppearance="@style/TextAppearance.KelilinkSeller.Subtitle2"
+                        android:textColor="@color/orange"
+                        tools:ignore="TextContrastCheck" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/content_input_store_image"
+                        android:layout_marginTop="@dimen/margin_component_more"
+                        android:textAppearance="@style/TextAppearance.KelilinkSeller.Body2"/>
+
+                    <ImageView
+                        android:id="@+id/ep_iv_store_image"
+                        android:layout_width="@dimen/image_view_input"
+                        android:layout_height="@dimen/image_view_input"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/margin_component_more"
+                        android:src="@drawable/placeholder_add_image"
+                        tools:ignore="ContentDescription,ImageContrastCheck" />
+
+                </LinearLayout>
+
+                <com.example.kelilinkseller.util.custom_view.KelilinkEditText
+                    android:id="@+id/ep_et_store_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_text_input"
+                    android:layout_marginHorizontal="@dimen/margin_layout"
+                    android:layout_marginTop="@dimen/margin_component_extra"
+                    android:hint="@string/hint_store_name"
+                    android:paddingHorizontal="@dimen/margin_component_more"
+                    app:layout_constraintTop_toBottomOf="@id/ep_layout_store_image"
+                    tools:ignore="TextContrastCheck"
+                    tools:layout_editor_absoluteX="16dp" />
+
+                <LinearLayout
+                    android:id="@+id/ep_layout_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/margin_layout"
+                    android:layout_marginHorizontal="@dimen/margin_layout"
+                    android:background="@drawable/bg_section_input"
+                    android:layout_marginTop="@dimen/margin_component_extra"
+                    app:layout_constraintTop_toBottomOf="@id/ep_et_store_name">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/title_input_category"
+                        android:textAppearance="@style/TextAppearance.KelilinkSeller.Subtitle2"
+                        android:textColor="@color/orange"
+                        tools:ignore="TextContrastCheck" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/content_input_category"
+                        android:layout_marginTop="@dimen/margin_component_more"
+                        android:textAppearance="@style/TextAppearance.KelilinkSeller.Body2"/>
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/ep_cg_category"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="@dimen/margin_component_extra"
+                        android:layout_height="wrap_content"
+                        app:selectionRequired="true"/>
+
+                </LinearLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/ep_btn_save"
+                    style="@style/Widget.KelilinkSeller.Button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_layout_extra"
+                    android:text="@string/btn_save"
+                    android:layout_marginBottom="@dimen/margin_layout_extra"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/ep_et_store_name"
+                    app:layout_constraintStart_toStartOf="@+id/ep_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/ep_layout_category" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/ep_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.6" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <include
+                android:id="@+id/ep_loading"
+                app:layout_constraintTop_toTopOf="parent"
+                layout="@layout/placeholder_menu_form"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
