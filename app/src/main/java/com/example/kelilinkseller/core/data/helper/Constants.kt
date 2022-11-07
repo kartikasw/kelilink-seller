@@ -1,7 +1,13 @@
 package com.example.kelilinkseller.core.data.helper
 
 object Constants {
+
+    const val PREFERENCE_NAME = "Kelilink_Preference"
     const val DATABASE_NAME = "Kelilink.db"
+
+    object PreferenceValue {
+        const val FCM_TOKEN = "fcm_token"
+    }
 
     object DatabaseCollection {
         const val SELLER_COLLECTION = "seller"
@@ -17,6 +23,7 @@ object Constants {
         const val NAME_COLUMN = "name"
         const val EMAIL_COLUMN = "email"
         const val PHONE_NUMBER_COLUMN = "phone_number"
+        const val FCM_TOKEN_COLUMN = "fcm_token"
         const val CATEGORY_COLUMN = "categories"
         const val ADDRESS_COLUMN = "address"
         const val CLOSE_HOUR_COLUMN =  "close_hour"

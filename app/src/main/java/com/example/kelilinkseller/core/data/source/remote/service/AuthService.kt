@@ -3,6 +3,7 @@ package com.example.kelilinkseller.core.data.source.remote.service
 import android.net.Uri
 import com.example.kelilinkseller.core.data.helper.Constants.DatabaseCollection.SELLER_COLLECTION
 import com.example.kelilinkseller.core.data.helper.Constants.DatabaseCollection.STORE_COLLECTION
+import com.example.kelilinkseller.core.data.helper.Constants.DatabaseColumn.FCM_TOKEN_COLUMN
 import com.example.kelilinkseller.core.data.helper.Response
 import com.example.kelilinkseller.core.data.source.remote.response.SellerResponse
 import com.example.kelilinkseller.core.data.source.remote.response.StoreResponse
@@ -70,15 +71,17 @@ class AuthService @Inject constructor(): FirebaseService() {
             }
         }
 
-    fun logIn(email: String, password: String): Flow<Response<SellerResponse>> =
+    fun logIn(email: String, password: String, fcmToken: String): Flow<Response<SellerResponse>> =
         flow {
             signInWithEmailAndPassword(email, password).collect {
                 when(it) {
                     is Response.Success -> {
                         emitAll(
-                            getDocumentById(
+                            updateFieldInDocument(
                                 SELLER_COLLECTION,
-                                it.data
+                                it.data,
+                                FCM_TOKEN_COLUMN,
+                                fcmToken
                             )
                         )
                     }

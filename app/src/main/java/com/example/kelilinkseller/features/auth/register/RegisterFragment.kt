@@ -82,6 +82,7 @@ class RegisterFragment : Fragment() {
         ) {
             val seller = Seller(
                 uid = "",
+                fcm_token = "",
                 email = emailData
             )
 

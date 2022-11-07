@@ -17,8 +17,8 @@ class RemoteDataSource @Inject constructor(
     fun register(email: String, password: String, seller: Seller, store: Store, uri: Uri) =
         auth.register(email, password, seller, store, uri)
 
-    fun logIn(email: String, password: String) =
-        auth.logIn(email, password)
+    fun logIn(email: String, password: String, fcmToken: String) =
+        auth.logIn(email, password, fcmToken)
 
     fun getMyStore() =
         store.getMyStore()

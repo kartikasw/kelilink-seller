@@ -1,8 +1,10 @@
 package com.example.kelilinkseller.core.di
 
 import com.example.kelilinkseller.core.data.repository.AuthRepositoryImpl
+import com.example.kelilinkseller.core.data.repository.SellerRepositoryImpl
 import com.example.kelilinkseller.core.data.repository.StoreRepositoryImpl
 import com.example.kelilinkseller.core.domain.repository.AuthRepository
+import com.example.kelilinkseller.core.domain.repository.SellerRepository
 import com.example.kelilinkseller.core.domain.repository.StoreRepository
 import dagger.Binds
 import dagger.Module
@@ -16,6 +18,11 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun provideAuthRepository(authRepositoryImpl: AuthRepositoryImpl): AuthRepository
+
+    @Binds
+    abstract fun provideSellerRepository(
+        sellerRepositoryImpl: SellerRepositoryImpl
+    ): SellerRepository
 
     @Binds
     abstract fun provideStoreRepository(storeRepositoryImpl: StoreRepositoryImpl): StoreRepository

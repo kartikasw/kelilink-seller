@@ -12,6 +12,6 @@ class AuthInteractor @Inject constructor(private val authRepository: AuthReposit
     override fun register(email: String, password: String, seller: Seller, store: Store, uri: Uri): Flow<Resource<Unit>> =
         authRepository.register(email, password, seller, store, uri)
 
-    override fun logIn(email: String, password: String): Flow<Resource<Unit>> =
-        authRepository.logIn(email, password)
+    override fun logIn(email: String, password: String, fcmToken: String): Flow<Resource<Unit>> =
+        authRepository.logIn(email, password, fcmToken)
 }

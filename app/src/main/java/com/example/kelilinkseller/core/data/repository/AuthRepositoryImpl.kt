@@ -2,7 +2,6 @@ package com.example.kelilinkseller.core.data.repository
 
 import android.net.Uri
 import com.example.kelilinkseller.core.data.helper.Response
-import com.example.kelilinkseller.core.data.source.local.room.LocalDataSource
 import com.example.kelilinkseller.core.data.source.remote.RemoteDataSource
 import com.example.kelilinkseller.core.domain.Resource
 import com.example.kelilinkseller.core.domain.model.Seller
@@ -33,10 +32,10 @@ class AuthRepositoryImpl @Inject constructor(
             }
         }
 
-    override fun logIn(email: String, password: String): Flow<Resource<Unit>> =
+    override fun logIn(email: String, password: String, fcmToken: String): Flow<Resource<Unit>> =
         flow {
             emit(Resource.Loading())
-            when (val response = remote.logIn(email, password).first()) {
+            when (val response = remote.logIn(email, password, fcmToken).first()) {
                 is Response.Success -> {
                     emit(Resource.Success(null))
                 }

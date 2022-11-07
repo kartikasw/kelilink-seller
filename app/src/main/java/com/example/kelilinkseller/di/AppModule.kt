@@ -2,6 +2,8 @@ package com.example.kelilinkseller.di
 
 import com.example.kelilinkseller.core.domain.use_case.auth.AuthInteractor
 import com.example.kelilinkseller.core.domain.use_case.auth.AuthUseCase
+import com.example.kelilinkseller.core.domain.use_case.seller.SellerInteractor
+import com.example.kelilinkseller.core.domain.use_case.seller.SellerUseCase
 import com.example.kelilinkseller.core.domain.use_case.store.StoreInteractor
 import com.example.kelilinkseller.core.domain.use_case.store.StoreUseCase
 import dagger.Binds
@@ -17,6 +19,10 @@ abstract class AppModule {
     @Binds
     @ViewModelScoped
     abstract fun provideAuthUseCase(authInteractor: AuthInteractor): AuthUseCase
+
+    @Binds
+    @ViewModelScoped
+    abstract fun provideSellerUseCase(sellerInteractor: SellerInteractor): SellerUseCase
 
     @Binds
     @ViewModelScoped
