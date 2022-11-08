@@ -9,6 +9,10 @@
     <string name="page_profile">Profil</string>
     <string name="page_stock">Stok Habis</string>
 
+    <string name="tab_order_new">Dalam proses</string>
+    <string name="tab_order_ready">Sudah siap</string>
+    <string name="tab_order_done">Selesai</string>
+
     <string name="bottom_nav_order">Pesanan</string>
     <string name="bottom_nav_store">Dagangan</string>
 
