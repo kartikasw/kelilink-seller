@@ -63,7 +63,8 @@ class LoginFragment : Fragment() {
 
         if(email.error == null && password.error == null
             && emailData.isNotEmpty() && passwordData.isNotEmpty()) {
-            loginViewModel.logIn(emailData, passwordData).observe(viewLifecycleOwner, ::loginResponse)
+            val token = loginViewModel.getFcmToken()
+            loginViewModel.logIn(emailData, passwordData, token).observe(viewLifecycleOwner, ::loginResponse)
         }
     }
 

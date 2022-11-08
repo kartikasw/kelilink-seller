@@ -2,8 +2,11 @@ package com.example.kelilinkseller.core.data.helper
 
 object Constants {
 
-    const val PREFERENCE_NAME = "Kelilink_Preference"
-    const val DATABASE_NAME = "Kelilink.db"
+    const val PREFERENCE_NAME = "KelilinkSeller_Preference"
+    const val DATABASE_NAME = "KelilinkSeller.db"
+
+    const val CHANNEL_ID = "KelilinkSeller_Channel"
+    const val CHANNEL_NAME = "KelilinkSeller"
 
     object PreferenceValue {
         const val FCM_TOKEN = "fcm_token"

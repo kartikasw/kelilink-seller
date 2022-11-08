@@ -78,7 +78,7 @@ class AuthService @Inject constructor(): FirebaseService() {
                     is Response.Success -> {
                         emitAll(
                             updateFieldInDocument(
-                                SELLER_COLLECTION,
+                                STORE_COLLECTION,
                                 it.data,
                                 FCM_TOKEN_COLUMN,
                                 fcmToken

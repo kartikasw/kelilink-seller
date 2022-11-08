@@ -82,12 +82,12 @@ class RegisterFragment : Fragment() {
         ) {
             val seller = Seller(
                 uid = "",
-                fcm_token = "",
                 email = emailData
             )
 
             val store = Store(
                 categories = categoryList,
+                fcm_token = "",
                 name = storeNameData
             )
 
