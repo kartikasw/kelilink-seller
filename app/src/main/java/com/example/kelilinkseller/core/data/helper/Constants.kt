@@ -48,7 +48,7 @@ object Constants {
         const val AVAILABLE_COLUMN = "available"
         const val STATUS_COLUMN = "status"
         const val UNIT_COLUMN = "unit"
-        const val TIMESTAMP_COLUMN = "timestamp"
+        const val TIME_COLUMN = "time"
     }
 
     object ORDER_STATUS {

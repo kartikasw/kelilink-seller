@@ -3,6 +3,7 @@ package com.example.kelilinkseller.core.data.source.remote.service
 import android.net.Uri
 import android.util.Log
 import com.example.kelilinkseller.core.data.helper.Constants.DatabaseColumn.ID_COLUMN
+import com.example.kelilinkseller.core.data.helper.Constants.DatabaseColumn.TIME_COLUMN
 import com.example.kelilinkseller.core.data.helper.Response
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
@@ -11,7 +12,6 @@ import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.tasks.await
-import java.lang.Exception
 
 abstract class FirebaseService {
 
@@ -166,14 +166,12 @@ abstract class FirebaseService {
     inline fun <reified ResponseType, FieldType> getDocumentByField(
         collection: String,
         field: String,
-        value: FieldType,
-        orderBy: String
+        value: List<FieldType>
     ): Flow<Response<List<ResponseType>>> =
         flow {
             val result = firestore
                 .collection(collection)
-                .whereEqualTo(field, value)
-                .orderBy(orderBy)
+                .whereIn(field, value)
                 .get()
                 .await()
 
@@ -187,17 +185,16 @@ abstract class FirebaseService {
             emit(Response.Error(it.message.toString()))
         }.flowOn(Dispatchers.IO)
 
-    inline fun <reified ResponseType, FieldType> getDocumentByField(
+    inline fun <reified ResponseType, FieldType> getDocumentByFieldAndOrderByTime(
         collection: String,
         field: String,
-        value: List<FieldType>,
-        orderBy: String
+        value: FieldType
     ): Flow<Response<List<ResponseType>>> =
         flow {
             val result = firestore
                 .collection(collection)
-                .whereIn(field, value)
-                .orderBy(orderBy)
+                .whereEqualTo(field, value)
+                .orderBy(TIME_COLUMN)
                 .get()
                 .await()
 

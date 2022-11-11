@@ -10,12 +10,12 @@
         android:id="@+id/im_iv_menu"
         android:layout_width="@dimen/image_view_item_store"
         android:layout_height="@dimen/image_view_item_store"
-        android:scaleType="centerInside"
         android:layout_marginStart="@dimen/margin_layout"
+        android:scaleType="centerInside"
         android:src="@drawable/ic_launcher_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription,ImageContrastCheck" />
 
     <TextView
         android:id="@+id/im_tv_title"

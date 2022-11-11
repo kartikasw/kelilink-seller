@@ -34,7 +34,7 @@
         <include
             android:visibility="invisible"
             android:id="@+id/m_empty"
-            layout="@layout/state_empty_menu"
+            layout="@layout/state_empty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"

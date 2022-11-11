@@ -22,10 +22,12 @@
     <string name="btn_add">Tambah</string>
     <string name="btn_closed">Tutup</string>
     <string name="btn_cancel">Batal</string>
+    <string name="btn_decline">Tolak</string>
     <string name="btn_delete">Hapus</string>
     <string name="btn_login">Masuk</string>
     <string name="btn_logout">Keluar</string>
     <string name="btn_open">Buka</string>
+    <string name="btn_ready">Tandai pesanan siap</string>
     <string name="btn_register">Daftar</string>
     <string name="btn_save">Simpan</string>
 

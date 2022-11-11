@@ -2,6 +2,7 @@ package com.example.kelilinkseller.core.data.source.remote
 
 import android.net.Uri
 import com.example.kelilinkseller.core.data.source.remote.service.AuthService
+import com.example.kelilinkseller.core.data.source.remote.service.OrderService
 import com.example.kelilinkseller.core.data.source.remote.service.StoreService
 import com.example.kelilinkseller.core.domain.model.Menu
 import com.example.kelilinkseller.core.domain.model.Seller
@@ -12,13 +13,17 @@ import javax.inject.Singleton
 @Singleton
 class RemoteDataSource @Inject constructor(
     private val auth: AuthService,
-    private val store: StoreService,
+    private val order: OrderService,
+    private val store: StoreService
 ) {
     fun register(email: String, password: String, seller: Seller, store: Store, uri: Uri) =
         auth.register(email, password, seller, store, uri)
 
     fun logIn(email: String, password: String, fcmToken: String) =
         auth.logIn(email, password, fcmToken)
+
+    fun getAllOrder() =
+        order.getAllOrder()
 
     fun getMyStore() =
         store.getMyStore()

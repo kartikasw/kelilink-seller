@@ -3,4 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/crv_rv_order"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <include
+        android:id="@+id/crv_loading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout=""
+
 </androidx.constraintlayout.widget.ConstraintLayout>
