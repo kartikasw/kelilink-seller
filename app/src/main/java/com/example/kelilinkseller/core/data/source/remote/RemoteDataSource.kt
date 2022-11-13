@@ -25,6 +25,9 @@ class RemoteDataSource @Inject constructor(
     fun getAllOrder() =
         order.getAllOrder()
 
+    fun getOrderMenu(invoiceId: String) =
+        order.getOrderMenu(invoiceId)
+
     fun getMyStore() =
         store.getMyStore()
 

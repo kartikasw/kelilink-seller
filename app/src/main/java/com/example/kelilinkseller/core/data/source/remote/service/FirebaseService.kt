@@ -120,6 +120,28 @@ abstract class FirebaseService {
             emit(Response.Error(it.message.toString()))
         }.flowOn(Dispatchers.IO)
 
+    inline fun <reified ResponseType> getDocumentInSubCollection(
+        collection: String,
+        docId: String,
+        subCollection: String
+    ): Flow<Response<List<ResponseType>>> =
+        flow {
+            val result = firestore
+                .collection(collection)
+                .document(docId)
+                .collection(subCollection)
+                .get()
+                .await()
+
+            if (result.isEmpty) {
+                emit(Response.Empty)
+            } else {
+                emit(Response.Success(result.toObjects(ResponseType::class.java)))
+            }
+        }.catch {
+            emit(Response.Error(it.message.toString()))
+        }.flowOn(Dispatchers.IO)
+
     inline fun <reified ResponseType> getDocumentById(
         collection: String,
         docId: String

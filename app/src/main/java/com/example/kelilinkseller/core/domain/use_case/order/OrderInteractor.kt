@@ -2,6 +2,7 @@ package com.example.kelilinkseller.core.domain.use_case.order
 
 import com.example.kelilinkseller.core.domain.Resource
 import com.example.kelilinkseller.core.domain.model.Invoice
+import com.example.kelilinkseller.core.domain.model.Order
 import com.example.kelilinkseller.core.domain.repository.OrderRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -18,5 +19,8 @@ class OrderInteractor @Inject constructor(
 
     override fun getAllDoneOrder(): Flow<Resource<List<Invoice>>> =
         orderRepository.getAllDoneOrder()
+
+    override fun getOrderMenu(): Flow<Resource<List<Order>>> =
+        orderRepository.getOrderMenu()
 
 }

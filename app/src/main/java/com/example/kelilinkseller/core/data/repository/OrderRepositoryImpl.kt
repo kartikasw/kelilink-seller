@@ -10,6 +10,7 @@ import com.example.kelilinkseller.core.data.mapper.toListModel
 import com.example.kelilinkseller.core.data.source.remote.RemoteDataSource
 import com.example.kelilinkseller.core.domain.Resource
 import com.example.kelilinkseller.core.domain.model.Invoice
+import com.example.kelilinkseller.core.domain.model.Order
 import com.example.kelilinkseller.core.domain.repository.OrderRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
@@ -21,21 +22,39 @@ import javax.inject.Singleton
 class OrderRepositoryImpl @Inject constructor(
     private val remote: RemoteDataSource
 ): OrderRepository {
+
+    companion object {
+        const val TAG = "OrderRepository"
+    }
+
     override fun getAllNewOrder(): Flow<Resource<List<Invoice>>> =
         flow {
             emit(Resource.Loading())
-            when(val response = remote.getAllOrder().first()) {
+            when(val invoiceResponse = remote.getAllOrder().first()) {
                 is Response.Success -> {
-                    Log.d(StoreRepositoryImpl.TAG, response.data.toString())
-                    emit(Resource.Success(response.data.toListModel().filter {
-                        it.status == COOKING || it.status == WAITING
-                    }))
+                    val responseModel = invoiceResponse.data.toListModel()
+                     for(i in responseModel) {
+                         when(val orderResponse = remote.getOrderMenu(i.id).first()) {
+                             is Response.Success -> {
+                                 Log.d(TAG, orderResponse.data.toString())
+                                 responseModel[responseModel.indexOf(i)].orders =
+                                     orderResponse.data.toListModel()
+                             }
+                             else -> {}
+                         }
+                     }
+                    Log.d(TAG, responseModel.toString())
+                    emit(Resource.Success(
+                        responseModel.filter {
+                            it.status == COOKING || it.status == WAITING
+                        })
+                    )
                 }
                 is Response.Empty -> {
                     emit(Resource.Success(null))
                 }
                 is Response.Error -> {
-                    emit(Resource.Error(response.errorMessage))
+                    emit(Resource.Error(invoiceResponse.errorMessage))
                 }
             }
         }
@@ -77,4 +96,8 @@ class OrderRepositoryImpl @Inject constructor(
                 }
             }
         }
+
+    override fun getOrderMenu(): Flow<Resource<List<Order>>> {
+        TODO("Not yet implemented")
+    }
 }

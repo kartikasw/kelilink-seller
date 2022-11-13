@@ -17,6 +17,7 @@ object Constants {
         const val STORE_COLLECTION = "store"
         const val MENU_COLLECTION = "menu"
         const val ORDER_COLLECTION = "order"
+        const val ORDERS_COLLECTION = "orders"
         const val INVOICE_COLLECTION = "invoice"
     }
 

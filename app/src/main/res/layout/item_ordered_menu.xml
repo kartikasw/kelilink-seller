@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/margin_component_more"
+    android:layout_marginHorizontal="@dimen/margin_layout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bg_ordered_menu">
 

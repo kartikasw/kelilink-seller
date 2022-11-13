@@ -19,12 +19,15 @@ class MenuAdapter: RecyclerView.Adapter<MenuAdapter.MyViewHolder>() {
 
     @SuppressLint("NotifyDataSetChanged")
     fun setItems(items: List<Menu>?) {
-        if (items == null) return
-        itemList.apply {
-            clear()
-            addAll(items)
+        itemList.clear()
+
+        if (items == null) {
+            notifyDataSetChanged()
+            return
+        } else {
+            itemList.addAll(items)
+            notifyDataSetChanged()
         }
-        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {

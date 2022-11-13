@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.kelilinkseller.databinding.ContentRecyclerViewBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class OrderDoneFragment : Fragment() {
 
     private var _binding: ContentRecyclerViewBinding? = null

@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_component_extra"
         android:text="@string/btn_decline"
-        app:layout_constraintEnd_toStartOf="@+id/io_guideline"
+        app:layout_constraintEnd_toStartOf="@+id/iow_guideline"
         app:layout_constraintStart_toStartOf="@id/iow_iv_profile"
         app:layout_constraintTop_toBottomOf="@id/iow_rv_menu"
         tools:ignore="TextContrastCheck" />

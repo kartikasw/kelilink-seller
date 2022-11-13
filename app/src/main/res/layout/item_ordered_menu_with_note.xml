@@ -2,6 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/margin_component_more"
+    android:layout_marginHorizontal="@dimen/margin_layout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bg_ordered_menu">
 
@@ -39,7 +41,7 @@
 
         <TextView
             android:id="@+id/iomwn_tv_note"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.KelilinkSeller.Caption"
             android:layout_marginStart="@dimen/margin_component_more"/>

@@ -1,7 +1,9 @@
 package com.example.kelilinkseller.core.ui
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kelilinkseller.core.domain.model.Invoice
 import com.example.kelilinkseller.databinding.ItemOrderCookingBinding
@@ -13,6 +15,19 @@ import com.example.kelilinkseller.util.dateFormat
 class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var itemList = ArrayList<Invoice>()
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setItems(items: List<Invoice>?) {
+        itemList.clear()
+
+        if (items == null) {
+            notifyDataSetChanged()
+            return
+        } else {
+            itemList.addAll(items)
+            notifyDataSetChanged()
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when(viewType) {
@@ -55,6 +70,13 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             with(binding) {
                 iowTvUserName.text = invoice.id
                 iowTvTime.text = dateFormat.format(invoice.time)
+
+                val orderMenuAdapter = OrderMenuAdapter()
+                orderMenuAdapter.setItems(invoice.orders)
+                with(iowRvMenu) {
+                    layoutManager = LinearLayoutManager(context)
+                    adapter = orderMenuAdapter
+                }
             }
         }
     }
@@ -63,7 +85,17 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val binding: ItemOrderCookingBinding
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind(invoice: Invoice) {
+            with(binding) {
+                iocTvUserName.text = invoice.id
+                iocTvTime.text = dateFormat.format(invoice.time)
 
+                val orderMenuAdapter = OrderMenuAdapter()
+                orderMenuAdapter.setItems(invoice.orders)
+                with(iocRvMenu) {
+                    layoutManager = LinearLayoutManager(context)
+                    adapter = orderMenuAdapter
+                }
+            }
         }
     }
 

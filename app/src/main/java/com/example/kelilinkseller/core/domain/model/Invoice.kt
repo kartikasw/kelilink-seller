@@ -5,6 +5,7 @@ import java.util.*
 data class Invoice(
     val address: String = "",
     val id: String = "",
+    var orders: List<Order> = listOf(),
     val queue_order: Int = 0,
     val status: String = "",
     val store_id: String = "",
