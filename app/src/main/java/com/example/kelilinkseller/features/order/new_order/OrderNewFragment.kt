@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.kelilinkseller.core.domain.Resource
@@ -30,16 +31,20 @@ class OrderNewFragment : Fragment() {
         orderViewModel.getAllNewOrder().observe(viewLifecycleOwner) {
             when(it) {
                 is Resource.Success -> {
-
+                    showLoadingState(false)
                 }
                 is Resource.Loading -> {
-
+                    showLoadingState(true)
                 }
                 is Resource.Error -> {
-
+                    showLoadingState(false)
                 }
             }
         }
+    }
+
+    private fun showLoadingState(state: Boolean) {
+        binding.crvLoading.root.isVisible = state
     }
 
     override fun onDestroy() {

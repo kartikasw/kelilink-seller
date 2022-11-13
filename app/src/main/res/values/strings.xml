@@ -28,6 +28,7 @@
     <string name="btn_logout">Keluar</string>
     <string name="btn_open">Buka</string>
     <string name="btn_ready">Tandai pesanan siap</string>
+    <string name="btn_taken">Tandai pesanan diambil</string>
     <string name="btn_register">Daftar</string>
     <string name="btn_save">Simpan</string>
 

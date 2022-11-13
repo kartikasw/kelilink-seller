@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:paddingTop="@dimen/margin_layout">
 
     <ImageView
-        android:id="@+id/io_iv_profile"
+        android:id="@+id/ioc_iv_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_profile"
@@ -17,17 +17,17 @@
         tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/io_tv_user_name"
+        android:id="@+id/ioc_tv_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.KelilinkSeller.Body2"
         android:layout_marginStart="@dimen/margin_component"
-        app:layout_constraintStart_toEndOf="@id/io_iv_profile"
-        app:layout_constraintBottom_toBottomOf="@id/io_iv_profile"
-        app:layout_constraintTop_toTopOf="@+id/io_iv_profile" />
+        app:layout_constraintStart_toEndOf="@id/ioc_iv_profile"
+        app:layout_constraintBottom_toBottomOf="@id/ioc_iv_profile"
+        app:layout_constraintTop_toTopOf="@+id/ioc_iv_profile" />
 
     <TextView
-        android:id="@+id/io_tv_time"
+        android:id="@+id/ioc_tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawablePadding="@dimen/margin_component"
@@ -36,54 +36,37 @@
         android:textColor="@color/dark_gray"
         android:gravity="center_vertical"
         android:layout_marginEnd="@dimen/margin_layout"
-        app:layout_constraintBottom_toBottomOf="@+id/io_iv_profile"
+        app:layout_constraintBottom_toBottomOf="@+id/ioc_iv_profile"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/io_iv_profile" />
+        app:layout_constraintTop_toTopOf="@+id/ioc_iv_profile" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/io_rv_menu"
+        android:id="@+id/ioc_rv_menu"
         android:layout_marginTop="@dimen/margin_component_extra"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/io_iv_profile" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/io_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent="0.4"
-        android:orientation="vertical"/>
+        app:layout_constraintTop_toBottomOf="@+id/ioc_iv_profile" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/io_btn_decline"
-        style="@style/Widget.KelilinkSeller.OutlinedButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_component_extra"
-        android:text="@string/btn_decline"
-        app:layout_constraintEnd_toStartOf="@+id/io_guideline"
-        app:layout_constraintStart_toStartOf="@id/io_iv_profile"
-        app:layout_constraintTop_toBottomOf="@id/io_rv_menu"
-        tools:ignore="TextContrastCheck" />
-
-    <com.google.android.material.button.MaterialButton
+        android:id="@+id/ioc_btn_decline"
         style="@style/Widget.KelilinkSeller.Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_component_more"
-        app:layout_constraintBottom_toBottomOf="@+id/io_btn_decline"
-        app:layout_constraintEnd_toEndOf="@+id/io_tv_time"
-        app:layout_constraintStart_toStartOf="@+id/io_guideline"
-        app:layout_constraintTop_toTopOf="@+id/io_btn_decline"
-        tools:ignore="SpeakableTextPresentCheck" />
+        android:layout_marginTop="@dimen/margin_component_extra"
+        android:text="@string/btn_ready"
+        app:layout_constraintEnd_toEndOf="@id/ioc_tv_time"
+        app:layout_constraintStart_toStartOf="@id/ioc_iv_profile"
+        app:layout_constraintTop_toBottomOf="@id/ioc_rv_menu"
+        tools:ignore="TextContrastCheck" />
 
     <View
-        android:id="@+id/io_line"
+        android:id="@+id/ioc_line"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="@color/gray"
         android:layout_marginTop="@dimen/margin_component_extra"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/io_btn_decline" />
+        app:layout_constraintTop_toBottomOf="@+id/ioc_btn_decline" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

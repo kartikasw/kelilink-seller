@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/margin_layout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <ImageView
+        android:id="@+id/iod_iv_profile"
+        android:layout_width="@dimen/image_view_profile_buyer"
+        android:layout_height="@dimen/image_view_profile_buyer"
+        android:src="@drawable/shimmer_placeholder_oval"
+        android:layout_marginStart="@dimen/margin_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/iod_tv_user_name"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.KelilinkSeller.Body2"
+        android:layout_marginStart="@dimen/margin_component"
+        android:background="@drawable/shimmer_placeholder"
+        app:layout_constraintStart_toEndOf="@id/iod_iv_profile"
+        app:layout_constraintBottom_toBottomOf="@id/iod_iv_profile"
+        app:layout_constraintTop_toTopOf="@+id/iod_iv_profile" />
+
+    <TextView
+        android:id="@+id/iod_tv_time"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:drawablePadding="@dimen/margin_component"
+        android:textAppearance="@style/TextAppearance.KelilinkSeller.Caption"
+        android:background="@drawable/shimmer_placeholder"
+
+        android:gravity="center_vertical"
+        android:layout_marginEnd="@dimen/margin_layout"
+        app:layout_constraintBottom_toBottomOf="@+id/iod_iv_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iod_iv_profile" />
+
+    <TextView
+        android:id="@+id/text_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.KelilinkSeller.Body2"
+        android:background="@drawable/shimmer_placeholder"
+        app:layout_constraintTop_toBottomOf="@id/iod_iv_profile"
+        android:layout_marginTop="@dimen/margin_component_extra"
+        android:layout_marginHorizontal="@dimen/margin_layout"/>
+
+    <TextView
+        android:id="@+id/text_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.KelilinkSeller.Body2"
+        android:background="@drawable/shimmer_placeholder"
+        app:layout_constraintTop_toBottomOf="@id/text_1"
+        android:layout_marginTop="@dimen/margin_component"
+        android:layout_marginHorizontal="@dimen/margin_layout"/>
+
+    <TextView
+        android:id="@+id/text_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.KelilinkSeller.Body2"
+        android:background="@drawable/shimmer_placeholder"
+        app:layout_constraintTop_toBottomOf="@id/text_2"
+        android:layout_marginTop="@dimen/margin_component"
+        android:layout_marginHorizontal="@dimen/margin_layout"/>
+
+
+    <View
+        android:id="@+id/iod_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray"
+        android:layout_marginTop="@dimen/margin_component_extra"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_3" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

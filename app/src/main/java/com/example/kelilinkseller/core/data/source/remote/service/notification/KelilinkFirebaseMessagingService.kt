@@ -39,7 +39,7 @@ class KelilinkFirebaseMessagingService: FirebaseMessagingService() {
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
         Log.d(TAG, message.toString())
-        sendNotification("Pesanan baru masuk", message.data["invoice_id"])
+        sendNotification("Kamu punya pesanan baru", message.data["invoice_id"])
     }
 
     private fun sendNotification(title: String?, messageBody: String?) {
@@ -53,7 +53,7 @@ class KelilinkFirebaseMessagingService: FirebaseMessagingService() {
         val notificationBuilder = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle(title)
-            .setContentText(messageBody)
+            .setContentText("Waktu terus berjalan, segera terima pesanan sebelum otomatis tertolak")
             .setContentIntent(contentPendingIntent)
             .setAutoCancel(true)
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

@@ -82,6 +82,7 @@ class StoreFragment : Fragment() {
     private fun setUpView() {
         with(storeViewModel) {
             getMyStore().observe(viewLifecycleOwner) {
+                Log.d(TAG, it.data?.name.toString())
                 when(it) {
                     is Resource.Success -> {
                         if(it.data!!.operating_status) {

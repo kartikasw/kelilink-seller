@@ -61,6 +61,8 @@ class LoginFragment : Fragment() {
         val emailData = email.text.toString()
         val passwordData = password.text.toString()
 
+        Log.d(TAG, emailData)
+
         if(email.error == null && password.error == null
             && emailData.isNotEmpty() && passwordData.isNotEmpty()) {
             val token = loginViewModel.getFcmToken()

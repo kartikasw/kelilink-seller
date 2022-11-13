@@ -12,6 +12,6 @@
         android:id="@+id/crv_loading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        layout=""
+        layout="@layout/placeholder_order"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
