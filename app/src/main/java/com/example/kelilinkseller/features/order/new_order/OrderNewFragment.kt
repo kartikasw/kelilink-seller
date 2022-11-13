@@ -62,6 +62,13 @@ class OrderNewFragment : Fragment() {
 
     private fun setUpOrderView(invoice: List<Invoice>?) {
         orderAdapter = OrderAdapter()
+
+        orderAdapter.apply {
+            onAcceptClick = {
+
+            }
+        }
+
         orderAdapter.setItems(invoice)
 
         with(binding.crvRvOrder) {

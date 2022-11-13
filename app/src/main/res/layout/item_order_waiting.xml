@@ -30,9 +30,7 @@
         android:id="@+id/iow_tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawablePadding="@dimen/margin_component"
         android:textAppearance="@style/TextAppearance.KelilinkSeller.Caption"
-        app:drawableEndCompat="@drawable/ic_next"
         android:textColor="@color/dark_gray"
         android:gravity="center_vertical"
         android:layout_marginEnd="@dimen/margin_layout"
@@ -59,7 +57,7 @@
         style="@style/Widget.KelilinkSeller.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_component_extra"
+        android:layout_marginTop="@dimen/margin_layout"
         android:text="@string/btn_decline"
         app:layout_constraintEnd_toStartOf="@+id/iow_guideline"
         app:layout_constraintStart_toStartOf="@id/iow_iv_profile"
@@ -67,6 +65,7 @@
         tools:ignore="TextContrastCheck" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/iow_btn_accept"
         style="@style/Widget.KelilinkSeller.Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

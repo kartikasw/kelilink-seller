@@ -48,11 +48,11 @@
         app:layout_constraintTop_toBottomOf="@+id/ior_iv_profile" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/ior_btn_decline"
+        android:id="@+id/ior_btn_done"
         style="@style/Widget.KelilinkSeller.Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_component_extra"
+        android:layout_marginTop="@dimen/margin_layout"
         android:text="@string/btn_taken"
         app:layout_constraintEnd_toEndOf="@id/ior_tv_time"
         app:layout_constraintStart_toStartOf="@id/ior_iv_profile"
@@ -66,6 +66,6 @@
         android:background="@color/gray"
         android:layout_marginTop="@dimen/margin_component_extra"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ior_btn_decline" />
+        app:layout_constraintTop_toBottomOf="@+id/ior_btn_done" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

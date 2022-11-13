@@ -1,6 +1,7 @@
 package com.example.kelilinkseller.core.ui
 
 import android.annotation.SuppressLint
+import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +16,14 @@ import com.example.kelilinkseller.util.dateFormat
 class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var itemList = ArrayList<Invoice>()
+
+    var onAcceptClick: ((Invoice) -> Unit)? = null
+
+    var onDeclineClick: ((Invoice) -> Unit)? = null
+
+    var onReadyClick: ((Invoice) -> Unit)? = null
+
+    var onDoneClick: ((Invoice) -> Unit)? = null
 
     @SuppressLint("NotifyDataSetChanged")
     fun setItems(items: List<Invoice>?) {
@@ -66,6 +75,35 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     inner class WaitingViewHolder(
         private val binding: ItemOrderWaitingBinding
     ): RecyclerView.ViewHolder(binding.root) {
+
+        private val timer: CountDownTimer = object : CountDownTimer(59000, 1000) {
+            @SuppressLint("SetTextI18n")
+            override fun onTick(millisUntilFinished: Long) {
+                val seconds = millisUntilFinished/1000
+                binding.iowBtnAccept.text = "Terima 00:${(seconds % 60).toString().padStart(2, '0')}"
+            }
+
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onFinish() {
+                itemList.remove(itemList[adapterPosition])
+                notifyDataSetChanged()
+            }
+        }.start()
+
+        init {
+            with(binding) {
+                iowBtnDecline.setOnClickListener {
+                    onDeclineClick?.invoke(itemList[adapterPosition])
+                }
+
+                iowBtnAccept.setOnClickListener {
+                    timer.cancel()
+                    onAcceptClick?.invoke(itemList[adapterPosition])
+                }
+
+            }
+        }
+
         fun bind(invoice: Invoice) {
             with(binding) {
                 iowTvUserName.text = invoice.id
@@ -84,6 +122,13 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     inner class CookingViewHolder(
         private val binding: ItemOrderCookingBinding
     ): RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.iocBtnReady.setOnClickListener {
+                onReadyClick?.invoke(itemList[adapterPosition])
+            }
+        }
+
         fun bind(invoice: Invoice) {
             with(binding) {
                 iocTvUserName.text = invoice.id
@@ -102,8 +147,25 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     inner class ReadyViewHolder(
         private val binding: ItemOrderReadyBinding
     ): RecyclerView.ViewHolder(binding.root) {
-        fun bind(invoice: Invoice) {
 
+        init {
+            binding.iorBtnDone.setOnClickListener {
+                onDoneClick?.invoke(itemList[adapterPosition])
+            }
+        }
+
+        fun bind(invoice: Invoice) {
+            with(binding) {
+                iorTvUserName.text = invoice.id
+                iorTvTime.text = dateFormat.format(invoice.time)
+
+                val orderMenuAdapter = OrderMenuAdapter()
+                orderMenuAdapter.setItems(invoice.orders)
+                with(iorRvMenu) {
+                    layoutManager = LinearLayoutManager(context)
+                    adapter = orderMenuAdapter
+                }
+            }
         }
     }
 
@@ -111,7 +173,17 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val binding: ItemOrderDoneBinding
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind(invoice: Invoice) {
+            with(binding) {
+                iodTvUserName.text = invoice.id
+                iodTvTime.text = dateFormat.format(invoice.time)
 
+                val orderMenuAdapter = OrderMenuAdapter()
+                orderMenuAdapter.setItems(invoice.orders)
+                with(iodRvMenu) {
+                    layoutManager = LinearLayoutManager(context)
+                    adapter = orderMenuAdapter
+                }
+            }
         }
     }
 
