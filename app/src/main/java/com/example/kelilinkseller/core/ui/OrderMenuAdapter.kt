@@ -12,8 +12,6 @@ class OrderMenuAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var itemList = ArrayList<Order>()
 
-
-
     @SuppressLint("NotifyDataSetChanged")
     fun setItems(items: List<Order>?) {
         itemList.clear()
@@ -52,9 +50,10 @@ class OrderMenuAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     inner class WithNoteViewHolder(
         private val binding: ItemOrderedMenuWithNoteBinding
     ): RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SetTextI18n")
         fun bind(order: Order) {
             with(binding) {
-                iomwnTvName.text = order.name
+                iomwnTvName.text = "${order.amount}x  ${order.name}"
                 iomwnTvNote.text = order.note
             }
         }
@@ -64,7 +63,7 @@ class OrderMenuAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val binding: ItemOrderedMenuBinding
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind(order: Order) {
-            binding.iomTvName.text = order.name
+            binding.iomTvName.text = "${order.amount}x  ${order.name}"
         }
     }
 

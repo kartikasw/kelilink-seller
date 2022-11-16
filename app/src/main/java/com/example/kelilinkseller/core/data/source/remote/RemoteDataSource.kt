@@ -43,6 +43,9 @@ class RemoteDataSource @Inject constructor(
     fun updateOrderStatus(invoiceId: String, status: String) =
         order.updateOrderStatus(invoiceId, status)
 
+    fun getOrderById(orderId: String) =
+        order.getOrderById(orderId)
+
     suspend fun sendFcm(data: Fcm): Flow<Response<FcmResponse>> =
         flow<Response<FcmResponse>> {
             val response = api.sendFcm(data)

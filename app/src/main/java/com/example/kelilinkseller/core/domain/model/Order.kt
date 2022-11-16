@@ -1,10 +1,10 @@
 package com.example.kelilinkseller.core.domain.model
 
 data class Order(
-    val amount: Int,
-    val name: String,
-    val note: String,
-    val price: Int,
-    val total_price: Int,
-    val unit: String
+    val amount: Int = 0,
+    val name: String = "",
+    val note: String = "",
+    val price: Int = 0,
+    val total_price: Int = 0,
+    val unit: String = ""
 )

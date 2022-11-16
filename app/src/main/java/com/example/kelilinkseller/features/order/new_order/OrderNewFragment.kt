@@ -1,5 +1,6 @@
 package com.example.kelilinkseller.features.order.new_order
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,14 +12,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kelilinkseller.R
+import com.example.kelilinkseller.core.data.helper.Constants.EXTRA.EXTRA_INVOICE_ID
 import com.example.kelilinkseller.core.data.helper.Constants.ORDER_STATUS.COOKING
 import com.example.kelilinkseller.core.data.helper.Constants.ORDER_STATUS.DECLINED
+import com.example.kelilinkseller.core.data.helper.Constants.ORDER_STATUS.WAITING
 import com.example.kelilinkseller.core.domain.Resource
 import com.example.kelilinkseller.core.domain.model.Fcm
 import com.example.kelilinkseller.core.domain.model.FcmData
 import com.example.kelilinkseller.core.domain.model.Invoice
 import com.example.kelilinkseller.core.ui.OrderAdapter
 import com.example.kelilinkseller.databinding.ContentRecyclerViewBinding
+import com.example.kelilinkseller.features.order.new_order.detail.DetailOrderNewActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -42,39 +46,63 @@ class OrderNewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        showOrder()
+        showLiveDataOrder()
     }
 
-    private fun showOrder() {
-        orderViewModel.getAllNewOrder().observe(viewLifecycleOwner) {
-            when(it) {
-                is Resource.Success -> {
-                    Log.d(TAG, it.data.toString())
-                    showLoadingState(false)
-
-                    if(it.data != null) {
-                        setUpOrderView(it.data)
-                    } else {
+    private fun showLiveDataOrder() {
+        orderViewModel.getAllNewOrderLiveData().observe(viewLifecycleOwner) { invoice ->
+            for(i in invoice) {
+                orderViewModel.getAllOrderMenuLiveData(i.id).observe(viewLifecycleOwner) { order ->
+                    i.orders = order
+                    if(order == null) {
                         showEmptyState(true)
+                    } else {
+                        val list = invoice.filter {
+                            it.status == COOKING || it.status == WAITING
+                        }
+                        showEmptyState(false)
+                        setUpOrderView(list)
                     }
-                }
-                is Resource.Loading -> {
-                    showEmptyState(false)
-                    showLoadingState(true)
-                }
-                is Resource.Error -> {
-                    showEmptyState(false)
-                    showLoadingState(false)
-                    Log.e(TAG, it.message.toString())
                 }
             }
         }
     }
 
+//    private fun showOrder() {
+//        orderViewModel.getAllNewOrder().observe(viewLifecycleOwner) {
+//            when(it) {
+//                is Resource.Success -> {
+//                    Log.d(TAG, it.data.toString())
+//                    showLoadingState(false)
+//
+//                    if(it.data != null) {
+//                        setUpOrderView(it.data)
+//                    } else {
+//                        showEmptyState(true)
+//                    }
+//                }
+//                is Resource.Loading -> {
+//                    showEmptyState(false)
+//                    showLoadingState(true)
+//                }
+//                is Resource.Error -> {
+//                    showEmptyState(false)
+//                    showLoadingState(false)
+//                    Log.e(TAG, it.message.toString())
+//                }
+//            }
+//        }
+//    }
+
     private fun setUpOrderView(invoice: List<Invoice>?) {
         orderAdapter = OrderAdapter()
 
         orderAdapter.apply {
+            onItemClick = {
+                orderViewModel.setInvoiceId(it.id)
+                startActivity(Intent(requireContext(), DetailOrderNewActivity::class.java))
+            }
+
             onAcceptClick = {
                 updateOrderStatus(it.id, "cooking")
             }
@@ -84,7 +112,7 @@ class OrderNewFragment : Fragment() {
             }
 
             onReadyClick = {
-                orderViewModel.updateOrderStatus(it.id, it.status).observe(viewLifecycleOwner) { resource ->
+                orderViewModel.updateOrderStatus(it.id, "ready").observe(viewLifecycleOwner) { resource ->
                     when(resource) {
                         is Resource.Success -> {
                             orderViewModel.sendFcm(
@@ -120,9 +148,6 @@ class OrderNewFragment : Fragment() {
                 }
             }
 
-            onDoneClick = {
-                updateOrderStatus(it.id, "done")
-            }
         }
 
         orderAdapter.setItems(invoice)

@@ -1,5 +1,6 @@
 package com.example.kelilinkseller.features.order.ready
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,11 +12,16 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kelilinkseller.R
+import com.example.kelilinkseller.core.data.helper.Constants
+import com.example.kelilinkseller.core.data.helper.Constants.ORDER_STATUS.COOKING
+import com.example.kelilinkseller.core.data.helper.Constants.ORDER_STATUS.READY
 import com.example.kelilinkseller.core.domain.Resource
 import com.example.kelilinkseller.core.domain.model.Invoice
 import com.example.kelilinkseller.core.ui.OrderAdapter
 import com.example.kelilinkseller.databinding.ContentRecyclerViewBinding
 import com.example.kelilinkseller.features.order.new_order.OrderNewFragment
+import com.example.kelilinkseller.features.order.new_order.detail.DetailOrderNewActivity
+import com.example.kelilinkseller.features.order.ready.detail.DetailOrderReadyActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -38,7 +44,27 @@ class OrderReadyFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        showOrder()
+
+        showLiveDataOrder()
+    }
+
+    private fun showLiveDataOrder() {
+        orderViewModel.getAllReadyOrderLiveData().observe(viewLifecycleOwner) {invoice ->
+            for(i in invoice) {
+                orderViewModel.getAllOrderMenuLiveData(i.id).observe(viewLifecycleOwner) { order ->
+                    i.orders = order
+                    if(order == null) {
+                        showEmptyState(true)
+                    } else {
+                        val list = invoice.filter {
+                            it.status == READY
+                        }
+                        showEmptyState(false)
+                        setUpOrderView(list)
+                    }
+                }
+            }
+        }
     }
 
     private fun showOrder() {
@@ -73,6 +99,11 @@ class OrderReadyFragment : Fragment() {
         orderAdapter.apply {
             onDoneClick = {
                 updateOrderStatus(it.id)
+            }
+
+            onItemClick = {
+                orderViewModel.setInvoiceId(it.id)
+                startActivity(Intent(requireContext(), DetailOrderReadyActivity::class.java))
             }
         }
 

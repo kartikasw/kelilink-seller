@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".features.order.ready.detail.DetailOrderReadyActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:liftOnScroll="true">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/dor_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include
+                android:id="@+id/dor_layout_info"
+                layout="@layout/content_detail_order"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <include
+                android:id="@+id/dor_loading"
+                layout="@layout/placeholder_detail_order"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="@dimen/margin_layout"
+            app:layout_constraintBottom_toTopOf="@id/dor_tv_total"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/dor_btn_ready"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_taken"
+            style="@style/Widget.KelilinkSeller.Button"
+            android:layout_marginHorizontal="@dimen/margin_layout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/margin_layout"/>
+
+        <TextView
+            android:id="@+id/dor_tv_title_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.KelilinkSeller.Body2"
+            android:text="Total"
+            app:layout_constraintBottom_toTopOf="@id/dor_btn_ready"
+            android:layout_marginBottom="@dimen/margin_layout"
+            app:layout_constraintStart_toStartOf="@id/dor_btn_ready"/>
+
+        <TextView
+            android:id="@+id/dor_tv_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.KelilinkSeller.Body1"
+            android:textStyle="bold"
+            android:text="Rp0"
+            app:layout_constraintTop_toTopOf="@id/dor_tv_title_total"
+            app:layout_constraintBottom_toBottomOf="@id/dor_tv_title_total"
+            app:layout_constraintEnd_toEndOf="@id/dor_btn_ready"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

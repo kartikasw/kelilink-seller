@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/cudo_iv_profile"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_profile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/cudo_tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.KelilinkSeller.Body2"
+        app:layout_constraintStart_toEndOf="@id/cudo_iv_profile"
+        android:layout_marginStart="@dimen/margin_component"
+        app:layout_constraintTop_toTopOf="@id/cudo_iv_profile"/>
+
+    <TextView
+        android:id="@+id/cudo_tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.KelilinkSeller.Caption"
+        style="@style/TextColorGray"
+        app:layout_constraintBottom_toBottomOf="@id/cudo_iv_profile"
+        app:layout_constraintStart_toStartOf="@id/cudo_tv_name"/>
+
+    <ImageButton
+        android:id="@+id/ib_call"
+        android:layout_width="@dimen/button_small"
+        android:layout_height="@dimen/button_small"
+        android:background="@null"
+        android:src="@drawable/ic_call"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/cudo_iv_profile"
+        app:layout_constraintBottom_toBottomOf="@id/cudo_iv_profile"/>
+
+    <ImageButton
+        android:id="@+id/ib_report"
+        android:layout_width="@dimen/button_small"
+        android:layout_height="@dimen/button_small"
+        android:background="@null"
+        android:src="@drawable/ic_report"
+        app:layout_constraintEnd_toStartOf="@id/ib_call"
+        app:layout_constraintTop_toTopOf="@id/cudo_iv_profile"
+        app:layout_constraintBottom_toBottomOf="@id/cudo_iv_profile"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

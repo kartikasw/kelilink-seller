@@ -14,4 +14,11 @@ class LocalDataSource @Inject constructor(
 
     fun getFcmToken() =
         pref.getFcmToken()
+
+    fun setInvoiceId(id: String) {
+        pref.setInvoiceId(id)
+    }
+
+    fun getInvoiceId() =
+        pref.getInvoiceId()
 }

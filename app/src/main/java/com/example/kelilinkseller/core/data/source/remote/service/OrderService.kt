@@ -63,4 +63,7 @@ class OrderService @Inject constructor(): FirebaseService() {
                 }
             }
         }
+
+    fun getOrderById(orderId: String): Flow<Response<InvoiceResponse>> =
+        getDocumentById(INVOICE_COLLECTION, orderId)
 }

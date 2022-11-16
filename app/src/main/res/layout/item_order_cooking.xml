@@ -40,12 +40,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/ioc_iv_profile" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ioc_rv_menu"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ioc_layout_rv_menu"
         android:layout_marginTop="@dimen/margin_component_extra"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/ioc_iv_profile" />
+        app:layout_constraintTop_toBottomOf="@+id/ioc_iv_profile">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ioc_rv_menu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/ioc_btn_ready"
@@ -56,7 +63,7 @@
         android:text="@string/btn_ready"
         app:layout_constraintEnd_toEndOf="@id/ioc_tv_time"
         app:layout_constraintStart_toStartOf="@id/ioc_iv_profile"
-        app:layout_constraintTop_toBottomOf="@id/ioc_rv_menu"
+        app:layout_constraintTop_toBottomOf="@id/ioc_layout_rv_menu"
         tools:ignore="TextContrastCheck" />
 
     <View

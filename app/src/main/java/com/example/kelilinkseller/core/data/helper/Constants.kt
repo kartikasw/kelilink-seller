@@ -13,6 +13,11 @@ object Constants {
 
     object PreferenceValue {
         const val FCM_TOKEN = "fcm_token"
+        const val INVOICE_ID = "invoice_id"
+    }
+
+    object EXTRA {
+        const val EXTRA_INVOICE_ID = "invoice_id"
     }
 
     object DatabaseCollection {
