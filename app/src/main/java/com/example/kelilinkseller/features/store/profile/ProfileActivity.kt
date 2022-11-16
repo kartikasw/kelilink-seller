@@ -12,7 +12,8 @@ import com.example.kelilinkseller.core.domain.Resource
 import com.example.kelilinkseller.core.domain.model.Store
 import com.example.kelilinkseller.databinding.ActivityProfileBinding
 import com.example.kelilinkseller.features.auth.AuthActivity
-import com.example.kelilinkseller.features.store.profile.edit.EditProfileActivity
+import com.example.kelilinkseller.features.store.profile.edit_password.EditPasswordActivity
+import com.example.kelilinkseller.features.store.profile.edit_profile.EditProfileActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -49,6 +50,10 @@ class ProfileActivity : AppCompatActivity() {
         with(binding) {
             pBtnEditProfile.setOnClickListener {
                 startActivity(Intent(this@ProfileActivity, EditProfileActivity::class.java))
+            }
+
+            pBtnEditPassword.setOnClickListener {
+                startActivity(Intent(this@ProfileActivity, EditPasswordActivity::class.java))
             }
 
             pBtnLogout.setOnClickListener {

@@ -5,6 +5,7 @@ import com.example.kelilinkseller.core.data.helper.Response
 import com.example.kelilinkseller.core.data.source.remote.response.FcmResponse
 import com.example.kelilinkseller.core.data.source.remote.service.AuthService
 import com.example.kelilinkseller.core.data.source.remote.service.OrderService
+import com.example.kelilinkseller.core.data.source.remote.service.SellerService
 import com.example.kelilinkseller.core.data.source.remote.service.StoreService
 import com.example.kelilinkseller.core.data.source.remote.service.notification.ApiService
 import com.example.kelilinkseller.core.domain.model.Fcm
@@ -24,6 +25,7 @@ class RemoteDataSource @Inject constructor(
     private val api: ApiService,
     private val auth: AuthService,
     private val order: OrderService,
+    private val seller: SellerService,
     private val store: StoreService
 ) {
     fun register(email: String, password: String, seller: Seller, store: Store, uri: Uri) =
@@ -52,6 +54,9 @@ class RemoteDataSource @Inject constructor(
         }.catch {
             emit(Response.Error(it.message.toString()))
         }.flowOn(Dispatchers.IO)
+
+    fun updatePassword(oldPassword: String, newPassword: String) =
+        seller.updatePassword(oldPassword, newPassword)
 
     fun getStoreById(storeId: String) =
         store.getStoreById(storeId)

@@ -1,4 +1,4 @@
-package com.example.kelilinkseller.features.store.profile.edit
+package com.example.kelilinkseller.features.store.profile.edit_profile
 
 import android.net.Uri
 import androidx.lifecycle.LiveData

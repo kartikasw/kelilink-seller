@@ -2,9 +2,12 @@ package com.example.kelilinkseller.core.data.source.remote.service
 
 import android.net.Uri
 import android.util.Log
+import com.example.kelilinkseller.core.data.helper.Constants.DatabaseCollection.SELLER_COLLECTION
 import com.example.kelilinkseller.core.data.helper.Constants.DatabaseColumn.ID_COLUMN
 import com.example.kelilinkseller.core.data.helper.Constants.DatabaseColumn.TIME_COLUMN
 import com.example.kelilinkseller.core.data.helper.Response
+import com.example.kelilinkseller.core.data.source.remote.response.SellerResponse
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
@@ -60,6 +63,45 @@ abstract class FirebaseService {
             } else {
                 emit(Response.Empty)
             }
+        }.catch {
+            emit(Response.Error(it.message.toString()))
+        }.flowOn(Dispatchers.IO)
+
+    fun reAuthenticate(
+        oldPassword: String,
+        newPassword: String
+    ): Flow<Response<SellerResponse>> =
+        flow {
+            val email = user!!.email.toString()
+            val credential = EmailAuthProvider
+                .getCredential(email, oldPassword)
+
+            var isComplete = false
+
+            user.reauthenticate(credential)
+                .addOnCompleteListener {
+                    isComplete = true
+                }.await()
+
+            if(isComplete) {
+                emitAll(updatePassword(newPassword))
+            } else {
+                emit(Response.Empty)
+            }
+
+        }.catch {
+            emit(Response.Error(it.message.toString()))
+        }.flowOn(Dispatchers.IO)
+
+
+    private fun updatePassword(
+        newPassword: String
+    ): Flow<Response<SellerResponse>> =
+        flow {
+            val userId = user!!.uid
+            user.updatePassword(newPassword).await()
+
+            emitAll(getDocumentById<SellerResponse>(SELLER_COLLECTION, userId))
         }.catch {
             emit(Response.Error(it.message.toString()))
         }.flowOn(Dispatchers.IO)
