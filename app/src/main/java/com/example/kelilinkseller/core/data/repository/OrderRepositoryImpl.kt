@@ -9,8 +9,8 @@ import com.example.kelilinkseller.core.data.helper.Response
 import com.example.kelilinkseller.core.data.mapper.toListModel
 import com.example.kelilinkseller.core.data.source.remote.RemoteDataSource
 import com.example.kelilinkseller.core.domain.Resource
+import com.example.kelilinkseller.core.domain.model.Fcm
 import com.example.kelilinkseller.core.domain.model.Invoice
-import com.example.kelilinkseller.core.domain.model.Order
 import com.example.kelilinkseller.core.domain.repository.OrderRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
@@ -97,7 +97,33 @@ class OrderRepositoryImpl @Inject constructor(
             }
         }
 
-    override fun getOrderMenu(): Flow<Resource<List<Order>>> {
-        TODO("Not yet implemented")
-    }
+    override fun updateOrderStatus(invoiceId: String, status: String): Flow<Resource<Unit>> =
+        flow {
+            emit(Resource.Loading())
+            when(val response = remote.updateOrderStatus(invoiceId, status).first()) {
+                is Response.Success -> {
+                    emit(Resource.Success(null))
+                }
+                is Response.Empty -> {
+                    emit(Resource.Success(null))
+                }
+                is Response.Error -> {
+                    emit(Resource.Error(response.errorMessage))
+                }
+            }
+        }
+
+    override fun sendFcm(data: Fcm): Flow<Resource<Unit>> =
+        flow {
+            emit(Resource.Loading())
+            when(val response = remote.sendFcm(data).first()) {
+                is Response.Success -> {
+                    emit(Resource.Success(null))
+                }
+                is Response.Error -> {
+                    emit(Resource.Error(response.errorMessage))
+                }
+                else -> {}
+            }
+        }
 }

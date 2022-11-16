@@ -2,6 +2,9 @@ package com.example.kelilinkseller.core.data.helper
 
 object Constants {
 
+    const val CONTENT_TYPE = "application/json"
+    const val SERVER_KEY = "AAAAOmbSqCc:APA91bFwPtZtHkwI54WxPolQmg5EO8n0a8shIPB0eyRoIfUpjqIew1v9UyOh1oSg17mC1SIQpuBGVdTQ9umgn68k6aYOn7PIL2Hy1StcwDl9-8j_iDA1AfVWUbOz-w9P_PrQBDgVEAmZ"
+
     const val PREFERENCE_NAME = "KelilinkSeller_Preference"
     const val DATABASE_NAME = "KelilinkSeller.db"
 
@@ -22,34 +25,23 @@ object Constants {
     }
 
     object DatabaseColumn {
-        const val UID_COLUMN = "uid"
         const val ID_COLUMN = "id"
         const val NAME_COLUMN = "name"
-        const val EMAIL_COLUMN = "email"
-        const val PHONE_NUMBER_COLUMN = "phone_number"
         const val FCM_TOKEN_COLUMN = "fcm_token"
         const val CATEGORY_COLUMN = "categories"
         const val ADDRESS_COLUMN = "address"
-        const val CLOSE_HOUR_COLUMN =  "close_hour"
         const val OPERATING_STATUS_COLUMN = "operating_status"
-        const val INFO_COLUMN = "info"
-        const val IN_QUEUE_COLUMN = "in_queue"
         const val LATITUDE_COLUMN = "lat"
         const val LONGITUDE_COLUMN = "lon"
         const val IMAGE_COLUMN = "image"
-        const val IS_SELECTED_COLUMN = "is_selected"
-        const val AMOUNT_COLUMN = "amount"
         const val PRICE_COLUMN = "price"
-        const val PER_PRICE_COLUMN = "per_price"
         const val STORE_ID_COLUMN = "store_id"
-        const val PKL_NAME_COLUMN = "pkl_name"
-        const val USER_ID_COLUMN = "user_id"
-        const val NOTE_COLUMN = "note"
-        const val TOTAL_PRICE_COLUMN = "total_price"
         const val AVAILABLE_COLUMN = "available"
         const val STATUS_COLUMN = "status"
         const val UNIT_COLUMN = "unit"
         const val TIME_COLUMN = "time"
+        const val QUEUE_ORDER_COLUMN = "queue_order"
+        const val QUEUE_COLUMN = "queue"
     }
 
     object ORDER_STATUS {

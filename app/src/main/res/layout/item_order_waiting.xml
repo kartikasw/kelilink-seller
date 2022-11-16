@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.KelilinkSeller.Caption"
-        android:textColor="@color/dark_gray"
+        style="@style/TextColorGray"
         android:gravity="center_vertical"
         android:layout_marginEnd="@dimen/margin_layout"
         app:layout_constraintBottom_toBottomOf="@+id/iow_iv_profile"

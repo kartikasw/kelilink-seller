@@ -23,7 +23,7 @@ class StoreViewModel @Inject constructor(
     fun updateUserInfo(store: MutableMap<String, Any>) =
         storeUseCase.updateMyStore(store).asLiveData()
 
-    fun getMyStore() =
-        storeUseCase.getMyStore().asLiveData()
+    fun getStoreById(storeId: String) =
+        storeUseCase.getStoreById(storeId).asLiveData()
 
 }

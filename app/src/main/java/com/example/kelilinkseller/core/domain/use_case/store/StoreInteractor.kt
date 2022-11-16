@@ -13,8 +13,8 @@ class StoreInteractor @Inject constructor(
     private val storeRepository: StoreRepository
 ): StoreUseCase {
 
-    override fun getMyStore(): Flow<Resource<Store>> =
-        storeRepository.getMyStore()
+    override fun getStoreById(storeId: String): Flow<Resource<Store>> =
+        storeRepository.getStoreById(storeId)
 
     override fun updateMyStore(store: MutableMap<String, Any>, uri: Uri): Flow<Resource<Unit>> =
         storeRepository.updateMyStore(store, uri)

@@ -23,8 +23,8 @@ class EditProfileViewModel @Inject constructor(
         _uriImage.value = uri
     }
 
-    fun getMyStore(): LiveData<Resource<Store>> =
-        storeUseCase.getMyStore().asLiveData()
+    fun getStoreById(storeId: String): LiveData<Resource<Store>> =
+        storeUseCase.getStoreById(storeId).asLiveData()
 
     fun updateMyStore(store: MutableMap<String, Any>, uri: Uri) =
         storeUseCase.updateMyStore(store, uri).asLiveData()

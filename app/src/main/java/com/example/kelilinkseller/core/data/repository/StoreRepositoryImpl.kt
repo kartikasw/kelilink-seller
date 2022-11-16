@@ -25,10 +25,10 @@ class StoreRepositoryImpl @Inject constructor(
         const val TAG = "StoreRepositoryImpl"
     }
 
-    override fun getMyStore(): Flow<Resource<Store>> =
+    override fun getStoreById(storeId: String): Flow<Resource<Store>> =
         flow {
             emit(Resource.Loading())
-            when(val response = remote.getMyStore().first()) {
+            when(val response = remote.getStoreById(storeId).first()) {
                 is Response.Success -> {
                     emit(Resource.Success(response.data.toModel()))
                 }

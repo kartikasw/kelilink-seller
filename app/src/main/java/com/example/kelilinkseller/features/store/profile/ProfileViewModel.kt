@@ -17,7 +17,7 @@ class ProfileViewModel @Inject constructor(
     fun logout(): Unit =
         storeUseCase.logout()
 
-    fun getMyStore(): LiveData<Resource<Store>> =
-        storeUseCase.getMyStore().asLiveData()
+    fun getStoreById(storeId: String): LiveData<Resource<Store>> =
+        storeUseCase.getStoreById(storeId).asLiveData()
 
 }

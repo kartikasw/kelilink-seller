@@ -40,7 +40,6 @@
                 android:id="@+id/p_layout_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="invisible"
                 app:layout_constraintTop_toBottomOf="@id/p_iv_store_image">
 
                 <TextView
@@ -89,9 +88,20 @@
                     android:textAppearance="@style/TextAppearance.KelilinkSeller.Body1"
                     android:text="@string/menu_edit_profile"
                     android:gravity="center_vertical"
-                    android:layout_marginHorizontal="@dimen/margin_layout"
+                    android:paddingHorizontal="@dimen/margin_layout"
                     android:layout_height="@dimen/button_menu"
                     app:layout_constraintTop_toBottomOf="@+id/p_tv_title_account"
+                    app:drawableEndCompat="@drawable/ic_next" />
+
+                <TextView
+                    android:id="@+id/p_btn_edit_password"
+                    android:layout_width="match_parent"
+                    android:textAppearance="@style/TextAppearance.KelilinkSeller.Body1"
+                    android:text="@string/menu_edit_password"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="@dimen/margin_layout"
+                    android:layout_height="@dimen/button_menu"
+                    app:layout_constraintTop_toBottomOf="@+id/p_btn_edit_profile"
                     app:drawableEndCompat="@drawable/ic_next" />
 
                 <TextView
@@ -102,7 +112,7 @@
                     android:textAppearance="@style/TextAppearance.KelilinkSeller.Subtitle2"
                     android:textColor="@color/orange"
                     app:layout_constraintStart_toStartOf="@id/p_tv_store_name"
-                    app:layout_constraintTop_toBottomOf="@id/p_btn_edit_profile"
+                    app:layout_constraintTop_toBottomOf="@id/p_btn_edit_password"
                     android:layout_marginTop="@dimen/margin_layout"/>
 
                 <TextView

@@ -6,6 +6,7 @@ import com.example.kelilinkseller.core.data.helper.Constants.DatabaseColumn.ID_C
 import com.example.kelilinkseller.core.data.helper.Constants.DatabaseColumn.TIME_COLUMN
 import com.example.kelilinkseller.core.data.helper.Response
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -85,37 +86,14 @@ abstract class FirebaseService {
         document: Any
     ): Flow<Response<ResponseType>> =
         flow {
-            var docId = ""
-
-            firestore
+            val result = firestore
                 .collection(collection)
                 .add(document)
-                .addOnSuccessListener { docId = it.id }
                 .await()
 
-            emitAll(updateDocument<ResponseType>(collection, docId, ID_COLUMN, docId))
-        }.catch {
-            emit(Response.Error(it.message.toString()))
-        }.flowOn(Dispatchers.IO)
+            val id = result.id
 
-    inline fun <reified ResponseType> setDocumentInSubCollection(
-        collection: String,
-        docId: String,
-        subCollection: String,
-        list: ArrayList<*>
-    ): Flow<Response<ResponseType>> =
-        flow {
-            firestore.runBatch {
-                list.forEach {
-                    firestore
-                        .collection(collection)
-                        .document(docId)
-                        .collection(subCollection)
-                        .add(it as Any)
-                }
-            }.await()
-
-            emitAll(getDocumentById<ResponseType>(collection, docId))
+            emitAll(updateDocument<ResponseType>(collection, id, ID_COLUMN, id))
         }.catch {
             emit(Response.Error(it.message.toString()))
         }.flowOn(Dispatchers.IO)
@@ -185,28 +163,6 @@ abstract class FirebaseService {
             emit(Response.Error(it.message.toString()))
         }.flowOn(Dispatchers.IO)
 
-    inline fun <reified ResponseType, FieldType> getDocumentByField(
-        collection: String,
-        field: String,
-        value: List<FieldType>
-    ): Flow<Response<List<ResponseType>>> =
-        flow {
-            val result = firestore
-                .collection(collection)
-                .whereIn(field, value)
-                .get()
-                .await()
-
-            if (result.isEmpty) {
-                emit(Response.Empty)
-            } else {
-                emit(Response.Success(result.toObjects(ResponseType::class.java)))
-            }
-        }.catch {
-            Log.e(TAG, it.message.toString())
-            emit(Response.Error(it.message.toString()))
-        }.flowOn(Dispatchers.IO)
-
     inline fun <reified ResponseType, FieldType> getDocumentByFieldAndOrderByTime(
         collection: String,
         field: String,
@@ -250,25 +206,6 @@ abstract class FirebaseService {
         }.catch {
             emit(Response.Error(it.message.toString()))
         }.flowOn(Dispatchers.IO)
-
-    inline fun <reified ResponseType> updateFieldInDocument(
-        collection: String,
-        docId: String,
-        fieldName: String,
-        value: String
-    ): Flow<Response<ResponseType>> =
-        flow {
-            firestore
-                .collection(collection)
-                .document(docId)
-                .update(fieldName,value)
-                .await()
-
-            emitAll(getDocumentById<ResponseType>(collection, docId))
-        }.catch {
-            emit(Response.Error(it.message.toString()))
-        }.flowOn(Dispatchers.IO)
-
 
     inline fun <reified ResponseType> updateDocument(
         collection: String,
@@ -353,6 +290,38 @@ abstract class FirebaseService {
                 .await()
 
             emit(Response.Success(Unit))
+        }.catch {
+            emit(Response.Error(it.message.toString()))
+        }.flowOn(Dispatchers.IO)
+
+    fun addValueToArrayOfDocument(
+        collection: String,
+        docId: String,
+        fieldName: String,
+        value: String
+    ): Flow<Response<Unit>> =
+        flow <Response<Unit>>{
+            firestore
+                .collection(collection)
+                .document(docId)
+                .update(fieldName, FieldValue.arrayUnion(value))
+                .await()
+            emit(Response.Success(Unit))
+        }.catch {
+            emit(Response.Error(it.message.toString()))
+        }.flowOn(Dispatchers.IO)
+
+    fun removeValueFromArrayOfDocument(
+        collection: String,
+        docId: String,
+        fieldName: String,
+        value: String
+    ): Flow<Response<Unit>> =
+        flow <Response<Unit>>{
+            firestore.collection(collection)
+                .document(docId)
+                .update(fieldName, FieldValue.arrayRemove(value))
+                .await()
         }.catch {
             emit(Response.Error(it.message.toString()))
         }.flowOn(Dispatchers.IO)

@@ -31,6 +31,8 @@ import com.example.kelilinkseller.features.store.profile.ProfileActivity
 import com.example.kelilinkseller.features.store.stock.StockActivity
 import com.example.kelilinkseller.util.custom_view.KelilinkLoadingDialog
 import com.google.android.gms.location.*
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -81,8 +83,9 @@ class StoreFragment : Fragment() {
 
     private fun setUpView() {
         with(storeViewModel) {
-            getMyStore().observe(viewLifecycleOwner) {
-                Log.d(TAG, it.data?.name.toString())
+            val storeId = Firebase.auth.currentUser!!.uid
+            getStoreById(storeId).observe(viewLifecycleOwner) {
+                Log.d(TAG, "nama = ${it.data?.name}")
                 when(it) {
                     is Resource.Success -> {
                         if(it.data!!.operating_status) {

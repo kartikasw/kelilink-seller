@@ -40,6 +40,7 @@
         app:layout_constraintTop_toBottomOf="@+id/se_iv_store" />
 
     <TextView
+        android:id="@+id/se_tv_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/content_menu_empty"

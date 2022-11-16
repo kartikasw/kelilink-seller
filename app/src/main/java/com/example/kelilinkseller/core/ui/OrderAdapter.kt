@@ -15,7 +15,7 @@ import com.example.kelilinkseller.util.dateFormat
 
 class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var itemList = ArrayList<Invoice>()
+    private val itemList = ArrayList<Invoice>()
 
     var onAcceptClick: ((Invoice) -> Unit)? = null
 
@@ -72,40 +72,40 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     inner class WaitingViewHolder(
         private val binding: ItemOrderWaitingBinding
     ): RecyclerView.ViewHolder(binding.root) {
 
-        private val timer: CountDownTimer = object : CountDownTimer(59000, 1000) {
-            @SuppressLint("SetTextI18n")
-            override fun onTick(millisUntilFinished: Long) {
-                val seconds = millisUntilFinished/1000
-                binding.iowBtnAccept.text = "Terima 00:${(seconds % 60).toString().padStart(2, '0')}"
-            }
-
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onFinish() {
-                itemList.remove(itemList[adapterPosition])
-                notifyDataSetChanged()
-            }
-        }.start()
-
-        init {
+        fun bind(invoice: Invoice) {
             with(binding) {
+
+                val timer: CountDownTimer = object : CountDownTimer(15000, 1000) {
+                    @SuppressLint("SetTextI18n")
+                    override fun onTick(millisUntilFinished: Long) {
+                        val seconds = millisUntilFinished/1000
+                        binding.iowBtnAccept.text = "Terima 00:${(seconds % 60).toString().padStart(2, '0')}"
+                    }
+
+                    override fun onFinish() {
+                        itemList.remove(itemList[adapterPosition])
+                        notifyDataSetChanged()
+                    }
+                }.start()
+
                 iowBtnDecline.setOnClickListener {
+                    itemList.remove(itemList[adapterPosition])
+                    notifyDataSetChanged()
                     onDeclineClick?.invoke(itemList[adapterPosition])
                 }
 
                 iowBtnAccept.setOnClickListener {
                     timer.cancel()
                     onAcceptClick?.invoke(itemList[adapterPosition])
+                    itemList[adapterPosition].status = "cooking"
+                    notifyDataSetChanged()
                 }
 
-            }
-        }
-
-        fun bind(invoice: Invoice) {
-            with(binding) {
                 iowTvUserName.text = invoice.id
                 iowTvTime.text = dateFormat.format(invoice.time)
 
@@ -119,6 +119,7 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     inner class CookingViewHolder(
         private val binding: ItemOrderCookingBinding
     ): RecyclerView.ViewHolder(binding.root) {
@@ -126,6 +127,9 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         init {
             binding.iocBtnReady.setOnClickListener {
                 onReadyClick?.invoke(itemList[adapterPosition])
+                itemList[adapterPosition].status = "ready"
+                itemList.remove(itemList[adapterPosition])
+                notifyDataSetChanged()
             }
         }
 
@@ -144,6 +148,7 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     inner class ReadyViewHolder(
         private val binding: ItemOrderReadyBinding
     ): RecyclerView.ViewHolder(binding.root) {
@@ -151,6 +156,9 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         init {
             binding.iorBtnDone.setOnClickListener {
                 onDoneClick?.invoke(itemList[adapterPosition])
+                itemList[adapterPosition].status = "done"
+                itemList.remove(itemList[adapterPosition])
+                notifyDataSetChanged()
             }
         }
 

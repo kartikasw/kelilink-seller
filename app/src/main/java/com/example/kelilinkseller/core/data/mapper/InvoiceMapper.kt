@@ -7,7 +7,7 @@ fun InvoiceResponse.toModel(): Invoice =
     Invoice(
         address, id,
         orders = listOf(),
-        queue_order, status, store_id, store_image, store_lat, store_lon, store_name, time, total_price, user_id
+        queue_order, status, store_id, store_image, store_lat, store_lon, store_name, time, total_price, user_fcm_token, user_id
     )
 
 fun List<InvoiceResponse>.toListModel(): List<Invoice> =

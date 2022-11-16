@@ -14,6 +14,8 @@ import com.example.kelilinkseller.databinding.ActivityProfileBinding
 import com.example.kelilinkseller.features.auth.AuthActivity
 import com.example.kelilinkseller.features.store.profile.edit.EditProfileActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -67,7 +69,8 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun showDetailStore() {
-        profileViewModel.getMyStore().observe(this) {
+        val storeId = Firebase.auth.currentUser!!.uid
+        profileViewModel.getStoreById(storeId).observe(this) {
             when(it) {
                 is Resource.Success -> {
                     if(it.data != null) {

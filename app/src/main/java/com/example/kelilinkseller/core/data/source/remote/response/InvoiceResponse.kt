@@ -15,5 +15,6 @@ data class InvoiceResponse(
     val store_name: String = "",
     val time: Date = Date(0),
     val total_price: Int = 0,
+    val user_fcm_token: String = "",
     val user_id: String = ""
 )

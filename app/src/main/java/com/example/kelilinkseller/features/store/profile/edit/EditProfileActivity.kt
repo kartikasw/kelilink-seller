@@ -22,6 +22,8 @@ import com.example.kelilinkseller.util.custom_view.KelilinkLoadingDialog
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -91,7 +93,8 @@ class EditProfileActivity : AppCompatActivity() {
     }
 
     private fun showForm() {
-        editProfileViewModel.getMyStore().observe(this) {
+        val storeId = Firebase.auth.currentUser!!.uid
+        editProfileViewModel.getStoreById(storeId).observe(this) {
             when(it) {
                 is Resource.Success -> {
                     setUpFormView(it.data!!)

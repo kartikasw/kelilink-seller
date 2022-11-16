@@ -18,8 +18,8 @@ import javax.inject.Inject
 
 class StoreService @Inject constructor(): FirebaseService() {
 
-    fun getMyStore(): Flow<Response<StoreResponse>> =
-        getDocumentById(STORE_COLLECTION, user!!.uid)
+    fun getStoreById(storeId: String): Flow<Response<StoreResponse>> =
+        getDocumentById(STORE_COLLECTION, storeId)
 
     fun updateMyStore(store: MutableMap<String, Any>, uri: Uri): Flow<Response<StoreResponse>> =
         flow {

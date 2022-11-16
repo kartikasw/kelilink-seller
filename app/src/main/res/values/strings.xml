@@ -17,6 +17,7 @@
     <string name="bottom_nav_store">Dagangan</string>
 
     <string name="menu_edit_profile">Ubah Profil Dagangan</string>
+    <string name="menu_edit_password">Ubah Kata Sandi</string>
     <string name="menu_logout">Keluar</string>
 
     <string name="btn_add">Tambah</string>
@@ -53,6 +54,7 @@
     <string name="content_menu_empty">Tambahkan menu baru untuk mulai berjualan.</string>
     <string name="title_stock_management">Stok tersedia</string>
     <string name="content_stock_management">Menu dengan stok tersedia/aktif akan muncul di daftar menu dagangan dan dapat dipesan oleh pelanggan</string>
+    <string name="title_order_empty">Tidak ada pesanan</string>
 
     <string name="title_delete">Hapus</string>
     <string name="content_delete_menu">Anda yakin ingin menghapus menu ini?</string>
@@ -79,6 +81,11 @@
     <string name="state_operating_closed">Tekan tombol hijau untuk mulai berjualan.</string>
     <string name="state_operating_open">Tekan tombol merah untuk menutup dagangan.</string>
     <string name="state_out_of_stock">Stok habis</string>
+
+    <string name="toast_order_accepted">Pesanan ${it.id} ditambahkan ke antrean</string>
+    <string name="toast_order_declined">Pesanan ${it.id} ditolak</string>
+    <string name="toast_order_ready">Pesanan ${it.id} sudah siap</string>
+    <string name="toast_order_done">"Pesanan ${it.id} sudah diambil</string>
 
     <string-array name="menu_name">
         <item>Profil</item>

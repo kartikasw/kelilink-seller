@@ -1,16 +1,138 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.KelilinkSeller" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.KelilinkSeller" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryVariant">@color/black</item>
+        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorSecondary">@color/yellow</item>
+        <item name="colorSecondaryVariant">@color/orange</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="editTextStyle">@style/Widget.KelilinkSeller.EditText</item>
+        <item name="toolbarStyle">@style/ToolbarTheme</item>
+        <item name="tabStyle">@style/TabTheme</item>
+        <item name="chipStyle">@style/Widget.KelilinkSeller.Chip.Choice</item>
+        <item name="materialAlertDialogTheme">@style/AlertDialogTheme</item>
     </style>
+
+    <style name="Theme.KelilinkSeller.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/yellow</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logo</item>
+        <item name="windowSplashScreenAnimationDuration">200</item>
+        <item name="postSplashScreenTheme">@style/Theme.KelilinkSeller</item>
+    </style>
+
+    <!-- Chip Group -->
+    <style name="Widget.KelilinkSeller.Chip.Choice" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:textAppearance">@style/TextAppearance.KelilinkSeller.Button</item>
+        <item name="chipBackgroundColor">@color/selector_chip</item>
+        <item name="android:textColor">@drawable/selector_text_view</item>
+        <item name="chipStrokeColor">@color/orange</item>
+        <item name="chipCornerRadius">@dimen/corner_button</item>
+        <item name="chipStrokeWidth">1dp</item>
+    </style>
+
+    <!-- Bottom Navigation -->
+    <style name="BottomNavigationTheme" parent="Theme.KelilinkSeller">
+        <item name="colorPrimary">@color/orange</item>
+    </style>
+
+    <!-- Switch -->
+    <style name="SwitchTheme" parent="Theme.KelilinkSeller">
+        <item name="colorSwitchThumbNormal">@color/orange</item>
+    </style>
+
+    <!-- Tab Layout -->
+    <style name="ToolbarTheme" parent="Widget.AppCompat.Toolbar">
+        <item name="android:textColor">@color/white</item>
+        <item name="elevation">0dp</item>
+    </style>
+
+    <style name="TabTheme" parent="Widget.MaterialComponents.TabLayout">
+        <item name="tabMode">scrollable</item>
+        <item name="tabTextColor">@color/white</item>
+        <item name="tabTextAppearance">@style/TextAppearance.KelilinkSeller.Button</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="textAllCaps">false</item>
+        <item name="tabIndicatorColor">@color/orange</item>
+    </style>
+
+    <style name="Theme.KelilinkSeller.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <!-- Dialog -->
+    <style name="AlertDialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="colorPrimary">@color/orange</item>
+        <item name="materialAlertDialogTitleTextStyle">
+            @style/MaterialAlertDialog.KelilinkSeller.Title.Text
+        </item>
+        <item name="materialAlertDialogBodyTextStyle">
+            @style/MaterialAlertDialog.KelilinkSeller.Body.Text
+        </item>
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.KellilinkSeller.Button.Dialog</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.KellilinkSeller.Button.Dialog</item>
+    </style>
+
+    <style name="MaterialAlertDialog.KelilinkSeller.Title.Text" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:textAppearance">@style/TextAppearance.KelilinkSeller.Heading6</item>
+    </style>
+
+    <style name="MaterialAlertDialog.KelilinkSeller.Body.Text" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:textAppearance">@style/TextAppearance.KelilinkSeller.Body1</item>
+    </style>
+
+    <style name="Widget.KellilinkSeller.Button.Dialog" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <!-- Text Appearance -->
+    <!-- Edit Text -->
+    <style name="Widget.KelilinkSeller.EditText" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@drawable/bg_edit_text</item>
+        <item name="android:textAppearance">@style/TextAppearance.KelilinkSeller.Body1</item>
+    </style>
+
+    <!-- Font Styles -->
+    <style name="TextAppearance.KelilinkSeller.Heading6" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="TextAppearance.KelilinkSeller.Body1" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="TextAppearance.KelilinkSeller.Body2" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="TextAppearance.KelilinkSeller.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="TextAppearance.KelilinkSeller.Button" parent="TextAppearance.MaterialComponents.Button">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="TextAppearance.KelilinkSeller.Caption" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="TextColorGray">
+        <item name="android:textColor">@color/light_gray</item>
+    </style>
+
 </resources>

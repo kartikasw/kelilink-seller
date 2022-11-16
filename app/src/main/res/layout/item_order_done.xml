@@ -33,7 +33,7 @@
         android:drawablePadding="@dimen/margin_component"
         android:textAppearance="@style/TextAppearance.KelilinkSeller.Caption"
         app:drawableEndCompat="@drawable/ic_next"
-        android:textColor="@color/dark_gray"
+        style="@style/TextColorGray"
         android:gravity="center_vertical"
         android:layout_marginEnd="@dimen/margin_layout"
         app:layout_constraintBottom_toBottomOf="@+id/iod_iv_profile"

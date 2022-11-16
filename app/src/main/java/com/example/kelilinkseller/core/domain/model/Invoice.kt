@@ -7,7 +7,7 @@ data class Invoice(
     val id: String = "",
     var orders: List<Order> = listOf(),
     val queue_order: Int = 0,
-    val status: String = "",
+    var status: String = "",
     val store_id: String = "",
     val store_image: String = "",
     val store_lat: Double = 0.0,
@@ -15,5 +15,6 @@ data class Invoice(
     val store_name: String = "",
     val time: Date = Date(0),
     val total_price: Int = 0,
+    val user_fcm_token: String = "",
     val user_id: String = ""
 )

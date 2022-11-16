@@ -1,6 +1,7 @@
 package com.example.kelilinkseller.core.domain.use_case.order
 
 import com.example.kelilinkseller.core.domain.Resource
+import com.example.kelilinkseller.core.domain.model.Fcm
 import com.example.kelilinkseller.core.domain.model.Invoice
 import com.example.kelilinkseller.core.domain.model.Order
 import com.example.kelilinkseller.core.domain.repository.OrderRepository
@@ -20,7 +21,10 @@ class OrderInteractor @Inject constructor(
     override fun getAllDoneOrder(): Flow<Resource<List<Invoice>>> =
         orderRepository.getAllDoneOrder()
 
-    override fun getOrderMenu(): Flow<Resource<List<Order>>> =
-        orderRepository.getOrderMenu()
+    override fun updateOrderStatus(invoiceId: String, status: String): Flow<Resource<Unit>> =
+        orderRepository.updateOrderStatus(invoiceId, status)
+
+    override fun sendFcm(data: Fcm): Flow<Resource<Unit>> =
+        orderRepository.sendFcm(data)
 
 }
