@@ -122,32 +122,8 @@ class DetailOrderDoneActivity : AppCompatActivity() {
         }
 
         binding.dodLayoutInfo.cdoLayoutUser.ibCall.setOnClickListener {
-            if(ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this,arrayOf(android.Manifest.permission.CALL_PHONE),1)
-            }else{
-                makeCall()
-            }
-        }
-    }
-
-    private fun makeCall() {
-        val uri = "tel:$phoneNumber"
-        val intent = Intent(Intent.ACTION_CALL)
-        intent.data = Uri.parse(uri)
-        startActivity(intent)
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED
-        ) {
-            Toast.makeText(this,"Permission denied", Toast.LENGTH_LONG).show()
-            return
-        }
-        startActivity(intent)
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 1){
-            makeCall()
+            val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Uri.encode(phoneNumber)))
+            startActivity(intent)
         }
     }
 }
