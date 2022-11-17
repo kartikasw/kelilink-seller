@@ -16,5 +16,6 @@ data class Invoice(
     val time: Date = Date(0),
     val total_price: Int = 0,
     val user_fcm_token: String = "",
-    val user_id: String = ""
+    val user_id: String = "",
+    val user_phone_number: String = ""
 )

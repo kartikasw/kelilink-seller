@@ -1,6 +1,7 @@
 package com.example.kelilinkseller.features.order.done
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -46,19 +47,23 @@ class OrderDoneFragment : Fragment() {
 
     private fun showLiveDataOrder() {
         orderViewModel.getAllDoneOrderLiveData().observe(viewLifecycleOwner) {invoice ->
-            for(i in invoice) {
-                orderViewModel.getAllOrderMenuLiveData(i.id).observe(viewLifecycleOwner) { order ->
-                    i.orders = order
-                    if(order == null) {
-                        showEmptyState(true)
-                    } else {
-                        val list = invoice.filter {
-                            it.status == DONE
+            if(invoice != null) {
+                for(i in invoice) {
+                    orderViewModel.getAllOrderMenuLiveData(i.id).observe(viewLifecycleOwner) { order ->
+                        i.orders = order
+                        if(order == null) {
+                            showEmptyState(true)
+                        } else {
+                            val list = invoice.filter {
+                                it.status == DONE
+                            }
+                            showEmptyState(false)
+                            setUpOrderView(list)
                         }
-                        showEmptyState(false)
-                        setUpOrderView(list)
                     }
                 }
+            } else {
+                showEmptyState(true)
             }
         }
     }
@@ -110,16 +115,14 @@ class OrderDoneFragment : Fragment() {
     }
 
     private fun showEmptyState(state: Boolean) {
-        binding.crvEmpty.apply {
-            seTvTitle.text = resources.getString(R.string.title_order_empty)
-            seTvContent.isVisible = false
-            root.isVisible = state
-        }
+
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
+
+
 
 }

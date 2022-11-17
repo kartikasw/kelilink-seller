@@ -50,48 +50,47 @@ class OrderReadyFragment : Fragment() {
 
     private fun showLiveDataOrder() {
         orderViewModel.getAllReadyOrderLiveData().observe(viewLifecycleOwner) {invoice ->
-            for(i in invoice) {
-                orderViewModel.getAllOrderMenuLiveData(i.id).observe(viewLifecycleOwner) { order ->
-                    i.orders = order
-                    if(order == null) {
-                        showEmptyState(true)
-                    } else {
-                        val list = invoice.filter {
-                            it.status == READY
+            if(invoice != null) {
+                for(i in invoice) {
+                    orderViewModel.getAllOrderMenuLiveData(i.id).observe(viewLifecycleOwner) { order ->
+                        i.orders = order
+                        if(order != null) {
+                            val list = invoice.filter {
+                                it.status == READY
+                            }
+                            setUpOrderView(list)
                         }
-                        showEmptyState(false)
-                        setUpOrderView(list)
                     }
                 }
             }
         }
     }
 
-    private fun showOrder() {
-        orderViewModel.getAllReadyOrder().observe(viewLifecycleOwner) {
-            when(it) {
-                is Resource.Success -> {
-                    Log.d(OrderNewFragment.TAG, it.data.toString())
-                    showLoadingState(false)
-
-                    if(it.data != null) {
-                        setUpOrderView(it.data)
-                    } else {
-                        showEmptyState(true)
-                    }
-                }
-                is Resource.Loading -> {
-                    showEmptyState(false)
-                    showLoadingState(true)
-                }
-                is Resource.Error -> {
-                    showEmptyState(false)
-                    showLoadingState(false)
-                    Log.e(OrderNewFragment.TAG, it.message.toString())
-                }
-            }
-        }
-    }
+//    private fun showOrder() {
+//        orderViewModel.getAllReadyOrder().observe(viewLifecycleOwner) {
+//            when(it) {
+//                is Resource.Success -> {
+//                    Log.d(OrderNewFragment.TAG, it.data.toString())
+//                    showLoadingState(false)
+//
+//                    if(it.data != null) {
+//                        setUpOrderView(it.data)
+//                    } else {
+//                        showEmptyState(true)
+//                    }
+//                }
+//                is Resource.Loading -> {
+//                    showEmptyState(false)
+//                    showLoadingState(true)
+//                }
+//                is Resource.Error -> {
+//                    showEmptyState(false)
+//                    showLoadingState(false)
+//                    Log.e(OrderNewFragment.TAG, it.message.toString())
+//                }
+//            }
+//        }
+//    }
 
     private fun setUpOrderView(invoice: List<Invoice>?) {
         orderAdapter = OrderAdapter()
@@ -137,14 +136,6 @@ class OrderReadyFragment : Fragment() {
 
     private fun showLoadingState(state: Boolean) {
         binding.crvLoading.root.isVisible = state
-    }
-
-    private fun showEmptyState(state: Boolean) {
-        binding.crvEmpty.apply {
-            seTvTitle.text = resources.getString(R.string.title_order_empty)
-            seTvContent.isVisible = false
-            root.isVisible = state
-        }
     }
 
     override fun onDestroy() {

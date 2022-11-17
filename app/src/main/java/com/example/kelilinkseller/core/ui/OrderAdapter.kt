@@ -96,7 +96,7 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     }
 
                     override fun onFinish() {
-                        notifyDataSetChanged()
+
                     }
                 }.start()
 

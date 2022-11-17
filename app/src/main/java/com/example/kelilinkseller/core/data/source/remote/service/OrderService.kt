@@ -7,6 +7,8 @@ import com.example.kelilinkseller.core.data.helper.Constants.DatabaseColumn.QUEU
 import com.example.kelilinkseller.core.data.helper.Constants.DatabaseColumn.QUEUE_ORDER_COLUMN
 import com.example.kelilinkseller.core.data.helper.Constants.DatabaseColumn.STATUS_COLUMN
 import com.example.kelilinkseller.core.data.helper.Constants.DatabaseColumn.STORE_ID_COLUMN
+import com.example.kelilinkseller.core.data.helper.Constants.ORDER_STATUS.COOKING
+import com.example.kelilinkseller.core.data.helper.Constants.ORDER_STATUS.READY
 import com.example.kelilinkseller.core.data.helper.Response
 import com.example.kelilinkseller.core.data.source.remote.response.InvoiceResponse
 import com.example.kelilinkseller.core.data.source.remote.response.OrderResponse
@@ -25,32 +27,74 @@ class OrderService @Inject constructor(): FirebaseService() {
 
     fun updateOrderStatus(invoiceId: String, status: String): Flow<Response<Unit>> =
         flow {
-            getDocumentById<StoreResponse>(STORE_COLLECTION, user!!.uid).collect { store ->
+            val storeId = user!!.uid
+            getDocumentById<StoreResponse>(STORE_COLLECTION, storeId).collect { store ->
                 when(store) {
                     is Response.Success -> {
-                        updateDocument<InvoiceResponse>(
-                            INVOICE_COLLECTION,
-                            invoiceId,
-                            mutableMapOf(
-                                STATUS_COLUMN to status,
-                                QUEUE_ORDER_COLUMN to store.data.queue.size + 1
-                            )
-                        ).collect { invoice ->
-                            when(invoice) {
-                                is Response.Success -> {
-                                    emitAll(addValueToArrayOfDocument(
-                                        STORE_COLLECTION,
-                                        store.data.id,
-                                        QUEUE_COLUMN,
-                                        invoiceId
-                                    ))
-                                }
-                                is Response.Empty -> {
+                        when (status) {
+                            COOKING -> {
+                                updateDocument<InvoiceResponse>(
+                                    INVOICE_COLLECTION,
+                                    invoiceId,
+                                    mutableMapOf(
+                                        STATUS_COLUMN to status,
+                                        QUEUE_ORDER_COLUMN to store.data.queue.size + 1
+                                    )
+                                ).collect { invoice ->
+                                    when(invoice) {
+                                        is Response.Success -> {
+                                            emitAll(addValueToArrayOfDocument(
+                                                STORE_COLLECTION,
+                                                store.data.id,
+                                                QUEUE_COLUMN,
+                                                invoiceId
+                                            ))
+                                        }
+                                        is Response.Empty -> {
 
+                                        }
+                                        is Response.Error -> {
+                                            emit(Response.Error(invoice.errorMessage))
+                                        }
+                                    }
                                 }
-                                is Response.Error -> {
-                                    emit(Response.Error(invoice.errorMessage))
+                            }
+                            READY -> {
+                                updateDocument<InvoiceResponse>(
+                                    INVOICE_COLLECTION,
+                                    invoiceId,
+                                    mutableMapOf(
+                                        STATUS_COLUMN to status,
+                                        QUEUE_ORDER_COLUMN to 0
+                                    )
+                                ).collect { invoice ->
+                                    when(invoice) {
+                                        is Response.Success -> {
+                                            emitAll(removeValueFromArrayOfDocument(
+                                                STORE_COLLECTION,
+                                                store.data.id,
+                                                QUEUE_COLUMN,
+                                                invoiceId
+                                            ))
+                                        }
+                                        is Response.Empty -> {
+
+                                        }
+                                        is Response.Error -> {
+                                            emit(Response.Error(invoice.errorMessage))
+                                        }
+                                    }
                                 }
+                            }
+                            else -> {
+                                emitAll(updateDocumentUnit(
+                                    INVOICE_COLLECTION,
+                                    invoiceId,
+                                    mutableMapOf(
+                                        STATUS_COLUMN to status,
+                                        QUEUE_ORDER_COLUMN to 0
+                                    )
+                                ))
                             }
                         }
                     }
@@ -63,6 +107,7 @@ class OrderService @Inject constructor(): FirebaseService() {
                 }
             }
         }
+
 
     fun getOrderById(orderId: String): Flow<Response<InvoiceResponse>> =
         getDocumentById(INVOICE_COLLECTION, orderId)

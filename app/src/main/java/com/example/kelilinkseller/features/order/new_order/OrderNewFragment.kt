@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kelilinkseller.R
-import com.example.kelilinkseller.core.data.helper.Constants.EXTRA.EXTRA_INVOICE_ID
 import com.example.kelilinkseller.core.data.helper.Constants.ORDER_STATUS.COOKING
 import com.example.kelilinkseller.core.data.helper.Constants.ORDER_STATUS.DECLINED
 import com.example.kelilinkseller.core.data.helper.Constants.ORDER_STATUS.WAITING
@@ -51,17 +50,17 @@ class OrderNewFragment : Fragment() {
 
     private fun showLiveDataOrder() {
         orderViewModel.getAllNewOrderLiveData().observe(viewLifecycleOwner) { invoice ->
-            for(i in invoice) {
-                orderViewModel.getAllOrderMenuLiveData(i.id).observe(viewLifecycleOwner) { order ->
-                    i.orders = order
-                    if(order == null) {
-                        showEmptyState(true)
-                    } else {
-                        val list = invoice.filter {
-                            it.status == COOKING || it.status == WAITING
+            if(invoice != null) {
+                for(i in invoice) {
+                    orderViewModel.getAllOrderMenuLiveData(i.id).observe(viewLifecycleOwner) { order ->
+                        i.orders = order
+                        if(order != null) {
+                            val list = invoice.filter {
+                                it.status == COOKING || it.status == WAITING
+                            }
+
+                            setUpOrderView(list)
                         }
-                        showEmptyState(false)
-                        setUpOrderView(list)
                     }
                 }
             }
@@ -182,14 +181,6 @@ class OrderNewFragment : Fragment() {
 
     private fun showLoadingState(state: Boolean) {
         binding.crvLoading.root.isVisible = state
-    }
-
-    private fun showEmptyState(state: Boolean) {
-        binding.crvEmpty.apply {
-            seTvTitle.text = resources.getString(R.string.title_order_empty)
-            seTvContent.isVisible = false
-            root.isVisible = state
-        }
     }
 
     override fun onDestroy() {

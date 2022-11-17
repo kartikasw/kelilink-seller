@@ -367,4 +367,19 @@ abstract class FirebaseService {
         }.catch {
             emit(Response.Error(it.message.toString()))
         }.flowOn(Dispatchers.IO)
+
+    inline fun updateDocumentUnit(
+        collection: String,
+        docId: String,
+        value: MutableMap<String, Any>
+    ): Flow<Response<Unit>> =
+        flow <Response<Unit>>{
+            firestore
+                .collection(collection)
+                .document(docId)
+                .update(value)
+                .await()
+        }.catch {
+            emit(Response.Error(it.message.toString()))
+        }.flowOn(Dispatchers.IO)
 }

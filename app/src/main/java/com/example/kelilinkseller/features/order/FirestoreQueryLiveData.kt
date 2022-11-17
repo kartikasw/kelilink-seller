@@ -1,11 +1,12 @@
 package com.example.kelilinkseller.features.order
 
 import androidx.lifecycle.LiveData
+import com.example.kelilinkseller.core.domain.model.Invoice
 import com.google.firebase.firestore.*
 
-class FirestoreQueryLiveData<ResponseType>(
+class FirestoreQueryLiveData(
     private val query: Query
-): LiveData<List<ResponseType>>(), EventListener<QuerySnapshot> {
+): LiveData<List<Invoice>>(), EventListener<QuerySnapshot> {
 
     private lateinit var registration: ListenerRegistration
 
@@ -20,9 +21,11 @@ class FirestoreQueryLiveData<ResponseType>(
     }
 
     override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
-        val items = ArrayList<ResponseType>()
+        val items = ArrayList<Invoice>()
         for (doc in value!!) {
-            doc.toObject(ResponseType::class.java)
+            doc.toObject(Invoice::class.java).let {
+                items.add(it)
+            }
         }
         postValue(items)
     }
