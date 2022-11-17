@@ -20,6 +20,8 @@
         android:id="@+id/iod_tv_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:maxLength="10"
+        android:ellipsize="marquee"
         android:textAppearance="@style/TextAppearance.KelilinkSeller.Body2"
         android:layout_marginStart="@dimen/margin_component"
         app:layout_constraintStart_toEndOf="@id/iod_iv_profile"

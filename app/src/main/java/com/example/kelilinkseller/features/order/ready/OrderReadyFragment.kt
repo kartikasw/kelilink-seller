@@ -50,16 +50,14 @@ class OrderReadyFragment : Fragment() {
 
     private fun showLiveDataOrder() {
         orderViewModel.getAllReadyOrderLiveData().observe(viewLifecycleOwner) {invoice ->
-            if(invoice != null) {
-                for(i in invoice) {
-                    orderViewModel.getAllOrderMenuLiveData(i.id).observe(viewLifecycleOwner) { order ->
-                        i.orders = order
-                        if(order != null) {
-                            val list = invoice.filter {
-                                it.status == READY
-                            }
-                            setUpOrderView(list)
+            for(i in invoice) {
+                orderViewModel.getAllOrderMenuLiveData(i.id).observe(viewLifecycleOwner) { order ->
+                    i.orders = order
+                    if(order != null) {
+                        val list = invoice.filter {
+                            it.status == READY
                         }
+                        setUpOrderView(list)
                     }
                 }
             }

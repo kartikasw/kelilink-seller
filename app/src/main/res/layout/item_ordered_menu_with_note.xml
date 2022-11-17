@@ -11,6 +11,7 @@
         android:id="@+id/iomwn_tv_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.KelilinkSeller.Body2"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_margin="@dimen/margin_component"/>
 

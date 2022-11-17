@@ -38,9 +38,10 @@
         android:layout_height="@dimen/button_small"
         android:background="@null"
         android:src="@drawable/ic_call"
+        app:layout_constraintBottom_toBottomOf="@id/cudo_iv_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/cudo_iv_profile"
-        app:layout_constraintBottom_toBottomOf="@id/cudo_iv_profile"/>
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/ib_report"
@@ -48,8 +49,9 @@
         android:layout_height="@dimen/button_small"
         android:background="@null"
         android:src="@drawable/ic_report"
+        app:layout_constraintBottom_toBottomOf="@id/cudo_iv_profile"
         app:layout_constraintEnd_toStartOf="@id/ib_call"
         app:layout_constraintTop_toTopOf="@id/cudo_iv_profile"
-        app:layout_constraintBottom_toBottomOf="@id/cudo_iv_profile"/>
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

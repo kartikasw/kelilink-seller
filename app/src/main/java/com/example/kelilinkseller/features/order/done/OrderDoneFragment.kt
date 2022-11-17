@@ -47,23 +47,16 @@ class OrderDoneFragment : Fragment() {
 
     private fun showLiveDataOrder() {
         orderViewModel.getAllDoneOrderLiveData().observe(viewLifecycleOwner) {invoice ->
-            if(invoice != null) {
-                for(i in invoice) {
-                    orderViewModel.getAllOrderMenuLiveData(i.id).observe(viewLifecycleOwner) { order ->
-                        i.orders = order
-                        if(order == null) {
-                            showEmptyState(true)
-                        } else {
-                            val list = invoice.filter {
-                                it.status == DONE
-                            }
-                            showEmptyState(false)
-                            setUpOrderView(list)
+            for(i in invoice) {
+                orderViewModel.getAllOrderMenuLiveData(i.id).observe(viewLifecycleOwner) { order ->
+                    i.orders = order
+                    if(order != null) {
+                        val list = invoice.filter {
+                            it.status == DONE
                         }
+                        setUpOrderView(list)
                     }
                 }
-            } else {
-                showEmptyState(true)
             }
         }
     }

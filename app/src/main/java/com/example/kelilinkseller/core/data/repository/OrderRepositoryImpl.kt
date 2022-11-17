@@ -145,12 +145,10 @@ class OrderRepositoryImpl @Inject constructor(
                 is Response.Success -> {
                     emit(Resource.Success(null))
                 }
-                is Response.Empty -> {
-                    emit(Resource.Success(null))
-                }
                 is Response.Error -> {
                     emit(Resource.Error(response.errorMessage))
                 }
+                else -> {}
             }
         }
 

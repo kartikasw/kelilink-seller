@@ -1,5 +1,6 @@
 package com.example.kelilinkseller.core.data.source.remote.service
 
+import android.util.Log
 import com.example.kelilinkseller.core.data.helper.Constants.DatabaseCollection.INVOICE_COLLECTION
 import com.example.kelilinkseller.core.data.helper.Constants.DatabaseCollection.ORDERS_COLLECTION
 import com.example.kelilinkseller.core.data.helper.Constants.DatabaseCollection.STORE_COLLECTION
@@ -102,7 +103,8 @@ class OrderService @Inject constructor(): FirebaseService() {
 
                     }
                     is Response.Error -> {
-
+                        Log.d(TAG, store.errorMessage)
+                        emit(Response.Error(store.errorMessage))
                     }
                 }
             }

@@ -12,7 +12,6 @@ import com.example.kelilinkseller.databinding.ItemOrderCookingBinding
 import com.example.kelilinkseller.databinding.ItemOrderDoneBinding
 import com.example.kelilinkseller.databinding.ItemOrderReadyBinding
 import com.example.kelilinkseller.databinding.ItemOrderWaitingBinding
-import com.example.kelilinkseller.features.order.done.OrderDoneFragment
 import com.example.kelilinkseller.util.dateFormat
 
 class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -109,7 +108,7 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     onAcceptClick?.invoke(itemList[adapterPosition])
                 }
 
-                iowTvUserName.text = invoice.id
+                iowTvUserName.text = invoice.id.take(10)
                 iowTvTime.text = dateFormat.format(invoice.time)
 
                 val orderMenuAdapter = OrderMenuAdapter()
@@ -139,7 +138,7 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         fun bind(invoice: Invoice) {
             with(binding) {
-                iocTvUserName.text = invoice.id
+                iocTvUserName.text = invoice.id.take(10)
                 iocTvTime.text = dateFormat.format(invoice.time)
 
                 val orderMenuAdapter = OrderMenuAdapter()
@@ -169,7 +168,7 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         fun bind(invoice: Invoice) {
             with(binding) {
-                iorTvUserName.text = invoice.id
+                iorTvUserName.text = invoice.id.take(10)
                 iorTvTime.text = dateFormat.format(invoice.time)
 
                 val orderMenuAdapter = OrderMenuAdapter()
@@ -193,7 +192,7 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         fun bind(invoice: Invoice) {
             with(binding) {
-                iodTvUserName.text = invoice.id
+                iodTvUserName.text = invoice.id.take(10)
                 iodTvTime.text = dateFormat.format(invoice.time)
 
                 val orderMenuAdapter = OrderMenuAdapter()

@@ -31,7 +31,6 @@ class OrderReadyViewModel @Inject constructor(
     }
 
     fun getAllOrderMenuLiveData(invoiceId: String): FirestoreQueryLiveDataNested {
-        val storeId = Firebase.auth.currentUser!!.uid
         return FirestoreQueryLiveDataNested(
             Firebase.firestore.collection(Constants.DatabaseCollection.INVOICE_COLLECTION)
                 .document(invoiceId)

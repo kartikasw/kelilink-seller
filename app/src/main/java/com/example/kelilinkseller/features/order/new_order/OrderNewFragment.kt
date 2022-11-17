@@ -50,8 +50,8 @@ class OrderNewFragment : Fragment() {
 
     private fun showLiveDataOrder() {
         orderViewModel.getAllNewOrderLiveData().observe(viewLifecycleOwner) { invoice ->
-            if(invoice != null) {
-                for(i in invoice) {
+            for(i in invoice) {
+                if(i.id != "") {
                     orderViewModel.getAllOrderMenuLiveData(i.id).observe(viewLifecycleOwner) { order ->
                         i.orders = order
                         if(order != null) {
@@ -111,20 +111,20 @@ class OrderNewFragment : Fragment() {
             }
 
             onReadyClick = {
-                orderViewModel.updateOrderStatus(it.id, "ready").observe(viewLifecycleOwner) { resource ->
-                    when(resource) {
+                orderViewModel.sendFcm(
+                    Fcm(
+                        to = it.user_fcm_token,
+                        FcmData(
+                            invoice_id = it.id,
+                            store_id = it.store_id,
+                            store_name = it.store_name
+                        )
+                    )
+                ).observe(viewLifecycleOwner) { fcmResource ->
+                    when(fcmResource) {
                         is Resource.Success -> {
-                            orderViewModel.sendFcm(
-                                Fcm(
-                                    to = it.user_fcm_token,
-                                    FcmData(
-                                        invoice_id = it.id,
-                                        store_id = it.store_id,
-                                        store_name = it.store_name
-                                    )
-                                )
-                            ).observe(viewLifecycleOwner) { fcmResource ->
-                                when(fcmResource) {
+                            orderViewModel.updateOrderStatus(it.id, "ready").observe(viewLifecycleOwner) { resource ->
+                                when(resource) {
                                     is Resource.Success -> {
                                         Toast.makeText(
                                             requireContext(),
@@ -133,14 +133,14 @@ class OrderNewFragment : Fragment() {
                                         ).show()
                                     }
                                     is Resource.Error -> {
-                                        Log.e(TAG, fcmResource.message.toString())
+                                        Log.e(TAG, resource.message.toString())
                                     }
                                     else -> {}
                                 }
                             }
                         }
                         is Resource.Error -> {
-                            Log.e(TAG, resource.message.toString())
+                            Log.e(TAG, fcmResource.message.toString())
                         }
                         else -> {}
                     }
