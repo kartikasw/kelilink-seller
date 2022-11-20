@@ -2,7 +2,6 @@ package com.example.kelilinkseller.core.ui
 
 import android.annotation.SuppressLint
 import android.os.CountDownTimer
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -84,11 +83,11 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
         }
 
+        @SuppressLint("SetTextI18n")
         fun bind(invoice: Invoice) {
             with(binding) {
 
                 val timer: CountDownTimer = object : CountDownTimer(15000, 1000) {
-                    @SuppressLint("SetTextI18n")
                     override fun onTick(millisUntilFinished: Long) {
                         val seconds = millisUntilFinished/1000
                         binding.iowBtnAccept.text = "Terima 00:${(seconds % 60).toString().padStart(2, '0')}"
@@ -108,7 +107,7 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     onAcceptClick?.invoke(itemList[adapterPosition])
                 }
 
-                iowTvUserName.text = invoice.id.take(10)
+                iowTvUserName.text = "${invoice.id.take(10)}..."
                 iowTvTime.text = dateFormat.format(invoice.time)
 
                 val orderMenuAdapter = OrderMenuAdapter()
@@ -136,9 +135,10 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
         }
 
+        @SuppressLint("SetTextI18n")
         fun bind(invoice: Invoice) {
             with(binding) {
-                iocTvUserName.text = invoice.id.take(10)
+                iocTvUserName.text = "${invoice.id.take(10)}..."
                 iocTvTime.text = dateFormat.format(invoice.time)
 
                 val orderMenuAdapter = OrderMenuAdapter()
@@ -166,9 +166,10 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
         }
 
+        @SuppressLint("SetTextI18n")
         fun bind(invoice: Invoice) {
             with(binding) {
-                iorTvUserName.text = invoice.id.take(10)
+                iorTvUserName.text = "${invoice.id.take(10)}..."
                 iorTvTime.text = dateFormat.format(invoice.time)
 
                 val orderMenuAdapter = OrderMenuAdapter()
@@ -190,13 +191,13 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
         }
 
+        @SuppressLint("SetTextI18n")
         fun bind(invoice: Invoice) {
             with(binding) {
-                iodTvUserName.text = invoice.id.take(10)
+                iodTvUserName.text = "${invoice.id.take(10)}..."
                 iodTvTime.text = dateFormat.format(invoice.time)
 
                 val orderMenuAdapter = OrderMenuAdapter()
-                Log.d("OK", invoice.orders.toString())
                 orderMenuAdapter.setItems(invoice.orders)
                 with(iodRvMenu) {
                     layoutManager = LinearLayoutManager(context)

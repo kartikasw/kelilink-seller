@@ -12,10 +12,12 @@ import com.example.kelilinkseller.core.data.source.remote.RemoteDataSource
 import com.example.kelilinkseller.core.domain.Resource
 import com.example.kelilinkseller.core.domain.model.Fcm
 import com.example.kelilinkseller.core.domain.model.Invoice
+import com.example.kelilinkseller.core.domain.model.Order
 import com.example.kelilinkseller.core.domain.repository.OrderRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -29,89 +31,28 @@ class OrderRepositoryImpl @Inject constructor(
         const val TAG = "OrderRepository"
     }
 
-    override fun getAllNewOrder(): Flow<Resource<List<Invoice>>> =
-        flow {
-            emit(Resource.Loading())
-            when(val invoiceResponse = remote.getAllOrder().first()) {
-                is Response.Success -> {
-                    val responseModel = invoiceResponse.data.toListModel()
-                     for(i in responseModel) {
-                         when(val orderResponse = remote.getOrderMenu(i.id).first()) {
-                             is Response.Success -> {
-                                 responseModel[responseModel.indexOf(i)].orders =
-                                     orderResponse.data.toListModel()
-                             }
-                             else -> {}
-                         }
-                     }
-                    emit(Resource.Success(
-                        responseModel.filter {
-                            it.status == COOKING || it.status == WAITING
-                        })
-                    )
-                }
-                is Response.Empty -> {
-                    emit(Resource.Success(null))
-                }
-                is Response.Error -> {
-                    emit(Resource.Error(invoiceResponse.errorMessage))
-                }
-            }
-        }
+    override fun getAllNewOrder(): Flow<List<Invoice>> =
+        remote.getAllOrder().map { it.toListModel().filter { invoice ->
+            invoice.status == COOKING || invoice.status == WAITING
+        } }
 
-    override fun getAllReadyOrder(): Flow<Resource<List<Invoice>>> =
-        flow {
-            emit(Resource.Loading())
-            when(val invoiceResponse = remote.getAllOrder().first()) {
-                is Response.Success -> {
-                    val responseModel = invoiceResponse.data.toListModel()
-                    for(i in responseModel) {
-                        when(val orderResponse = remote.getOrderMenu(i.id).first()) {
-                            is Response.Success -> {
-                                responseModel[responseModel.indexOf(i)].orders =
-                                    orderResponse.data.toListModel()
-                            }
-                            else -> {}
-                        }
-                    }
-                    emit(Resource.Success(responseModel.filter {
-                        it.status == READY
-                    }))
-                }
-                is Response.Empty -> {
-                    emit(Resource.Success(null))
-                }
-                is Response.Error -> {
-                    emit(Resource.Error(invoiceResponse.errorMessage))
-                }
-            }
-        }
+    override fun getAllReadyOrder(): Flow<List<Invoice>> =
+        remote.getAllOrder().map { it.toListModel().filter { invoice ->
+            invoice.status == READY
+        } }
 
-    override fun getAllDoneOrder(): Flow<Resource<List<Invoice>>> =
+    override fun getAllDoneOrder(): Flow<List<Invoice>> =
+        remote.getAllOrder().map { it.toListModel().filter { invoice ->
+            invoice.status == DONE
+        } }
+
+    override fun getOrderMenu(invoiceId: String): Flow<List<Order>> =
         flow {
-            emit(Resource.Loading())
-            when(val invoiceResponse = remote.getAllOrder().first()) {
+            when(val response = remote.getOrderMenu(invoiceId).first()) {
                 is Response.Success -> {
-                    val responseModel = invoiceResponse.data.toListModel()
-                    for(i in responseModel) {
-                        when(val orderResponse = remote.getOrderMenu(i.id).first()) {
-                            is Response.Success -> {
-                                responseModel[responseModel.indexOf(i)].orders =
-                                    orderResponse.data.toListModel()
-                            }
-                            else -> {}
-                        }
-                    }
-                    emit(Resource.Success(responseModel.filter {
-                        it.status == DONE
-                    }))
+                    emit(response.data.toListModel())
                 }
-                is Response.Empty -> {
-                    emit(Resource.Success(null))
-                }
-                is Response.Error -> {
-                    emit(Resource.Error(invoiceResponse.errorMessage))
-                }
+                else -> {}
             }
         }
 
@@ -138,10 +79,52 @@ class OrderRepositoryImpl @Inject constructor(
             }
         }
 
-    override fun updateOrderStatus(invoiceId: String, status: String): Flow<Resource<Unit>> =
+    override fun acceptOrder(invoiceId: String): Flow<Resource<Unit>> =
         flow {
             emit(Resource.Loading())
-            when(val response = remote.updateOrderStatus(invoiceId, status).first()) {
+            when(val response = remote.acceptOrder(invoiceId).first()) {
+                is Response.Success -> {
+                    emit(Resource.Success(null))
+                }
+                is Response.Error -> {
+                    emit(Resource.Error(response.errorMessage))
+                }
+                else -> {}
+            }
+        }
+
+    override fun declineOrder(invoiceId: String): Flow<Resource<Unit>> =
+        flow {
+            emit(Resource.Loading())
+            when(val response = remote.declineOrder(invoiceId).first()) {
+                is Response.Success -> {
+                    emit(Resource.Success(null))
+                }
+                is Response.Error -> {
+                    emit(Resource.Error(response.errorMessage))
+                }
+                else -> {}
+            }
+        }
+
+    override fun markOrderAsReady(invoiceId: String): Flow<Resource<Unit>> =
+        flow {
+            emit(Resource.Loading())
+            when(val response = remote.markOrderAsReady(invoiceId).first()) {
+                is Response.Success -> {
+                    emit(Resource.Success(null))
+                }
+                is Response.Error -> {
+                    emit(Resource.Error(response.errorMessage))
+                }
+                else -> {}
+            }
+        }
+
+    override fun markOrderAsDone(invoiceId: String): Flow<Resource<Unit>> =
+        flow {
+            emit(Resource.Loading())
+            when(val response = remote.markOrderAsDone(invoiceId).first()) {
                 is Response.Success -> {
                     emit(Resource.Success(null))
                 }

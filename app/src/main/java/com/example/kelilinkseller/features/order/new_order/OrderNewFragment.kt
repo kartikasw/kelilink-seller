@@ -12,9 +12,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kelilinkseller.R
+import com.example.kelilinkseller.core.data.helper.Constants
 import com.example.kelilinkseller.core.data.helper.Constants.ORDER_STATUS.COOKING
 import com.example.kelilinkseller.core.data.helper.Constants.ORDER_STATUS.DECLINED
-import com.example.kelilinkseller.core.data.helper.Constants.ORDER_STATUS.WAITING
+import com.example.kelilinkseller.core.data.helper.Constants.ORDER_STATUS.READY
 import com.example.kelilinkseller.core.domain.Resource
 import com.example.kelilinkseller.core.domain.model.Fcm
 import com.example.kelilinkseller.core.domain.model.FcmData
@@ -45,53 +46,27 @@ class OrderNewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        showLiveDataOrder()
+        showOrder()
     }
 
-    private fun showLiveDataOrder() {
-        orderViewModel.getAllNewOrderLiveData().observe(viewLifecycleOwner) { invoice ->
-            for(i in invoice) {
-                if(i.id != "") {
-                    orderViewModel.getAllOrderMenuLiveData(i.id).observe(viewLifecycleOwner) { order ->
-                        i.orders = order
-                        if(order != null) {
-                            val list = invoice.filter {
-                                it.status == COOKING || it.status == WAITING
-                            }
+    private fun showOrder() {
+//        orderViewModel.orders.observe(viewLifecycleOwner) { invoiceList ->
+//            Log.d(TAG, invoiceList.toString())
+//            setUpOrderView(invoiceList)
+//        }
 
-                            setUpOrderView(list)
-                        }
+        orderViewModel.getAllNewOrderLiveData().observe(viewLifecycleOwner) { invoiceList ->
+            for(invoice in invoiceList) {
+                orderViewModel.getAllOrderMenuLiveData(invoice.id).observe(viewLifecycleOwner) { order ->
+                    invoice.orders = order
+                    val list = invoiceList.filter {
+                        it.status == COOKING || it.status == Constants.ORDER_STATUS.WAITING
                     }
+                    setUpOrderView(list)
                 }
             }
         }
     }
-
-//    private fun showOrder() {
-//        orderViewModel.getAllNewOrder().observe(viewLifecycleOwner) {
-//            when(it) {
-//                is Resource.Success -> {
-//                    Log.d(TAG, it.data.toString())
-//                    showLoadingState(false)
-//
-//                    if(it.data != null) {
-//                        setUpOrderView(it.data)
-//                    } else {
-//                        showEmptyState(true)
-//                    }
-//                }
-//                is Resource.Loading -> {
-//                    showEmptyState(false)
-//                    showLoadingState(true)
-//                }
-//                is Resource.Error -> {
-//                    showEmptyState(false)
-//                    showLoadingState(false)
-//                    Log.e(TAG, it.message.toString())
-//                }
-//            }
-//        }
-//    }
 
     private fun setUpOrderView(invoice: List<Invoice>?) {
         orderAdapter = OrderAdapter()
@@ -103,11 +78,15 @@ class OrderNewFragment : Fragment() {
             }
 
             onAcceptClick = {
-                updateOrderStatus(it.id, "cooking")
+                orderViewModel.acceptOrder(it.id).observe(viewLifecycleOwner) { resource ->
+                    updateResponse(resource, COOKING)
+                }
             }
 
             onDeclineClick = {
-                updateOrderStatus(it.id, "declined")
+                orderViewModel.declineOrder(it.id).observe(viewLifecycleOwner) { resource ->
+                    updateResponse(resource, DECLINED)
+                }
             }
 
             onReadyClick = {
@@ -123,20 +102,8 @@ class OrderNewFragment : Fragment() {
                 ).observe(viewLifecycleOwner) { fcmResource ->
                     when(fcmResource) {
                         is Resource.Success -> {
-                            orderViewModel.updateOrderStatus(it.id, "ready").observe(viewLifecycleOwner) { resource ->
-                                when(resource) {
-                                    is Resource.Success -> {
-                                        Toast.makeText(
-                                            requireContext(),
-                                            resources.getString(R.string.toast_order_ready),
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                    }
-                                    is Resource.Error -> {
-                                        Log.e(TAG, resource.message.toString())
-                                    }
-                                    else -> {}
-                                }
+                            orderViewModel.markOrderAsReady(it.id).observe(viewLifecycleOwner) { resource ->
+                                updateResponse(resource, READY)
                             }
                         }
                         is Resource.Error -> {
@@ -151,36 +118,41 @@ class OrderNewFragment : Fragment() {
 
         orderAdapter.setItems(invoice)
 
+        showEmptyState(invoice.isNullOrEmpty())
+
         with(binding.crvRvOrder) {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = orderAdapter
         }
     }
 
-    private fun updateOrderStatus(invoiceId: String, status: String) {
-        orderViewModel
-            .updateOrderStatus(invoiceId, status)
-            .observe(viewLifecycleOwner) { resource ->
-                when(resource) {
-                    is Resource.Success -> {
-                        val toastText = when(status) {
-                            COOKING ->  resources.getString(R.string.toast_order_accepted)
-                            DECLINED ->  resources.getString(R.string.toast_order_declined)
-                            else ->  resources.getString(R.string.toast_order_done)
-                        }
-
-                        Toast.makeText(requireContext(), toastText, Toast.LENGTH_SHORT).show()
+    private fun updateResponse(resource: Resource<Unit>, status: String) {
+        when(resource) {
+            is Resource.Success -> {
+                val toastText = when (status) {
+                    COOKING -> {
+                        resources.getString(R.string.toast_order_accepted)
                     }
-                    is Resource.Error -> {
-                        Log.e(TAG, resource.message.toString())
+                    DECLINED -> {
+                        resources.getString(R.string.toast_order_declined)
                     }
-                    else -> {}
+                    else -> {
+                        resources.getString(R.string.toast_order_done)
+                    }
                 }
+
+                Toast.makeText(requireContext(), toastText, Toast.LENGTH_SHORT).show()
             }
+            is Resource.Error -> {
+                Log.e(TAG, resource.message.toString())
+                Toast.makeText(requireContext(), resource.message.toString(), Toast.LENGTH_SHORT).show()
+            }
+            else -> {}
+        }
     }
 
-    private fun showLoadingState(state: Boolean) {
-        binding.crvLoading.root.isVisible = state
+    private fun showEmptyState(state: Boolean) {
+        binding.crvEmpty.root.isVisible = state
     }
 
     override fun onDestroy() {

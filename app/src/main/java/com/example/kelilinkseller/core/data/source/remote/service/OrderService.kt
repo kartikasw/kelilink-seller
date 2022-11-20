@@ -8,7 +8,10 @@ import com.example.kelilinkseller.core.data.helper.Constants.DatabaseColumn.QUEU
 import com.example.kelilinkseller.core.data.helper.Constants.DatabaseColumn.QUEUE_ORDER_COLUMN
 import com.example.kelilinkseller.core.data.helper.Constants.DatabaseColumn.STATUS_COLUMN
 import com.example.kelilinkseller.core.data.helper.Constants.DatabaseColumn.STORE_ID_COLUMN
+import com.example.kelilinkseller.core.data.helper.Constants.DatabaseColumn.TIME_COLUMN
 import com.example.kelilinkseller.core.data.helper.Constants.ORDER_STATUS.COOKING
+import com.example.kelilinkseller.core.data.helper.Constants.ORDER_STATUS.DECLINED
+import com.example.kelilinkseller.core.data.helper.Constants.ORDER_STATUS.DONE
 import com.example.kelilinkseller.core.data.helper.Constants.ORDER_STATUS.READY
 import com.example.kelilinkseller.core.data.helper.Response
 import com.example.kelilinkseller.core.data.source.remote.response.InvoiceResponse
@@ -17,99 +20,130 @@ import com.example.kelilinkseller.core.data.source.remote.response.StoreResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class OrderService @Inject constructor(): FirebaseService() {
-    fun getAllOrder(): Flow<Response<List<InvoiceResponse>>> =
-        getDocumentByFieldAndOrderByTime(INVOICE_COLLECTION, STORE_ID_COLUMN, user!!.uid)
+
+    fun getAllOrder(): Flow<List<InvoiceResponse?>> {
+        val storeId = user!!.uid
+
+        return firestore.collection(INVOICE_COLLECTION)
+            .whereEqualTo(STORE_ID_COLUMN, storeId)
+            .orderBy(TIME_COLUMN)
+            .snapshotFlow()
+            .map { querySnapshot ->
+                querySnapshot.documents.map { it.toObject(InvoiceResponse::class.java) }
+            }
+
+    }
 
     fun getOrderMenu(invoiceId: String): Flow<Response<List<OrderResponse>>> =
         getDocumentInSubCollection(INVOICE_COLLECTION, invoiceId, ORDERS_COLLECTION)
 
-    fun updateOrderStatus(invoiceId: String, status: String): Flow<Response<Unit>> =
+    fun acceptOrder(invoiceId: String): Flow<Response<Unit>> =
         flow {
             val storeId = user!!.uid
             getDocumentById<StoreResponse>(STORE_COLLECTION, storeId).collect { store ->
                 when(store) {
                     is Response.Success -> {
-                        when (status) {
-                            COOKING -> {
-                                updateDocument<InvoiceResponse>(
-                                    INVOICE_COLLECTION,
-                                    invoiceId,
-                                    mutableMapOf(
-                                        STATUS_COLUMN to status,
-                                        QUEUE_ORDER_COLUMN to store.data.queue.size + 1
-                                    )
-                                ).collect { invoice ->
-                                    when(invoice) {
-                                        is Response.Success -> {
-                                            emitAll(addValueToArrayOfDocument(
-                                                STORE_COLLECTION,
-                                                store.data.id,
-                                                QUEUE_COLUMN,
-                                                invoiceId
-                                            ))
-                                        }
-                                        is Response.Empty -> {
-
-                                        }
-                                        is Response.Error -> {
-                                            emit(Response.Error(invoice.errorMessage))
-                                        }
-                                    }
+                        updateDocument<InvoiceResponse>(
+                            INVOICE_COLLECTION,
+                            invoiceId,
+                            mutableMapOf(
+                                STATUS_COLUMN to COOKING,
+                                QUEUE_ORDER_COLUMN to store.data.queue.size + 1
+                            )
+                        ).collect { invoice ->
+                            when(invoice) {
+                                is Response.Success -> {
+                                    emitAll(addValueToArrayOfDocument(
+                                        STORE_COLLECTION,
+                                        store.data.id,
+                                        QUEUE_COLUMN,
+                                        invoiceId
+                                    ))
                                 }
-                            }
-                            READY -> {
-                                updateDocument<InvoiceResponse>(
-                                    INVOICE_COLLECTION,
-                                    invoiceId,
-                                    mutableMapOf(
-                                        STATUS_COLUMN to status,
-                                        QUEUE_ORDER_COLUMN to 0
-                                    )
-                                ).collect { invoice ->
-                                    when(invoice) {
-                                        is Response.Success -> {
-                                            emitAll(removeValueFromArrayOfDocument(
-                                                STORE_COLLECTION,
-                                                store.data.id,
-                                                QUEUE_COLUMN,
-                                                invoiceId
-                                            ))
-                                        }
-                                        is Response.Empty -> {
-
-                                        }
-                                        is Response.Error -> {
-                                            emit(Response.Error(invoice.errorMessage))
-                                        }
-                                    }
+                                is Response.Error -> {
+                                    emit(Response.Error(invoice.errorMessage))
                                 }
-                            }
-                            else -> {
-                                emitAll(updateDocumentUnit(
-                                    INVOICE_COLLECTION,
-                                    invoiceId,
-                                    mutableMapOf(
-                                        STATUS_COLUMN to status,
-                                        QUEUE_ORDER_COLUMN to 0
-                                    )
-                                ))
+                                else -> {}
                             }
                         }
-                    }
-                    is Response.Empty -> {
-
                     }
                     is Response.Error -> {
                         Log.d(TAG, store.errorMessage)
                         emit(Response.Error(store.errorMessage))
                     }
+                    else -> {}
                 }
             }
         }
 
+    fun declineOrder(invoiceId: String): Flow<Response<StoreResponse>> =
+        flow {
+            val storeId = user!!.uid
+            getDocumentById<StoreResponse>(STORE_COLLECTION, storeId).collect {
+                when(it) {
+                    is Response.Success -> {
+                        emitAll(updateDocument(
+                            INVOICE_COLLECTION,
+                            invoiceId,
+                            STATUS_COLUMN,
+                            DECLINED
+                        ))
+                    }
+                    is Response.Error -> {
+                        emit(Response.Error(it.errorMessage))
+                    }
+                    else -> {}
+                }
+            }
+        }
+
+    fun markOrderAsReady(invoiceId: String): Flow<Response<StoreResponse>> =
+        flow {
+            val storeId = user!!.uid
+            getDocumentById<StoreResponse>(STORE_COLLECTION, storeId).collect {
+                when(it) {
+                    is Response.Success -> {
+                        emitAll(updateDocument(
+                            INVOICE_COLLECTION,
+                            invoiceId,
+                            mutableMapOf(
+                                STATUS_COLUMN to READY,
+                                QUEUE_ORDER_COLUMN to 0
+                            )
+                        ))
+                    }
+                    is Response.Error -> {
+                        emit(Response.Error(it.errorMessage))
+                    }
+                    else -> {}
+                }
+            }
+        }
+
+    fun markOrderAsDone(invoiceId: String): Flow<Response<StoreResponse>> =
+        flow {
+            val storeId = user!!.uid
+            getDocumentById<StoreResponse>(STORE_COLLECTION, storeId).collect {
+                when(it) {
+                    is Response.Success -> {
+                        emitAll(updateDocument(
+                            INVOICE_COLLECTION,
+                            invoiceId,
+                            STATUS_COLUMN,
+                            DONE
+                        ))
+                    }
+                    is Response.Error -> {
+                        emit(Response.Error(it.errorMessage))
+                    }
+                    else -> {}
+                }
+            }
+        }
 
     fun getOrderById(orderId: String): Flow<Response<InvoiceResponse>> =
         getDocumentById(INVOICE_COLLECTION, orderId)

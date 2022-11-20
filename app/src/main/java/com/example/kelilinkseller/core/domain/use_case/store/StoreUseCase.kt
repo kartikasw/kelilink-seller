@@ -10,6 +10,7 @@ interface StoreUseCase {
     fun getStoreById(storeId: String): Flow<Resource<Store>>
     fun updateMyStore(store: MutableMap<String, Any>, uri: Uri): Flow<Resource<Unit>>
     fun updateMyStore(store: MutableMap<String, Any>): Flow<Resource<Unit>>
+
     fun openStore(store: MutableMap<String, Any>): Flow<Resource<Unit>>
     fun closeStore(): Flow<Resource<Unit>>
 

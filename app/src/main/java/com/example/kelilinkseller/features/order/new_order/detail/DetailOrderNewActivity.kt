@@ -124,15 +124,13 @@ class DetailOrderNewActivity : AppCompatActivity() {
         }
 
         binding.donLayoutInfo.cdoLayoutUser.ibCall.setOnClickListener {
-            if(ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this,arrayOf(android.Manifest.permission.CALL_PHONE),1)
-            }else{
-                makeCall()
-            }
+            val uri = "tel:${Uri.encode(phoneNumber)}"
+            val intent = Intent(Intent.ACTION_DIAL, Uri.parse(uri))
+            startActivity(intent)
         }
 
         binding.donBtnReady.setOnClickListener {
-            detailOrderNewViewModel.updateOrderStatus(invoiceId, "ready").observe(this) {
+            detailOrderNewViewModel.markOrderAsReady(invoiceId).observe(this) {
                 when(it) {
                     is Resource.Success -> {
                         onBackPressed()
@@ -146,24 +144,4 @@ class DetailOrderNewActivity : AppCompatActivity() {
         }
     }
 
-    private fun makeCall() {
-        val uri = "tel:$phoneNumber"
-        val intent = Intent(Intent.ACTION_CALL)
-        intent.data = Uri.parse(uri)
-        startActivity(intent)
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED
-        ) {
-            Toast.makeText(this,"Permission denied", Toast.LENGTH_LONG).show()
-            return
-        }
-        startActivity(intent)
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 1){
-            makeCall()
-        }
-    }
 }

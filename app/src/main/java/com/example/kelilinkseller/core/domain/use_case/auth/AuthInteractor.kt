@@ -14,4 +14,7 @@ class AuthInteractor @Inject constructor(private val authRepository: AuthReposit
 
     override fun logIn(email: String, password: String, fcmToken: String): Flow<Resource<Unit>> =
         authRepository.logIn(email, password, fcmToken)
+
+    override fun resetPassword(email: String): Flow<Resource<Unit>> =
+        authRepository.resetPassword(email)
 }

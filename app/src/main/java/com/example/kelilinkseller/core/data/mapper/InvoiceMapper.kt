@@ -3,12 +3,12 @@ package com.example.kelilinkseller.core.data.mapper
 import com.example.kelilinkseller.core.data.source.remote.response.InvoiceResponse
 import com.example.kelilinkseller.core.domain.model.Invoice
 
-fun InvoiceResponse.toModel(): Invoice =
+fun InvoiceResponse?.toModel(): Invoice =
     Invoice(
-        address, id,
+        this!!.address, id,
         orders = listOf(),
         queue_order, status, store_id, store_image, store_lat, store_lon, store_name, time, total_price, user_fcm_token, user_id, user_phone_number
     )
 
-fun List<InvoiceResponse>.toListModel(): List<Invoice> =
+fun List<InvoiceResponse?>.toListModel(): List<Invoice> =
     this.map { it.toModel() }

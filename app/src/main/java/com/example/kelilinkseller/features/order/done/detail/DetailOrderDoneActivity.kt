@@ -122,8 +122,10 @@ class DetailOrderDoneActivity : AppCompatActivity() {
         }
 
         binding.dodLayoutInfo.cdoLayoutUser.ibCall.setOnClickListener {
-            val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Uri.encode(phoneNumber)))
+            val uri = "tel:${Uri.encode(phoneNumber)}"
+            val intent = Intent(Intent.ACTION_DIAL, Uri.parse(uri))
             startActivity(intent)
         }
     }
+
 }

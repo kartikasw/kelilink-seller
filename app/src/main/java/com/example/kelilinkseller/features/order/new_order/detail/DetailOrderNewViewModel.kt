@@ -15,6 +15,6 @@ class DetailOrderNewViewModel @Inject constructor(
     fun getOrderById(orderId: String) =
         orderUseCase.getOrderById(orderId).asLiveData()
 
-    fun updateOrderStatus(invoiceId: String, status: String) =
-        orderUseCase.updateOrderStatus(invoiceId, status).asLiveData()
+    fun markOrderAsReady(invoiceId: String) =
+        orderUseCase.markOrderAsReady(invoiceId).asLiveData()
 }

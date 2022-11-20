@@ -94,4 +94,7 @@ class AuthService @Inject constructor(): FirebaseService() {
                 }
             }
         }
+
+    fun resetPassword(email: String): Flow<Response<Unit>> =
+        sendPasswordResetEmail(email)
 }

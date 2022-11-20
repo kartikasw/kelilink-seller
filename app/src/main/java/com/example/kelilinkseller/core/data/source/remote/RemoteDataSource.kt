@@ -34,14 +34,26 @@ class RemoteDataSource @Inject constructor(
     fun logIn(email: String, password: String, fcmToken: String) =
         auth.logIn(email, password, fcmToken)
 
+    fun resetPassword(email: String) =
+        auth.resetPassword(email)
+
     fun getAllOrder() =
         order.getAllOrder()
 
     fun getOrderMenu(invoiceId: String) =
         order.getOrderMenu(invoiceId)
 
-    fun updateOrderStatus(invoiceId: String, status: String) =
-        order.updateOrderStatus(invoiceId, status)
+    fun acceptOrder(invoiceId: String) =
+        order.acceptOrder(invoiceId)
+
+    fun declineOrder(invoiceId: String) =
+        order.declineOrder(invoiceId)
+
+    fun markOrderAsReady(invoiceId: String) =
+        order.markOrderAsReady(invoiceId)
+
+    fun markOrderAsDone(invoiceId: String) =
+        order.markOrderAsDone(invoiceId)
 
     fun getOrderById(orderId: String) =
         order.getOrderById(orderId)

@@ -45,4 +45,18 @@ class AuthRepositoryImpl @Inject constructor(
                 else -> {}
             }
         }
+
+    override fun resetPassword(email: String): Flow<Resource<Unit>> =
+        flow {
+            emit(Resource.Loading())
+            when(val response = remote.resetPassword(email).first()) {
+                is Response.Success -> {
+                    emit(Resource.Success(null))
+                }
+                is Response.Error -> {
+                    emit(Resource.Error(response.errorMessage))
+                }
+                else -> {}
+            }
+        }
 }

@@ -18,6 +18,7 @@ class SellerRepositoryImpl @Inject constructor(
     private val local: LocalDataSource,
     private val remote: RemoteDataSource
 ): SellerRepository {
+
     override fun setFcmToken(token: String) {
         local.setFcmToken(token)
     }
@@ -40,4 +41,5 @@ class SellerRepositoryImpl @Inject constructor(
                 }
             }
         }
+
 }

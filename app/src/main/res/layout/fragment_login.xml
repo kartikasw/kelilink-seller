@@ -81,6 +81,18 @@
             tools:ignore="TextContrastCheck"
             tools:layout_editor_absoluteX="16dp" />
 
+        <TextView
+            android:id="@+id/l_btn_forgot_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.KelilinkSeller.Body2"
+            android:textColor="@color/orange"
+            android:textStyle="bold"
+            android:text="@string/btn_forgot_password"
+            app:layout_constraintTop_toBottomOf="@id/l_et_password"
+            app:layout_constraintEnd_toEndOf="@id/l_et_password"
+            android:layout_marginTop="@dimen/margin_component"/>
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/l_btn_login"
             style="@style/Widget.KelilinkSeller.Button"
@@ -89,7 +101,7 @@
             android:layout_marginHorizontal="@dimen/margin_layout"
             android:layout_marginTop="@dimen/margin_layout_extra"
             android:text="@string/btn_login"
-            app:layout_constraintTop_toBottomOf="@id/l_et_password"
+            app:layout_constraintTop_toBottomOf="@id/l_btn_forgot_password"
             tools:ignore="TextContrastCheck"
             tools:layout_editor_absoluteX="16dp" />
 

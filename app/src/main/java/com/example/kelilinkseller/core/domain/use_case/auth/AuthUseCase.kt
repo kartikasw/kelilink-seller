@@ -9,4 +9,5 @@ import kotlinx.coroutines.flow.Flow
 interface AuthUseCase {
     fun register(email: String, password: String, seller: Seller, store: Store, uri: Uri): Flow<Resource<Unit>>
     fun logIn(email: String, password: String, fcmToken: String): Flow<Resource<Unit>>
+    fun resetPassword(email: String): Flow<Resource<Unit>>
 }

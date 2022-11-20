@@ -34,6 +34,8 @@
     <string name="btn_taken">Tandai pesanan diambil</string>
     <string name="btn_register">Daftar</string>
     <string name="btn_save">Simpan</string>
+    <string name="btn_forgot_password">Lupa kata sandi?</string>
+    <string name="btn_send">Kirim</string>
 
     <string name="title_login">Selamat datang di Kelilink Seller!</string>
     <string name="content_login">Kelola usaha Anda dengan satu gerakan tangan.</string>
@@ -57,6 +59,9 @@
     <string name="title_stock_management">Stok tersedia</string>
     <string name="content_stock_management">Menu dengan stok tersedia/aktif akan muncul di daftar menu dagangan dan dapat dipesan oleh pelanggan</string>
     <string name="title_order_empty">Tidak ada pesanan</string>
+
+    <string name="title_email">Email</string>
+    <string name="content_reset_password">Isi dengan email yang Anda gunakan ketika mendaftar akun Kelilink Seller</string>
 
     <string name="title_delete">Hapus</string>
     <string name="content_delete_menu">Anda yakin ingin menghapus menu ini?</string>

@@ -13,6 +13,7 @@ import com.example.kelilinkseller.features.MainActivity
 import com.example.kelilinkseller.R
 import com.example.kelilinkseller.core.domain.Resource
 import com.example.kelilinkseller.databinding.FragmentLoginBinding
+import com.example.kelilinkseller.features.auth.reset_password.ResetPasswordActivity
 import com.example.kelilinkseller.util.custom_view.KelilinkLoadingDialog
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -51,6 +52,12 @@ class LoginFragment : Fragment() {
 
             lBtnLogin.setOnClickListener {
                 login()
+            }
+
+            lBtnForgotPassword.setOnClickListener {
+                startActivity(
+                    Intent(requireContext(), ResetPasswordActivity::class.java)
+                )
             }
         }
     }
