@@ -22,7 +22,7 @@ class MenuActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMenuBinding
 
-    private val menuViewModel: MenuViewModel by viewModels()
+    private val viewModel: MenuViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +46,7 @@ class MenuActivity : AppCompatActivity() {
     }
 
     private fun showMenu() {
-        menuViewModel.menu.observe(this) {
+        viewModel.getMyMenu().observe(this) {
             when(it) {
                 is Resource.Success -> {
                     if(it.data != null) {

@@ -26,7 +26,7 @@ import javax.inject.Inject
 class OrderService @Inject constructor(): FirebaseService() {
 
     fun getAllOrder(): Flow<List<InvoiceResponse?>> {
-        val storeId = user!!.uid
+        val storeId = getUser()!!.uid
 
         return firestore.collection(INVOICE_COLLECTION)
             .whereEqualTo(STORE_ID_COLUMN, storeId)
@@ -43,7 +43,7 @@ class OrderService @Inject constructor(): FirebaseService() {
 
     fun acceptOrder(invoiceId: String): Flow<Response<Unit>> =
         flow {
-            val storeId = user!!.uid
+            val storeId = getUser()!!.uid
             getDocumentById<StoreResponse>(STORE_COLLECTION, storeId).collect { store ->
                 when(store) {
                     is Response.Success -> {
@@ -82,7 +82,7 @@ class OrderService @Inject constructor(): FirebaseService() {
 
     fun declineOrder(invoiceId: String): Flow<Response<StoreResponse>> =
         flow {
-            val storeId = user!!.uid
+            val storeId = getUser()!!.uid
             getDocumentById<StoreResponse>(STORE_COLLECTION, storeId).collect {
                 when(it) {
                     is Response.Success -> {
@@ -103,7 +103,7 @@ class OrderService @Inject constructor(): FirebaseService() {
 
     fun markOrderAsReady(invoiceId: String): Flow<Response<StoreResponse>> =
         flow {
-            val storeId = user!!.uid
+            val storeId = getUser()!!.uid
             getDocumentById<StoreResponse>(STORE_COLLECTION, storeId).collect {
                 when(it) {
                     is Response.Success -> {
@@ -126,7 +126,7 @@ class OrderService @Inject constructor(): FirebaseService() {
 
     fun markOrderAsDone(invoiceId: String): Flow<Response<StoreResponse>> =
         flow {
-            val storeId = user!!.uid
+            val storeId = getUser()!!.uid
             getDocumentById<StoreResponse>(STORE_COLLECTION, storeId).collect {
                 when(it) {
                     is Response.Success -> {

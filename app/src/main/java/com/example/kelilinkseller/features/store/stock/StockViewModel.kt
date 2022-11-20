@@ -8,9 +8,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class StockViewModel @Inject constructor(
-    storeUseCase: StoreUseCase
+    private val storeUseCase: StoreUseCase
 ): ViewModel() {
 
-    val menu = storeUseCase.getMyMenu().asLiveData()
+    fun getMyMenu() =
+        storeUseCase.getMyMenu().asLiveData()
 
 }

@@ -11,6 +11,7 @@ class MenuViewModel @Inject constructor(
     private val storeUseCase: StoreUseCase
 ): ViewModel() {
 
-    val menu = storeUseCase.getMyMenu().asLiveData()
+    fun getMyMenu() =
+        storeUseCase.getMyMenu().asLiveData()
 
 }

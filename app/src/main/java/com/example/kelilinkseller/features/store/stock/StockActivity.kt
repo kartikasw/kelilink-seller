@@ -21,7 +21,7 @@ class StockActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityStockBinding
 
-    private val stockViewModel: StockViewModel by viewModels()
+    private val viewModel: StockViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +44,7 @@ class StockActivity : AppCompatActivity() {
     }
 
     private fun showMenu() {
-        stockViewModel.menu.observe(this) {
+        viewModel.getMyMenu().observe(this) {
             when(it) {
                 is Resource.Success -> {
                     if(it.data != null) {

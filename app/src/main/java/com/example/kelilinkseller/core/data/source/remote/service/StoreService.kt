@@ -23,7 +23,7 @@ class StoreService @Inject constructor(): FirebaseService() {
 
     fun updateMyStore(store: MutableMap<String, Any>, uri: Uri): Flow<Response<StoreResponse>> =
         flow {
-            val storeId = user!!.uid
+            val storeId = getUser()!!.uid
             deleteFile(STORE_COLLECTION, storeId).collect {
                 when(it) {
                     is Response.Success -> {
@@ -61,19 +61,19 @@ class StoreService @Inject constructor(): FirebaseService() {
 
     fun updateMyStore(store: MutableMap<String, Any>): Flow<Response<StoreResponse>> =
         flow {
-            val storeId = user!!.uid
+            val storeId = getUser()!!.uid
             emitAll(updateDocument(STORE_COLLECTION, storeId, store))
         }
 
     fun openStore(store: MutableMap<String, Any>): Flow<Response<StoreResponse>> =
         flow {
-            val storeId = user!!.uid
+            val storeId = getUser()!!.uid
             emitAll(updateDocument(STORE_COLLECTION, storeId, store))
         }
 
     fun closeStore(): Flow<Response<StoreResponse>> =
         flow {
-            val storeId = user!!.uid
+            val storeId = getUser()!!.uid
             emitAll(
                 updateDocument(STORE_COLLECTION, storeId, OPERATING_STATUS_COLUMN, false)
             )
@@ -81,7 +81,7 @@ class StoreService @Inject constructor(): FirebaseService() {
 
     fun getMyMenu(): Flow<Response<List<MenuResponse>>> =
         flow {
-            val storeId = user!!.uid
+            val storeId = getUser()!!.uid
             emitAll(getDocumentByField(MENU_COLLECTION, STORE_ID_COLUMN, storeId))
         }
 
@@ -90,7 +90,7 @@ class StoreService @Inject constructor(): FirebaseService() {
 
     fun addMenu(menu: Menu, uri: Uri): Flow<Response<MenuResponse>> =
         flow {
-            val storeId = user!!.uid
+            val storeId = getUser()!!.uid
             addDocument<MenuResponse>(
                 MENU_COLLECTION,
                 menu.copy(store_id = storeId) as Any

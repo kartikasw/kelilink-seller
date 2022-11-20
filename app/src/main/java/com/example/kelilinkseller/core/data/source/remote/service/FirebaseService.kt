@@ -28,13 +28,13 @@ abstract class FirebaseService {
 
     private val auth = FirebaseAuth.getInstance()
 
-    val user = auth.currentUser
-
     val firestore = Firebase.firestore
 
     private val storage = Firebase.storage
 
     private val storageRef = storage.reference
+
+    fun getUser() = auth.currentUser
 
     fun signOut(): Unit = auth.signOut()
 
@@ -83,13 +83,13 @@ abstract class FirebaseService {
         newPassword: String
     ): Flow<Response<SellerResponse>> =
         flow {
-            val email = user!!.email.toString()
+            val email = getUser()!!.email.toString()
             val credential = EmailAuthProvider
                 .getCredential(email, oldPassword)
 
             var isComplete = false
 
-            user.reauthenticate(credential)
+            getUser()!!.reauthenticate(credential)
                 .addOnCompleteListener {
                     isComplete = true
                 }.await()
@@ -108,8 +108,8 @@ abstract class FirebaseService {
         newPassword: String
     ): Flow<Response<SellerResponse>> =
         flow {
-            val userId = user!!.uid
-            user.updatePassword(newPassword).await()
+            val userId = getUser()!!.uid
+            getUser()!!.updatePassword(newPassword).await()
 
             emitAll(getDocumentById<SellerResponse>(SELLER_COLLECTION, userId))
         }.catch {
