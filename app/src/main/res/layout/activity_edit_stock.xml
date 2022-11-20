@@ -18,45 +18,51 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <TextView
-            android:id="@+id/es_tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/button_menu"
-            android:layout_marginStart="@dimen/margin_layout"
-            android:gravity="center_vertical"
-            android:text="@string/title_stock_management"
-            android:textAppearance="@style/TextAppearance.KelilinkSeller.Body1"
-            app:layout_constraintBottom_toBottomOf="@+id/es_switch_stock"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/es_switch_stock" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/es_tv_content"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:text="@string/content_stock_management"
-            android:textAppearance="@style/TextAppearance.KelilinkSeller.Caption"
-            app:layout_constraintEnd_toStartOf="@id/es_switch_stock"
-            android:layout_marginEnd="@dimen/margin_component_more"
-            app:layout_constraintStart_toStartOf="@+id/es_tv_title"
-            app:layout_constraintTop_toBottomOf="@+id/es_tv_title" />
+            <TextView
+                android:id="@+id/es_tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_menu"
+                android:layout_marginStart="@dimen/margin_layout"
+                android:gravity="center_vertical"
+                android:text="@string/title_stock_management"
+                android:textAppearance="@style/TextAppearance.KelilinkSeller.Body1"
+                app:layout_constraintBottom_toBottomOf="@+id/es_switch_stock"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/es_switch_stock" />
 
-        <androidx.appcompat.widget.SwitchCompat
-            app:trackTint="@color/selectore_switch_track"
-            app:thumbTint="@color/selector_switch_thumb"
-            android:id="@+id/es_switch_stock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_layout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/es_tv_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/content_stock_management"
+                android:textAppearance="@style/TextAppearance.KelilinkSeller.Caption"
+                app:layout_constraintEnd_toStartOf="@id/es_switch_stock"
+                android:layout_marginEnd="@dimen/margin_component_more"
+                app:layout_constraintStart_toStartOf="@+id/es_tv_title"
+                app:layout_constraintTop_toBottomOf="@+id/es_tv_title" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.SwitchCompat
+                app:trackTint="@color/selectore_switch_track"
+                app:thumbTint="@color/selector_switch_thumb"
+                android:id="@+id/es_switch_stock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
