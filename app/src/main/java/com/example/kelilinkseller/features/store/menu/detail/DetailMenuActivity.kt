@@ -143,6 +143,7 @@ class DetailMenuActivity : AppCompatActivity() {
 
             dmTvName.text = data.name
             dmTvPriceAndAmount.text = "${data.price}/${data.unit}"
+            dmTvDescription.text = data.description
         }
     }
 

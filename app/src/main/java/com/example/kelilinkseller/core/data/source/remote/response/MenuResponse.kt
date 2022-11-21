@@ -2,6 +2,7 @@ package com.example.kelilinkseller.core.data.source.remote.response
 
 data class MenuResponse(
     val available: Boolean = false,
+    val description: String = "",
     val id: String = "",
     val image: String = "",
     val name: String = "",

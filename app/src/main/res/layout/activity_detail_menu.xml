@@ -63,6 +63,15 @@
                     android:textAppearance="@style/TextAppearance.KelilinkSeller.Body1"
                     app:layout_constraintTop_toBottomOf="@id/dm_tv_name" />
 
+                <TextView
+                    android:id="@+id/dm_tv_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_component_more"
+                    android:layout_marginHorizontal="@dimen/margin_layout"
+                    android:textAppearance="@style/TextAppearance.KelilinkSeller.Body1"
+                    app:layout_constraintTop_toBottomOf="@id/dm_tv_price_and_amount" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <include

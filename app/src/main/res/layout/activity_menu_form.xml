@@ -84,6 +84,20 @@
                     tools:layout_editor_absoluteX="16dp" />
 
                 <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/mf_et_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_text_input_long"
+                    android:layout_marginHorizontal="@dimen/margin_layout"
+                    android:layout_marginTop="@dimen/margin_component_extra"
+                    android:hint="@string/hint_description"
+                    android:inputType="text"
+                    android:gravity="top"
+                    android:singleLine="false"
+                    android:padding="@dimen/margin_component_more"                    app:layout_constraintTop_toBottomOf="@+id/mf_et_name"
+                    tools:ignore="TextContrastCheck"
+                    tools:layout_editor_absoluteX="16dp" />
+
+                <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/mf_et_price"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_text_input"
@@ -92,7 +106,7 @@
                     android:hint="@string/hint_price"
                     android:inputType="number"
                     android:paddingHorizontal="@dimen/margin_component_more"
-                    app:layout_constraintTop_toBottomOf="@+id/mf_et_name"
+                    app:layout_constraintTop_toBottomOf="@+id/mf_et_description"
                     tools:ignore="TextContrastCheck"
                     tools:layout_editor_absoluteX="16dp" />
 

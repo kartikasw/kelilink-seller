@@ -32,6 +32,7 @@ object Constants {
     object DatabaseColumn {
         const val ID_COLUMN = "id"
         const val NAME_COLUMN = "name"
+        const val DESCRIPTION_COLUMN = "description"
         const val FCM_TOKEN_COLUMN = "fcm_token"
         const val CATEGORY_COLUMN = "categories"
         const val ADDRESS_COLUMN = "address"

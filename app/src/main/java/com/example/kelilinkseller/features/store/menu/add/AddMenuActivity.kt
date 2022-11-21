@@ -60,16 +60,20 @@ class AddMenuActivity : AppCompatActivity() {
 
             mfBtnAction.setOnClickListener {
                 val menuName = binding.mfEtName
+                val description = binding.mfEtDescription
                 val price = binding.mfEtPrice
                 val unit = binding.mfEtUnit
                 val menuNameData = menuName.text.toString()
+                val descriptionData = description.text.toString()
                 val priceData = price.text.toString()
                 val unitData = unit.text.toString()
                 val image = addMenuViewModel.uriImage.value
 
                 if(menuName.error == null && price.error == null && unit.error == null && image != null
-                    && menuNameData.isNotEmpty() && priceData.isNotEmpty() && unitData.isNotEmpty()) {
+                    && description.error == null && menuNameData.isNotEmpty() && descriptionData.isNotEmpty()
+                    && priceData.isNotEmpty() && unitData.isNotEmpty()) {
                     val menu = Menu(
+                        description = descriptionData,
                         name = menuNameData,
                         price = priceData.toInt(),
                         unit = unitData

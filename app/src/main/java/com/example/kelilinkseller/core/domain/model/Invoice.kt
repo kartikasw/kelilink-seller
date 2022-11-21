@@ -14,6 +14,7 @@ data class Invoice(
     val store_lon: Double = 0.0,
     val store_name: String = "",
     val time: Date = Date(0),
+    val time_expire: Date = Date(0),
     val total_price: Int = 0,
     val user_fcm_token: String = "",
     val user_id: String = "",

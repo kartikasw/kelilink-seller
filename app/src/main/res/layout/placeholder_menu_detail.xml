@@ -49,12 +49,30 @@
                 app:layout_constraintStart_toStartOf="@+id/dm_tv_name"
                 app:layout_constraintTop_toBottomOf="@id/dm_tv_name" />
 
+            <TextView
+                android:id="@+id/dm_tv_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_component_more"
+                android:background="@drawable/shimmer_placeholder"
+                android:textAppearance="@style/TextAppearance.KelilinkSeller.Body1"
+                app:layout_constraintEnd_toStartOf="@+id/guideline5"
+                app:layout_constraintStart_toStartOf="@+id/dm_tv_name"
+                app:layout_constraintTop_toBottomOf="@id/dm_tv_price_and_amount" />
+
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.4" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.6" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

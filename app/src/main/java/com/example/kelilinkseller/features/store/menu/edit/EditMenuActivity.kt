@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.kelilinkseller.R
+import com.example.kelilinkseller.core.data.helper.Constants.DatabaseColumn.DESCRIPTION_COLUMN
 import com.example.kelilinkseller.core.data.helper.Constants.DatabaseColumn.NAME_COLUMN
 import com.example.kelilinkseller.core.data.helper.Constants.DatabaseColumn.PRICE_COLUMN
 import com.example.kelilinkseller.core.data.helper.Constants.DatabaseColumn.UNIT_COLUMN
@@ -100,21 +101,24 @@ class EditMenuActivity : AppCompatActivity() {
         with(binding) {
             mfBtnAction.setOnClickListener {
                 val name = mfEtName
+                val description = mfEtDescription
                 val price = mfEtPrice
                 val unit = mfEtUnit
                 val nameData = name.text.toString()
+                val descriptionData = description.text.toString()
                 val priceData = price.text.toString()
                 val unitData = unit.text.toString()
                 val image = editMenuViewModel.uriImage.value
 
-                if(name.error == null && price.error == null && unit.error == null
-                    && nameData.isNotEmpty() && priceData.isNotEmpty() && unitData.isNotEmpty()) {
+                if(name.error == null && price.error == null && unit.error == null && description.error == null
+                    && nameData.isNotEmpty() && descriptionData.isNotEmpty() && priceData.isNotEmpty() && unitData.isNotEmpty()) {
 
                     if(image != null) {
                         editMenuViewModel.updateMenu(
                             menuId,
                             mutableMapOf(
                                 NAME_COLUMN to nameData,
+                                DESCRIPTION_COLUMN to descriptionData,
                                 PRICE_COLUMN to priceData.toInt(),
                                 UNIT_COLUMN to unitData
                             ),
@@ -125,6 +129,7 @@ class EditMenuActivity : AppCompatActivity() {
                             menuId,
                             mutableMapOf(
                                 NAME_COLUMN to nameData,
+                                DESCRIPTION_COLUMN to descriptionData,
                                 PRICE_COLUMN to priceData.toInt(),
                                 UNIT_COLUMN to unitData
                             )

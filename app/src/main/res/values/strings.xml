@@ -71,6 +71,7 @@
     <string name="title_logout">Keluar</string>
     <string name="content_logout">Anda yakin ingin keluar?</string>
 
+    <string name="hint_description">Deskripsi</string>
     <string name="hint_name">Nama</string>
     <string name="hint_price">Harga</string>
     <string name="hint_unit">Satuan</string>

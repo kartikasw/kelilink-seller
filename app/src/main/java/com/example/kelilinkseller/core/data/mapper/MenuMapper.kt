@@ -5,7 +5,7 @@ import com.example.kelilinkseller.core.domain.model.Menu
 
 fun MenuResponse.toModel(): Menu =
     Menu(
-        available, id, image, name, price, store_id, unit
+        available, description, id, image, name, price, store_id, unit
     )
 
 fun List<MenuResponse>.toListModel(): List<Menu> =
