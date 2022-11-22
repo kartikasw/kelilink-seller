@@ -12,10 +12,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kelilinkseller.R
-import com.example.kelilinkseller.core.data.helper.Constants
 import com.example.kelilinkseller.core.data.helper.Constants.ORDER_STATUS.COOKING
 import com.example.kelilinkseller.core.data.helper.Constants.ORDER_STATUS.DECLINED
 import com.example.kelilinkseller.core.data.helper.Constants.ORDER_STATUS.READY
+import com.example.kelilinkseller.core.data.helper.Constants.ORDER_STATUS.WAITING
 import com.example.kelilinkseller.core.domain.Resource
 import com.example.kelilinkseller.core.domain.model.Fcm
 import com.example.kelilinkseller.core.domain.model.FcmData
@@ -57,12 +57,14 @@ class OrderNewFragment : Fragment() {
 
         orderViewModel.getAllNewOrderLiveData().observe(viewLifecycleOwner) { invoiceList ->
             for(invoice in invoiceList) {
-                orderViewModel.getAllOrderMenuLiveData(invoice.id).observe(viewLifecycleOwner) { order ->
-                    invoice.orders = order
-                    val list = invoiceList.filter {
-                        it.status == COOKING || it.status == Constants.ORDER_STATUS.WAITING
+                if(invoice.id != "") {
+                    orderViewModel.getAllOrderMenuLiveData(invoice.id).observe(viewLifecycleOwner) { order ->
+                        invoice.orders = order
+                        val list = invoiceList.filter {
+                            it.status == COOKING || it.status == WAITING
+                        }
+                        setUpOrderView(list)
                     }
-                    setUpOrderView(list)
                 }
             }
         }

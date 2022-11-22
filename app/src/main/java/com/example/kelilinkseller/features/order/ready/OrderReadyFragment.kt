@@ -53,12 +53,14 @@ class OrderReadyFragment : Fragment() {
 
         orderViewModel.getAllReadyOrderLiveData().observe(viewLifecycleOwner) { invoiceList ->
             for(invoice in invoiceList) {
-                orderViewModel.getAllOrderMenuLiveData(invoice.id).observe(viewLifecycleOwner) { order ->
-                    invoice.orders = order
-                    val list = invoiceList.filter {
-                        it.status == READY
+                if(invoice.id != "") {
+                    orderViewModel.getAllOrderMenuLiveData(invoice.id).observe(viewLifecycleOwner) { order ->
+                        invoice.orders = order
+                        val list = invoiceList.filter {
+                            it.status == READY
+                        }
+                        setUpOrderView(list)
                     }
-                    setUpOrderView(list)
                 }
             }
         }

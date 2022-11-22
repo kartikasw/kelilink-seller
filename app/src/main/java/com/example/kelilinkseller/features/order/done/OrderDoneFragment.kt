@@ -49,13 +49,15 @@ class OrderDoneFragment : Fragment() {
 
         orderViewModel.getAllDoneOrderLiveData().observe(viewLifecycleOwner) { invoiceList ->
             for(invoice in invoiceList) {
-                orderViewModel.getAllOrderMenuLiveData(invoice.id).observe(viewLifecycleOwner) { order ->
-                    invoice.orders = order
-                    val list = invoiceList.filter {
-                        it.status == DONE
-                    }
-                    setUpOrderView(list)
-                }
+               if(invoice.id != "") {
+                   orderViewModel.getAllOrderMenuLiveData(invoice.id).observe(viewLifecycleOwner) { order ->
+                       invoice.orders = order
+                       val list = invoiceList.filter {
+                           it.status == DONE
+                       }
+                       setUpOrderView(list)
+                   }
+               }
             }
         }
     }
