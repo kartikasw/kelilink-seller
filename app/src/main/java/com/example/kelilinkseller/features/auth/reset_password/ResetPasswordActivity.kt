@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.example.kelilinkseller.R
 import com.example.kelilinkseller.core.domain.Resource
 import com.example.kelilinkseller.databinding.ActivityResetPasswordBinding
 import com.example.kelilinkseller.features.auth.AuthActivity
@@ -35,7 +36,7 @@ class ResetPasswordActivity : AppCompatActivity() {
     private fun setUpToolbar() {
         setSupportActionBar(binding.rpToolbar)
         supportActionBar?.apply {
-            title = ""
+            title = resources.getString(R.string.page_forgot_password)
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
         }

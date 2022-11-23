@@ -8,11 +8,15 @@ import androidx.lifecycle.asLiveData
 import com.example.kelilinkseller.core.domain.model.Seller
 import com.example.kelilinkseller.core.domain.model.Store
 import com.example.kelilinkseller.core.domain.use_case.auth.AuthUseCase
+import com.example.kelilinkseller.core.domain.use_case.seller.SellerUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class RegisterViewModel @Inject constructor(private val authUseCase: AuthUseCase): ViewModel() {
+class RegisterViewModel @Inject constructor(
+    private val authUseCase: AuthUseCase,
+    private val sellerUseCase: SellerUseCase
+): ViewModel() {
 
     private val _uriImage = MutableLiveData<Uri?>()
     val uriImage: LiveData<Uri?> = _uriImage
@@ -23,5 +27,8 @@ class RegisterViewModel @Inject constructor(private val authUseCase: AuthUseCase
 
     fun register(email: String, password: String, seller: Seller, store: Store, uri: Uri) =
         authUseCase.register(email, password, seller, store, uri).asLiveData()
+
+    fun getFcmToken() =
+        sellerUseCase.getFcmToken()
 
 }

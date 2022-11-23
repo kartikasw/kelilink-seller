@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -115,7 +116,9 @@ class AddMenuActivity : AppCompatActivity() {
         addMenuViewModel.setUriImage(it)
 
         Glide.with(binding.mfIvMenu.context)
-            .load(it)
+            .load(
+                it ?: ContextCompat.getDrawable(this, R.drawable.placeholder_add_image)
+            )
             .transform(
                 CenterCrop(),
                 RoundedCorners(resources.getDimensionPixelOffset(R.dimen.corner_button))

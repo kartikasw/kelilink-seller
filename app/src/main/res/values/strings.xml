@@ -10,6 +10,7 @@
     <string name="page_detail_order">Detail Pesanan</string>
     <string name="page_stock">Stok Habis</string>
     <string name="page_edit_password">Ubah Kata Sandi</string>
+    <string name="page_forgot_password">Lupa Kata Sandi</string>
 
     <string name="tab_order_new">Dalam proses</string>
     <string name="tab_order_ready">Sudah siap</string>
@@ -61,7 +62,7 @@
     <string name="title_order_empty">Tidak ada pesanan</string>
 
     <string name="title_email">Email</string>
-    <string name="content_reset_password">Isi dengan email yang Anda gunakan ketika mendaftar akun Kelilink Seller</string>
+    <string name="content_reset_password">Isi dengan email yang Anda gunakan ketika mendaftar akun.</string>
 
     <string name="title_delete">Hapus</string>
     <string name="content_delete_menu">Anda yakin ingin menghapus menu ini?</string>
