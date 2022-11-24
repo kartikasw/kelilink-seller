@@ -11,7 +11,10 @@ import com.example.kelilinkseller.core.domain.Resource
 import com.example.kelilinkseller.databinding.ActivityResetPasswordBinding
 import com.example.kelilinkseller.features.auth.AuthActivity
 import com.example.kelilinkseller.util.custom_view.KelilinkLoadingDialog
+import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ResetPasswordActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityResetPasswordBinding
@@ -47,7 +50,7 @@ class ResetPasswordActivity : AppCompatActivity() {
             val email = binding.rpEtEmail
             val emailData = email.text.toString()
 
-            if(email.error != null && emailData.isNotEmpty()) {
+            if(email.error == null && emailData.isNotEmpty()) {
                 resetPasswordViewModel.resetPassword(emailData).observe(this) {
                     when(it) {
                         is Resource.Success -> {
@@ -68,6 +71,9 @@ class ResetPasswordActivity : AppCompatActivity() {
                         }
                     }
                 }
+            } else {
+                Snackbar.make(binding.root, resources.getString(R.string.error_field), Snackbar.LENGTH_LONG)
+                    .show()
             }
         }
     }
