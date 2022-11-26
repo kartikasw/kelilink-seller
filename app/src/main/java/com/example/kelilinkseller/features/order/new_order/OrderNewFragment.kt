@@ -142,7 +142,6 @@ class OrderNewFragment : Fragment() {
                         resources.getString(R.string.toast_order_done)
                     }
                 }
-
                 Toast.makeText(requireContext(), toastText, Toast.LENGTH_SHORT).show()
             }
             is Resource.Error -> {
