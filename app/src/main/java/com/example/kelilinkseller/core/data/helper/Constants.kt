@@ -1,9 +1,11 @@
 package com.example.kelilinkseller.core.data.helper
 
+import com.example.kelilinkseller.BuildConfig
+
 object Constants {
 
     const val CONTENT_TYPE = "application/json"
-    const val SERVER_KEY = "AAAAOmbSqCc:APA91bFwPtZtHkwI54WxPolQmg5EO8n0a8shIPB0eyRoIfUpjqIew1v9UyOh1oSg17mC1SIQpuBGVdTQ9umgn68k6aYOn7PIL2Hy1StcwDl9-8j_iDA1AfVWUbOz-w9P_PrQBDgVEAmZ"
+    const val SERVER_KEY = BuildConfig.SERVER_KEY
 
     const val PREFERENCE_NAME = "KelilinkSeller_Preference"
     const val DATABASE_NAME = "KelilinkSeller.db"
