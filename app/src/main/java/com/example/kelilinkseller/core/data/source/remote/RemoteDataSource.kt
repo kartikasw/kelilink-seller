@@ -37,8 +37,11 @@ class RemoteDataSource @Inject constructor(
     fun resetPassword(email: String) =
         auth.resetPassword(email)
 
-    fun getAllOrder() =
-        order.getAllOrder()
+    fun getAllLiveOrder() =
+        order.getAllLiveOrder()
+
+    fun getLiveOrderMenu(invoiceId: String) =
+        order.getLiveOrderMenu(invoiceId)
 
     fun getOrderMenu(invoiceId: String) =
         order.getOrderMenu(invoiceId)

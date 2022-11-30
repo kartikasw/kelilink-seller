@@ -5,24 +5,18 @@ import com.example.kelilinkseller.core.domain.model.Fcm
 import com.example.kelilinkseller.core.domain.model.Invoice
 import com.example.kelilinkseller.core.domain.model.Order
 import com.example.kelilinkseller.core.domain.repository.OrderRepository
+import com.example.kelilinkseller.features.order.FirestoreQueryLiveData
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class OrderInteractor @Inject constructor(
     private val orderRepository: OrderRepository
 ) : OrderUseCase {
+    override fun getAllLiveOrder(): FirestoreQueryLiveData<Invoice> =
+        orderRepository.getAllLiveOrder()
 
-    override fun getAllNewOrder(): Flow<List<Invoice>> =
-        orderRepository.getAllNewOrder()
-
-    override fun getAllReadyOrder(): Flow<List<Invoice>> =
-        orderRepository.getAllReadyOrder()
-
-    override fun getAllDoneOrder(): Flow<List<Invoice>> =
-        orderRepository.getAllDoneOrder()
-
-    override fun getOrderMenu(invoiceId: String): Flow<List<Order>> =
-        orderRepository.getOrderMenu(invoiceId)
+    override fun getLiveOrderMenu(invoiceId: String): FirestoreQueryLiveData<Order> =
+        orderRepository.getLiveOrderMenu(invoiceId)
 
     override fun getOrderById(orderId: String): Flow<Resource<Invoice>> =
         orderRepository.getOrderById(orderId)

@@ -5,7 +5,7 @@ import com.example.kelilinkseller.core.domain.model.Store
 
 fun StoreResponse.toModel(): Store =
     Store(
-        address, categories, fcm_token, id, image, lat, lon, name, operating_status, queue, total_queue
+        address, categories, fcm_token, id, image, lat, lon, name, operating_status, queue
     )
 
 fun List<StoreResponse>.toListModel(): List<Store> =

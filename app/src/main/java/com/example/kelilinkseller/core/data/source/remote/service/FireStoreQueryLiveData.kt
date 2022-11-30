@@ -1,12 +1,12 @@
-package com.example.kelilinkseller.features.order
+package com.example.kelilinkseller.core.data.source.remote.service
 
 import androidx.lifecycle.LiveData
-import com.example.kelilinkseller.core.domain.model.Order
 import com.google.firebase.firestore.*
 
-class FirestoreQueryLiveDataNested(
-    private val query: Query
-): LiveData<List<Order>>(), EventListener<QuerySnapshot> {
+class FirestoreQueryLiveData<ResponseType>(
+    private val query: Query,
+    private val responseType: ResponseType
+): LiveData<List<ResponseType>>(), EventListener<QuerySnapshot> {
 
     private lateinit var registration: ListenerRegistration
 
@@ -21,9 +21,9 @@ class FirestoreQueryLiveDataNested(
     }
 
     override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
-        val items = ArrayList<Order>()
+        val items = ArrayList<ResponseType>()
         for (doc in value!!) {
-            doc.toObject(Order::class.java).let {
+            doc.toObject(responseType!!::class.java).let {
                 items.add(it)
             }
         }

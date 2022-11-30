@@ -1,9 +1,5 @@
 package com.example.kelilinkseller.core.data.repository
 
-import com.example.kelilinkseller.core.data.helper.Constants.ORDER_STATUS.COOKING
-import com.example.kelilinkseller.core.data.helper.Constants.ORDER_STATUS.DONE
-import com.example.kelilinkseller.core.data.helper.Constants.ORDER_STATUS.READY
-import com.example.kelilinkseller.core.data.helper.Constants.ORDER_STATUS.WAITING
 import com.example.kelilinkseller.core.data.helper.Response
 import com.example.kelilinkseller.core.data.mapper.toListModel
 import com.example.kelilinkseller.core.data.mapper.toModel
@@ -14,10 +10,10 @@ import com.example.kelilinkseller.core.domain.model.Fcm
 import com.example.kelilinkseller.core.domain.model.Invoice
 import com.example.kelilinkseller.core.domain.model.Order
 import com.example.kelilinkseller.core.domain.repository.OrderRepository
+import com.example.kelilinkseller.features.order.FirestoreQueryLiveData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -31,30 +27,11 @@ class OrderRepositoryImpl @Inject constructor(
         const val TAG = "OrderRepository"
     }
 
-    override fun getAllNewOrder(): Flow<List<Invoice>> =
-        remote.getAllOrder().map { it.toListModel().filter { invoice ->
-            invoice.status == COOKING || invoice.status == WAITING
-        } }
+    override fun getAllLiveOrder(): FirestoreQueryLiveData<Invoice> =
+        remote.getAllLiveOrder()
 
-    override fun getAllReadyOrder(): Flow<List<Invoice>> =
-        remote.getAllOrder().map { it.toListModel().filter { invoice ->
-            invoice.status == READY
-        } }
-
-    override fun getAllDoneOrder(): Flow<List<Invoice>> =
-        remote.getAllOrder().map { it.toListModel().filter { invoice ->
-            invoice.status == DONE
-        } }
-
-    override fun getOrderMenu(invoiceId: String): Flow<List<Order>> =
-        flow {
-            when(val response = remote.getOrderMenu(invoiceId).first()) {
-                is Response.Success -> {
-                    emit(response.data.toListModel())
-                }
-                else -> {}
-            }
-        }
+    override fun getLiveOrderMenu(invoiceId: String): FirestoreQueryLiveData<Order> =
+        remote.getLiveOrderMenu(invoiceId)
 
     override fun getOrderById(orderId: String): Flow<Resource<Invoice>> =
         flow {

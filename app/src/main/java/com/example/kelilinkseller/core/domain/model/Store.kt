@@ -10,6 +10,5 @@ data class Store(
     val lon: Double = 0.0,
     val name: String = "",
     val operating_status: Boolean = false,
-    val queue: List<String> = listOf(),
-    val total_queue: Int = 0
+    val queue: List<String> = listOf()
 )

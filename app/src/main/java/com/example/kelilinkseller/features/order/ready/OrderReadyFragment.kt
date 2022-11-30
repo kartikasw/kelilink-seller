@@ -52,6 +52,8 @@ class OrderReadyFragment : Fragment() {
 //        }
 
         orderViewModel.getAllReadyOrderLiveData().observe(viewLifecycleOwner) { invoiceList ->
+            showEmptyState(invoiceList.isNullOrEmpty())
+
             for(invoice in invoiceList) {
                 if(invoice.id != "") {
                     orderViewModel.getAllOrderMenuLiveData(invoice.id).observe(viewLifecycleOwner) { order ->

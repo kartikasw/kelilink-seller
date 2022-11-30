@@ -84,6 +84,7 @@ class EditMenuActivity : AppCompatActivity() {
                 .into(mfIvMenu)
 
             mfEtName.setText(menu.name)
+            mfEtDescription.setText(menu.description)
             mfEtPrice.setText(menu.price.toString())
             mfEtUnit.setText(menu.unit)
         }

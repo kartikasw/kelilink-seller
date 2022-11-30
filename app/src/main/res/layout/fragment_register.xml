@@ -53,6 +53,7 @@
             android:layout_marginHorizontal="@dimen/margin_layout"
             android:layout_marginTop="@dimen/margin_layout_more"
             android:hint="@string/hint_store_name"
+            android:singleLine="true"
             android:paddingHorizontal="@dimen/margin_component_more"
             app:layout_constraintTop_toBottomOf="@id/r_tv_content_register"
             tools:ignore="TextContrastCheck"

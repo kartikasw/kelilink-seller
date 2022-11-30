@@ -4,13 +4,12 @@ import com.example.kelilinkseller.core.domain.Resource
 import com.example.kelilinkseller.core.domain.model.Fcm
 import com.example.kelilinkseller.core.domain.model.Invoice
 import com.example.kelilinkseller.core.domain.model.Order
+import com.example.kelilinkseller.features.order.FirestoreQueryLiveData
 import kotlinx.coroutines.flow.Flow
 
 interface OrderRepository {
-    fun getAllNewOrder(): Flow<List<Invoice>>
-    fun getAllReadyOrder(): Flow<List<Invoice>>
-    fun getAllDoneOrder(): Flow<List<Invoice>>
-    fun getOrderMenu(invoiceId: String): Flow<List<Order>>
+    fun getAllLiveOrder(): FirestoreQueryLiveData<Invoice>
+    fun getLiveOrderMenu(invoiceId: String): FirestoreQueryLiveData<Order>
 
     fun getOrderById(orderId: String): Flow<Resource<Invoice>>
 

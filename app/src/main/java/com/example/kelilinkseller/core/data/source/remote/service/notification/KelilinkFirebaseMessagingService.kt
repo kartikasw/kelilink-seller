@@ -39,10 +39,10 @@ class KelilinkFirebaseMessagingService: FirebaseMessagingService() {
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
         Log.d(TAG, message.toString())
-        sendNotification("Kamu punya pesanan baru", message.data["invoice_id"])
+        sendNotification("Kamu punya pesanan baru")
     }
 
-    private fun sendNotification(title: String?, messageBody: String?) {
+    private fun sendNotification(title: String?) {
         val contentIntent = Intent(applicationContext, MainActivity::class.java)
         val contentPendingIntent = PendingIntent.getActivity(
             applicationContext,

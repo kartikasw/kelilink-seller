@@ -42,12 +42,9 @@ class OrderDoneFragment : Fragment() {
 
 
     private fun showOrder() {
-//        orderViewModel.orders.observe(viewLifecycleOwner) { invoiceList ->
-//            Log.d(OrderNewFragment.TAG, invoiceList.toString())
-//            setUpOrderView(invoiceList)
-//        }
-
         orderViewModel.getAllDoneOrderLiveData().observe(viewLifecycleOwner) { invoiceList ->
+            showEmptyState(invoiceList.isNullOrEmpty())
+
             for(invoice in invoiceList) {
                if(invoice.id != "") {
                    orderViewModel.getAllOrderMenuLiveData(invoice.id).observe(viewLifecycleOwner) { order ->

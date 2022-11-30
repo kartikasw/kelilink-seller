@@ -50,15 +50,12 @@ class OrderNewFragment : Fragment() {
     }
 
     private fun showOrder() {
-//        orderViewModel.orders.observe(viewLifecycleOwner) { invoiceList ->
-//            Log.d(TAG, invoiceList.toString())
-//            setUpOrderView(invoiceList)
-//        }
+        orderViewModel.getAllNewOrder().observe(viewLifecycleOwner) { invoiceList ->
+            showEmptyState(invoiceList.isNullOrEmpty())
 
-        orderViewModel.getAllNewOrderLiveData().observe(viewLifecycleOwner) { invoiceList ->
             for(invoice in invoiceList) {
                 if(invoice.id != "") {
-                    orderViewModel.getAllOrderMenuLiveData(invoice.id).observe(viewLifecycleOwner) { order ->
+                    orderViewModel.getAllOrderMenu(invoice.id).observe(viewLifecycleOwner) { order ->
                         invoice.orders = order
                         val list = invoiceList.filter {
                             it.status == COOKING || it.status == WAITING
@@ -137,6 +134,9 @@ class OrderNewFragment : Fragment() {
                     }
                     DECLINED -> {
                         resources.getString(R.string.toast_order_declined)
+                    }
+                    READY -> {
+                        resources.getString(R.string.toast_order_ready)
                     }
                     else -> {
                         resources.getString(R.string.toast_order_done)

@@ -385,6 +385,8 @@ abstract class FirebaseService {
                 .document(docId)
                 .update(fieldName, FieldValue.arrayRemove(value))
                 .await()
+
+            emit(Response.Success(Unit))
         }.catch {
             emit(Response.Error(it.message.toString()))
         }.flowOn(Dispatchers.IO)
