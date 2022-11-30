@@ -31,7 +31,7 @@ class EditMenuActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMenuFormBinding
 
-    private val editMenuViewModel: EditMenuViewModel by viewModels()
+    private val viewModel: EditMenuViewModel by viewModels()
 
     private var menuId: String = ""
 
@@ -54,7 +54,7 @@ class EditMenuActivity : AppCompatActivity() {
     }
 
     private fun showForm() {
-        editMenuViewModel.getMenuById(menuId).observe(this) {
+        viewModel.getMenuById(menuId).observe(this) {
             when(it) {
                 is Resource.Success -> {
                     setUpFormView(it.data!!)
@@ -110,13 +110,13 @@ class EditMenuActivity : AppCompatActivity() {
                 val descriptionData = description.text.toString()
                 val priceData = price.text.toString()
                 val unitData = unit.text.toString()
-                val image = editMenuViewModel.uriImage.value
+                val image = viewModel.uriImage.value
 
                 if(name.error == null && price.error == null && unit.error == null && description.error == null
                     && nameData.isNotEmpty() && descriptionData.isNotEmpty() && priceData.isNotEmpty() && unitData.isNotEmpty()) {
 
                     if(image != null) {
-                        editMenuViewModel.updateMenu(
+                        viewModel.updateMenu(
                             menuId,
                             mutableMapOf(
                                 NAME_COLUMN to nameData,
@@ -127,7 +127,7 @@ class EditMenuActivity : AppCompatActivity() {
                             image
                         ).observe(this@EditMenuActivity, ::menuResponse)
                     } else {
-                        editMenuViewModel.updateMenu(
+                        viewModel.updateMenu(
                             menuId,
                             mutableMapOf(
                                 NAME_COLUMN to nameData,
@@ -176,7 +176,7 @@ class EditMenuActivity : AppCompatActivity() {
     }
 
     private var pickImage = registerForActivityResult(ActivityResultContracts.GetContent()) {
-        editMenuViewModel.setUriImage(it)
+        viewModel.setUriImage(it)
 
         Glide.with(binding.mfIvMenu.context)
             .load(

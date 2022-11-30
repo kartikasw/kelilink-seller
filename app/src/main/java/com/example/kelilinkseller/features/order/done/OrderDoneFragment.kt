@@ -22,7 +22,7 @@ class OrderDoneFragment : Fragment() {
     private var _binding: ContentRecyclerViewBinding? = null
     private val binding get() = _binding!!
 
-    private val orderViewModel: OrderDoneViewModel by viewModels()
+    private val viewModel: OrderDoneViewModel by viewModels()
 
     private lateinit var orderAdapter: OrderAdapter
 
@@ -42,12 +42,12 @@ class OrderDoneFragment : Fragment() {
 
 
     private fun showOrder() {
-        orderViewModel.getAllDoneOrderLiveData().observe(viewLifecycleOwner) { invoiceList ->
+        viewModel.getAllDoneOrderLiveData().observe(viewLifecycleOwner) { invoiceList ->
             showEmptyState(invoiceList.isNullOrEmpty())
 
             for(invoice in invoiceList) {
                if(invoice.id != "") {
-                   orderViewModel.getAllOrderMenuLiveData(invoice.id).observe(viewLifecycleOwner) { order ->
+                   viewModel.getAllOrderMenuLiveData(invoice.id).observe(viewLifecycleOwner) { order ->
                        invoice.orders = order
                        val list = invoiceList.filter {
                            it.status == DONE
@@ -63,7 +63,7 @@ class OrderDoneFragment : Fragment() {
         orderAdapter = OrderAdapter()
 
         orderAdapter.onItemClick = {
-            orderViewModel.setInvoiceId(it.id)
+            viewModel.setInvoiceId(it.id)
             startActivity(Intent(requireContext(), DetailOrderDoneActivity::class.java))
         }
 

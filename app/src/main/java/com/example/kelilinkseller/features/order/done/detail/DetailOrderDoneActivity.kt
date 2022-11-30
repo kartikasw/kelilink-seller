@@ -1,15 +1,11 @@
 package com.example.kelilinkseller.features.order.done.detail
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kelilinkseller.R
@@ -29,7 +25,7 @@ class DetailOrderDoneActivity : AppCompatActivity() {
 
     private lateinit var phoneNumber: String
 
-    private val detailOrderDoneViewModel: DetailOrderDoneViewModel by viewModels()
+    private val viewModel: DetailOrderDoneViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,9 +49,9 @@ class DetailOrderDoneActivity : AppCompatActivity() {
     }
 
     private fun showInvoiceInfo() {
-        invoiceId = detailOrderDoneViewModel.getInvoiceId()
+        invoiceId = viewModel.getInvoiceId()
 
-        detailOrderDoneViewModel.getOrderById(invoiceId).observe(this) {
+        viewModel.getOrderById(invoiceId).observe(this) {
             when(it) {
                 is Resource.Success -> {
                     phoneNumber = it.data!!.user_phone_number

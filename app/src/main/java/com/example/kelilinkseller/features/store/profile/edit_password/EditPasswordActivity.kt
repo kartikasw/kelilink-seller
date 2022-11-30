@@ -21,7 +21,7 @@ class EditPasswordActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityEditPasswordBinding
 
-    private val editPasswordViewModel: EditPasswordViewModel by viewModels()
+    private val viewModel: EditPasswordViewModel by viewModels()
 
     private lateinit var loading: KelilinkLoadingDialog
 
@@ -70,7 +70,7 @@ class EditPasswordActivity : AppCompatActivity() {
 
                 if(oldPassword.error == null && newPassword.error == null
                     && oldPasswordData.isNotEmpty() && newPasswordData.isNotEmpty()) {
-                    editPasswordViewModel.updatePassword(oldPasswordData, newPasswordData)
+                    viewModel.updatePassword(oldPasswordData, newPasswordData)
                         .observe(this@EditPasswordActivity, ::response)
                 } else {
                     Toast.makeText(this@EditPasswordActivity, resources.getString(R.string.error_field), Toast.LENGTH_SHORT).show()

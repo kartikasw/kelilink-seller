@@ -1,10 +1,10 @@
 package com.example.kelilinkseller.core.domain.use_case.order
 
+import com.example.kelilinkseller.core.data.source.remote.service.FirestoreQueryLiveData
 import com.example.kelilinkseller.core.domain.Resource
 import com.example.kelilinkseller.core.domain.model.Fcm
 import com.example.kelilinkseller.core.domain.model.Invoice
 import com.example.kelilinkseller.core.domain.model.Order
-import com.example.kelilinkseller.features.order.FirestoreQueryLiveData
 import kotlinx.coroutines.flow.Flow
 
 interface OrderUseCase {

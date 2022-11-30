@@ -30,7 +30,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class EditProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditProfileBinding
 
-    private val editProfileViewModel: EditProfileViewModel by viewModels()
+    private val viewModel: EditProfileViewModel by viewModels()
 
     private lateinit var categoryChipGroup: ChipGroup
     private var categoryMap = mutableMapOf<Int, String>()
@@ -94,7 +94,7 @@ class EditProfileActivity : AppCompatActivity() {
 
     private fun showForm() {
         val storeId = Firebase.auth.currentUser!!.uid
-        editProfileViewModel.getStoreById(storeId).observe(this) {
+        viewModel.getStoreById(storeId).observe(this) {
             when(it) {
                 is Resource.Success -> {
                     setUpFormView(it.data!!)
@@ -140,7 +140,7 @@ class EditProfileActivity : AppCompatActivity() {
 
                 val storeName = epEtStoreName
                 val storeNameData = storeName.text.toString()
-                val image = editProfileViewModel.uriImage.value
+                val image = viewModel.uriImage.value
                 val selectedCategory = categoryChipGroup.checkedChipIds
 
                 if(selectedCategory.isNotEmpty()) {
@@ -159,10 +159,10 @@ class EditProfileActivity : AppCompatActivity() {
                     )
 
                     if(image != null) {
-                        editProfileViewModel.updateMyStore(data, image)
+                        viewModel.updateMyStore(data, image)
                             .observe(this@EditProfileActivity, ::storeResponse)
                     } else {
-                        editProfileViewModel.updateMyStore(data)
+                        viewModel.updateMyStore(data)
                             .observe(this@EditProfileActivity, ::storeResponse)
                     }
 
@@ -203,7 +203,7 @@ class EditProfileActivity : AppCompatActivity() {
     }
 
     private var pickImage = registerForActivityResult(ActivityResultContracts.GetContent()) {
-        editProfileViewModel.setUriImage(it)
+        viewModel.setUriImage(it)
 
         Glide.with(binding.epIvStoreImage.context)
             .load(it)

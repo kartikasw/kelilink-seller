@@ -1,10 +1,10 @@
 package com.example.kelilinkseller.features.order.done
 
 import androidx.lifecycle.ViewModel
+import com.example.kelilinkseller.core.data.source.remote.service.FirestoreQueryLiveData
 import com.example.kelilinkseller.core.domain.model.Invoice
 import com.example.kelilinkseller.core.domain.model.Order
 import com.example.kelilinkseller.core.domain.use_case.order.OrderUseCase
-import com.example.kelilinkseller.features.order.FirestoreQueryLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

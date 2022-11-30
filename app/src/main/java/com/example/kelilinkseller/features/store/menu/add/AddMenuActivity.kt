@@ -25,7 +25,7 @@ class AddMenuActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMenuFormBinding
 
-    private val addMenuViewModel: AddMenuViewModel by viewModels()
+    private val viewModel: AddMenuViewModel by viewModels()
 
     private lateinit var loading: KelilinkLoadingDialog
 
@@ -68,7 +68,7 @@ class AddMenuActivity : AppCompatActivity() {
                 val descriptionData = description.text.toString()
                 val priceData = price.text.toString()
                 val unitData = unit.text.toString()
-                val image = addMenuViewModel.uriImage.value
+                val image = viewModel.uriImage.value
 
                 if(menuName.error == null && price.error == null && unit.error == null && image != null
                     && description.error == null && menuNameData.isNotEmpty() && descriptionData.isNotEmpty()
@@ -80,7 +80,7 @@ class AddMenuActivity : AppCompatActivity() {
                         unit = unitData
                     )
 
-                    addMenuViewModel.addMenu(menu, image).observe(this@AddMenuActivity, ::menuResponse)
+                    viewModel.addMenu(menu, image).observe(this@AddMenuActivity, ::menuResponse)
                 } else {
                     Snackbar.make(binding.root, resources.getString(R.string.error_field), Snackbar.LENGTH_LONG)
                         .show()
@@ -113,7 +113,7 @@ class AddMenuActivity : AppCompatActivity() {
     }
 
     private var pickImage = registerForActivityResult(ActivityResultContracts.GetContent()) {
-        addMenuViewModel.setUriImage(it)
+        viewModel.setUriImage(it)
 
         Glide.with(binding.mfIvMenu.context)
             .load(

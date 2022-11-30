@@ -29,7 +29,7 @@ class DetailMenuActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailMenuBinding
 
-    private val detailMenuViewModel: DetailMenuViewModel by viewModels()
+    private val viewModel: DetailMenuViewModel by viewModels()
 
     private var menuId: String = ""
     private var editMenu: Boolean = false
@@ -89,7 +89,7 @@ class DetailMenuActivity : AppCompatActivity() {
     }
 
     private fun deleteMenu(dialog: DialogInterface) {
-        detailMenuViewModel.deleteMenu(menuId).observe(this) {
+        viewModel.deleteMenu(menuId).observe(this) {
             when(it) {
                 is Resource.Success -> {
                     loading.dismiss()
@@ -110,7 +110,7 @@ class DetailMenuActivity : AppCompatActivity() {
     }
 
     private fun showDetailMenuView() {
-        detailMenuViewModel.getMenuById(menuId).observe(this) {
+        viewModel.getMenuById(menuId).observe(this) {
             Log.d(TAG, it.data.toString())
             when(it) {
                 is Resource.Success -> {

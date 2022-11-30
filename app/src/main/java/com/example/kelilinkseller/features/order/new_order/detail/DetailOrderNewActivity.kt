@@ -31,7 +31,7 @@ class DetailOrderNewActivity : AppCompatActivity() {
 
     private lateinit var phoneNumber: String
 
-    private val detailOrderNewViewModel: DetailOrderNewViewModel by viewModels()
+    private val viewModel: DetailOrderNewViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,9 +55,9 @@ class DetailOrderNewActivity : AppCompatActivity() {
     }
 
     private fun showInvoiceInfo() {
-        invoiceId = detailOrderNewViewModel.getInvoiceId()
+        invoiceId = viewModel.getInvoiceId()
 
-        detailOrderNewViewModel.getOrderById(invoiceId).observe(this) {
+        viewModel.getOrderById(invoiceId).observe(this) {
             when(it) {
                 is Resource.Success -> {
                     phoneNumber = it.data!!.user_phone_number
@@ -130,7 +130,7 @@ class DetailOrderNewActivity : AppCompatActivity() {
         }
 
         binding.donBtnReady.setOnClickListener {
-            detailOrderNewViewModel.markOrderAsReady(invoiceId).observe(this) {
+            viewModel.markOrderAsReady(invoiceId).observe(this) {
                 when(it) {
                     is Resource.Success -> {
                         onBackPressed()

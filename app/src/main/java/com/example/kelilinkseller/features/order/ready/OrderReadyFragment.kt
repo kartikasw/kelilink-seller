@@ -27,7 +27,7 @@ class OrderReadyFragment : Fragment() {
     private var _binding: ContentRecyclerViewBinding? = null
     private val binding get() = _binding!!
 
-    private val orderViewModel: OrderReadyViewModel by viewModels()
+    private val viewModel: OrderReadyViewModel by viewModels()
 
     private lateinit var orderAdapter: OrderAdapter
 
@@ -46,17 +46,12 @@ class OrderReadyFragment : Fragment() {
     }
 
     private fun showOrder() {
-//        orderViewModel.orders.observe(viewLifecycleOwner) { invoiceList ->
-//            Log.d(OrderNewFragment.TAG, invoiceList.toString())
-//            setUpOrderView(invoiceList)
-//        }
-
-        orderViewModel.getAllReadyOrderLiveData().observe(viewLifecycleOwner) { invoiceList ->
+        viewModel.getAllReadyOrderLiveData().observe(viewLifecycleOwner) { invoiceList ->
             showEmptyState(invoiceList.isNullOrEmpty())
 
             for(invoice in invoiceList) {
                 if(invoice.id != "") {
-                    orderViewModel.getAllOrderMenuLiveData(invoice.id).observe(viewLifecycleOwner) { order ->
+                    viewModel.getAllOrderMenuLiveData(invoice.id).observe(viewLifecycleOwner) { order ->
                         invoice.orders = order
                         val list = invoiceList.filter {
                             it.status == READY
@@ -73,7 +68,7 @@ class OrderReadyFragment : Fragment() {
 
         orderAdapter.apply {
             onDoneClick = {
-                orderViewModel.markOrderAsDone(it.id).observe(viewLifecycleOwner) { resource ->
+                viewModel.markOrderAsDone(it.id).observe(viewLifecycleOwner) { resource ->
                     when(resource) {
                         is Resource.Success -> {
                             Toast.makeText(
@@ -92,7 +87,7 @@ class OrderReadyFragment : Fragment() {
             }
 
             onItemClick = {
-                orderViewModel.setInvoiceId(it.id)
+                viewModel.setInvoiceId(it.id)
                 startActivity(Intent(requireContext(), DetailOrderReadyActivity::class.java))
             }
         }

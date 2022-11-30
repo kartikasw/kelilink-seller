@@ -5,12 +5,12 @@ import com.example.kelilinkseller.core.data.mapper.toListModel
 import com.example.kelilinkseller.core.data.mapper.toModel
 import com.example.kelilinkseller.core.data.source.local.LocalDataSource
 import com.example.kelilinkseller.core.data.source.remote.RemoteDataSource
+import com.example.kelilinkseller.core.data.source.remote.service.FirestoreQueryLiveData
 import com.example.kelilinkseller.core.domain.Resource
 import com.example.kelilinkseller.core.domain.model.Fcm
 import com.example.kelilinkseller.core.domain.model.Invoice
 import com.example.kelilinkseller.core.domain.model.Order
 import com.example.kelilinkseller.core.domain.repository.OrderRepository
-import com.example.kelilinkseller.features.order.FirestoreQueryLiveData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
