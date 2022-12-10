@@ -1,7 +1,6 @@
 package com.example.kelilinkseller.core.ui
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.view.LayoutInflater
@@ -15,9 +14,7 @@ import com.example.kelilinkseller.core.domain.model.Menu
 import com.example.kelilinkseller.databinding.ItemMenuBinding
 import com.example.kelilinkseller.databinding.ItemMenuOutOfStockBinding
 
-class StockAdapter(context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
-    private val corner = context.resources.getDimensionPixelSize(R.dimen.corner_image)
+class StockAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var onItemClick: ((Menu) -> Unit)? = null
 
@@ -69,6 +66,7 @@ class StockAdapter(context: Context): RecyclerView.Adapter<RecyclerView.ViewHold
 
         @SuppressLint("SetTextI18n")
         fun bind(menu: Menu) {
+            val corner = itemView.context.resources.getDimensionPixelSize(R.dimen.corner_image)
             with(binding) {
                 Glide.with(itemView.context)
                     .load(menu.image)
@@ -93,6 +91,7 @@ class StockAdapter(context: Context): RecyclerView.Adapter<RecyclerView.ViewHold
 
         @SuppressLint("SetTextI18n")
         fun bind(menu: Menu) {
+            val corner = itemView.context.resources.getDimensionPixelSize(R.dimen.corner_image)
             with(binding) {
                 Glide.with(itemView.context)
                     .load(menu.image)

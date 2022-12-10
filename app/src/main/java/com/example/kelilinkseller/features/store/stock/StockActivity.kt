@@ -71,7 +71,7 @@ class StockActivity : AppCompatActivity() {
     }
 
     private fun setUpMenuView(data: List<Menu>?) {
-        val stockAdapter = StockAdapter(this)
+        val stockAdapter = StockAdapter()
 
         stockAdapter.onItemClick = {
             val intent = Intent(this, EditStockActivity::class.java)

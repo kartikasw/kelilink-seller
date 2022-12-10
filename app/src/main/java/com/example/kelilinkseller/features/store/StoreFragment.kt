@@ -24,6 +24,7 @@ import com.example.kelilinkseller.core.data.helper.Constants.DatabaseColumn.LATI
 import com.example.kelilinkseller.core.data.helper.Constants.DatabaseColumn.LONGITUDE_COLUMN
 import com.example.kelilinkseller.core.data.helper.Constants.DatabaseColumn.OPERATING_STATUS_COLUMN
 import com.example.kelilinkseller.core.domain.Resource
+import com.example.kelilinkseller.core.ui.StoreMenu
 import com.example.kelilinkseller.core.ui.StoreMenuAdapter
 import com.example.kelilinkseller.databinding.FragmentStoreBinding
 import com.example.kelilinkseller.features.store.menu.MenuActivity
@@ -121,7 +122,7 @@ class StoreFragment : Fragment() {
     }
 
     private fun showStoreMenu() {
-        val storeMenuAdapter = StoreMenuAdapter(requireContext())
+        val storeMenuAdapter = StoreMenuAdapter()
 
         storeMenuAdapter.onItemClick = {
             when(it.name) {
@@ -137,13 +138,25 @@ class StoreFragment : Fragment() {
             }
         }
 
-        storeMenuAdapter.setItems()
+        storeMenuAdapter.setItems(listCategories)
         with(binding.sRvStoreMenu) {
             layoutManager = GridLayoutManager(activity, 4)
             adapter = storeMenuAdapter
         }
     }
 
+    private val listCategories: ArrayList<StoreMenu>
+        get() {
+            val name = resources.getStringArray(R.array.menu_name)
+            val icon = resources.obtainTypedArray(R.array.menu_icon)
+            val listCategory = ArrayList<StoreMenu>()
+            for (i in name.indices) {
+                val category = StoreMenu(name[i], icon.getResourceId(i, -1))
+                listCategory.add(category)
+            }
+            icon.recycle()
+            return listCategory
+        }
 
     private fun setOnClickLister() {
         with(binding) {

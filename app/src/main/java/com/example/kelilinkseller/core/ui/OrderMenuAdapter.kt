@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kelilinkseller.R
 import com.example.kelilinkseller.core.domain.model.Order
 import com.example.kelilinkseller.databinding.ItemOrderedMenuBinding
 import com.example.kelilinkseller.databinding.ItemOrderedMenuWithNoteBinding
@@ -50,11 +51,11 @@ class OrderMenuAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     inner class WithNoteViewHolder(
         private val binding: ItemOrderedMenuWithNoteBinding
     ): RecyclerView.ViewHolder(binding.root) {
-        @SuppressLint("SetTextI18n")
         fun bind(order: Order) {
             with(binding) {
-                iomwnTvName.text = "${order.amount}x  ${order.name}"
+                iomwnTvName.text = itemView.context.resources.getString(R.string.ordered_menu_format, order.amount, order.name)
                 iomwnTvNote.text = order.note
+                iomwnTvPrice.text = order.price.toString()
             }
         }
     }
@@ -63,7 +64,10 @@ class OrderMenuAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val binding: ItemOrderedMenuBinding
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind(order: Order) {
-            binding.iomTvName.text = "${order.amount}x  ${order.name}"
+            with(binding) {
+                iomTvName.text = itemView.context.resources.getString(R.string.ordered_menu_format, order.amount, order.name)
+                iomTvPrice.text = order.price.toString()
+            }
         }
     }
 

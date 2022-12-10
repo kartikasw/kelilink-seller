@@ -12,7 +12,6 @@
         android:layout_height="@dimen/image_view_item_store"
         android:scaleType="centerInside"
         android:layout_marginStart="@dimen/margin_layout"
-        android:src="@drawable/ic_launcher_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
@@ -45,12 +44,12 @@
         style="@style/TextAppearance.KelilinkSeller.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_component_small"
-        android:textColor="@color/orange"
         android:layout_marginTop="@dimen/margin_component_small"
         android:text="@string/state_out_of_stock"
+        android:textColor="@color/orange"
         app:layout_constraintStart_toStartOf="@id/imoos_tv_title"
-        app:layout_constraintTop_toBottomOf="@+id/imoos_tv_price_and_unit" />
+        app:layout_constraintTop_toBottomOf="@+id/imoos_tv_price_and_unit"
+        tools:ignore="TextContrastCheck" />
 
     <ImageView
         android:id="@+id/imoos_iv_next"

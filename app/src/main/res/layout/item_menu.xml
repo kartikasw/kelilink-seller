@@ -12,7 +12,6 @@
         android:layout_height="@dimen/image_view_item_store"
         android:layout_marginStart="@dimen/margin_layout"
         android:scaleType="centerInside"
-        android:src="@drawable/ic_launcher_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription,ImageContrastCheck" />

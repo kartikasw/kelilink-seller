@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/margin_component_more"
@@ -9,10 +10,23 @@
 
     <TextView
         android:id="@+id/iomwn_tv_name"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.KelilinkSeller.Body2"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/iomwn_line"
+        app:layout_constraintEnd_toStartOf="@id/iomwn_tv_price"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="@dimen/margin_component"/>
+
+    <TextView
+        android:id="@+id/iomwn_tv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.KelilinkSeller.Body2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/iomwn_line"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="@dimen/margin_component"/>
 
     <View
@@ -38,7 +52,8 @@
             android:id="@+id/iomwn_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_note"/>
+            android:src="@drawable/ic_note"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/iomwn_tv_note"

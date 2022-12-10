@@ -1,25 +1,21 @@
 package com.example.kelilinkseller.features.order.new_order.detail
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.core.app.ActivityCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kelilinkseller.R
-import com.example.kelilinkseller.core.data.helper.Constants
 import com.example.kelilinkseller.core.domain.Resource
 import com.example.kelilinkseller.core.domain.model.Invoice
 import com.example.kelilinkseller.core.ui.OrderMenuAdapter
 import com.example.kelilinkseller.databinding.ActivityDetailOrderNewBinding
 import com.example.kelilinkseller.features.order.new_order.OrderNewFragment
 import com.example.kelilinkseller.util.dateFormat
+import com.example.kelilinkseller.util.withCurrencyFormat
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -90,7 +86,7 @@ class DetailOrderNewActivity : AppCompatActivity() {
         with(binding) {
             donLayoutInfo.cdoLayoutUser.cudoTvName.text = invoice.id
             donLayoutInfo.cdoLayoutUser.cudoTvTime.text = dateFormat.format(invoice.time)
-            donTvTotal.text = "Rp${invoice.total_price}"
+            donTvTotal.text = invoice.total_price.withCurrencyFormat()
 
             val orderMenuAdapter = OrderMenuAdapter()
 

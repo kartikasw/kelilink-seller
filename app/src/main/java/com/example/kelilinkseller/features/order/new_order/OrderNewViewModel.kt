@@ -2,10 +2,7 @@ package com.example.kelilinkseller.features.order.new_order
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import com.example.kelilinkseller.core.data.source.remote.service.FirestoreQueryLiveData
 import com.example.kelilinkseller.core.domain.model.Fcm
-import com.example.kelilinkseller.core.domain.model.Invoice
-import com.example.kelilinkseller.core.domain.model.Order
 import com.example.kelilinkseller.core.domain.use_case.order.OrderUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -15,10 +12,10 @@ class OrderNewViewModel @Inject constructor(
     private val orderUseCase: OrderUseCase
 ) : ViewModel() {
 
-    fun getAllNewOrder(): FirestoreQueryLiveData<Invoice> =
+    fun getAllNewOrder() =
         orderUseCase.getAllLiveOrder()
 
-    fun getAllOrderMenu(invoiceId: String): FirestoreQueryLiveData<Order> =
+    fun getAllOrderMenu(invoiceId: String) =
         orderUseCase.getLiveOrderMenu(invoiceId)
 
     fun setInvoiceId(id: String) {

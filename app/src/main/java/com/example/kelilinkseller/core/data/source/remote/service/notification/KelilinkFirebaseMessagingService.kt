@@ -51,7 +51,7 @@ class KelilinkFirebaseMessagingService: FirebaseMessagingService() {
             PendingIntent.FLAG_IMMUTABLE
         )
         val notificationBuilder = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setSmallIcon(R.drawable.ic_logo_notification)
             .setContentTitle(title)
             .setContentText("Waktu terus berjalan, segera terima pesanan sebelum otomatis tertolak")
             .setContentIntent(contentPendingIntent)

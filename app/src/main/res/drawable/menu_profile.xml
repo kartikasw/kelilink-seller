@@ -1,12 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
-        <shape android:shape="oval">
-            <solid android:color="@color/light_orange"/>
-            <size android:width="@dimen/button_store_menu"
-                android:height="@dimen/button_store_menu"/>
-        </shape>
-    </item>
-    <item android:gravity="center"
-        android:drawable="@drawable/ic_person_orange"/>
-</layer-list>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="60dp"
+    android:height="60dp"
+    android:viewportWidth="60"
+    android:viewportHeight="60">
+  <group>
+    <clip-path
+        android:pathData="M0,0h60v60h-60z"/>
+    <path
+        android:pathData="M30,30m-30,0a30,30 0,1 1,60 0a30,30 0,1 1,-60 0"
+        android:fillColor="#FDF1CC"/>
+    <path
+        android:pathData="M30,30C33.315,30 36,27.315 36,24C36,20.685 33.315,18 30,18C26.685,18 24,20.685 24,24C24,27.315 26.685,30 30,30ZM30,33C25.995,33 18,35.01 18,39V40.5C18,41.325 18.675,42 19.5,42H40.5C41.325,42 42,41.325 42,40.5V39C42,35.01 34.005,33 30,33Z"
+        android:fillColor="#E55116"/>
+  </group>
+</vector>

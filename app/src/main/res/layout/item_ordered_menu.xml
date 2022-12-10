@@ -9,11 +9,23 @@
 
     <TextView
         android:id="@+id/iom_tv_name"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.KelilinkSeller.Body2"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/iom_tv_price"
+        android:layout_margin="@dimen/margin_component"/>
+
+    <TextView
+        android:id="@+id/iom_tv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.KelilinkSeller.Body2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="@dimen/margin_component"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

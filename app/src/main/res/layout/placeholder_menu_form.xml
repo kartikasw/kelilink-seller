@@ -48,9 +48,11 @@
                 android:layout_height="@dimen/height_text_input"
                 android:layout_marginHorizontal="@dimen/margin_layout"
                 android:layout_marginTop="@dimen/margin_component_extra"
-                android:paddingHorizontal="@dimen/margin_component_more"
                 android:background="@drawable/shimmer_placeholder"
-                app:layout_constraintTop_toBottomOf="@+id/pmf_layout_menu_image" />
+                android:paddingHorizontal="@dimen/margin_component_more"
+                app:layout_constraintTop_toBottomOf="@+id/pmf_layout_menu_image"
+                tools:ignore="SpeakableTextPresentCheck"
+                tools:layout_editor_absoluteX="16dp" />
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/pmf_et_price"
@@ -58,9 +60,11 @@
                 android:layout_height="@dimen/height_text_input"
                 android:layout_marginHorizontal="@dimen/margin_layout"
                 android:layout_marginTop="@dimen/margin_component_extra"
-                android:paddingHorizontal="@dimen/margin_component_more"
                 android:background="@drawable/shimmer_placeholder"
-                app:layout_constraintTop_toBottomOf="@+id/pmf_et_name" />
+                android:paddingHorizontal="@dimen/margin_component_more"
+                app:layout_constraintTop_toBottomOf="@+id/pmf_et_name"
+                tools:ignore="SpeakableTextPresentCheck"
+                tools:layout_editor_absoluteX="16dp" />
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/pmf_et_unit"
@@ -68,9 +72,11 @@
                 android:layout_height="@dimen/height_text_input"
                 android:layout_marginHorizontal="@dimen/margin_layout"
                 android:layout_marginTop="@dimen/margin_component_extra"
-                android:paddingHorizontal="@dimen/margin_component_more"
                 android:background="@drawable/shimmer_placeholder"
-                app:layout_constraintTop_toBottomOf="@+id/pmf_et_price" />
+                android:paddingHorizontal="@dimen/margin_component_more"
+                app:layout_constraintTop_toBottomOf="@+id/pmf_et_price"
+                tools:ignore="SpeakableTextPresentCheck"
+                tools:layout_editor_absoluteX="16dp" />
 
             <TextView
                 android:id="@+id/textView5"

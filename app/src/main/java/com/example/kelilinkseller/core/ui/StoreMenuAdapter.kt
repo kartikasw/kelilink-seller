@@ -1,26 +1,24 @@
 package com.example.kelilinkseller.core.ui
 
-import android.content.Context
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.kelilinkseller.R
 import com.example.kelilinkseller.databinding.ItemStoreMenuBinding
 
-class StoreMenuAdapter(private val context: Context): RecyclerView.Adapter<StoreMenuAdapter.MyViewHolder>() {
+class StoreMenuAdapter : RecyclerView.Adapter<StoreMenuAdapter.MyViewHolder>() {
 
     private var itemList = ArrayList<StoreMenu>()
 
     var onItemClick: ((StoreMenu) -> Unit)? = null
 
-    fun setItems() {
-        val name = context.resources.getStringArray(R.array.menu_name)
-        val icon = context.resources.obtainTypedArray(R.array.menu_icon)
-        for (i in name.indices) {
-            val category = StoreMenu(name[i], icon.getResourceId(i, -1))
-            itemList.add(category)
+    @SuppressLint("NotifyDataSetChanged")
+    fun setItems(menu: ArrayList<StoreMenu>) {
+        itemList.apply {
+            clear()
+            addAll(menu)
         }
-        icon.recycle()
+        notifyDataSetChanged()
     }
 
     inner class MyViewHolder(private val binding: ItemStoreMenuBinding): RecyclerView.ViewHolder(binding.root) {

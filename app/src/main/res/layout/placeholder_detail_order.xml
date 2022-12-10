@@ -14,7 +14,7 @@
         android:src="@drawable/shimmer_placeholder_oval"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription,ImageContrastCheck" />
 
     <TextView
         android:id="@+id/cudo_tv_name"
@@ -40,23 +40,25 @@
         android:id="@+id/ib_call"
         android:layout_width="@dimen/button_small"
         android:layout_height="@dimen/button_small"
-        android:background="@null"
         android:layout_marginEnd="@dimen/margin_layout"
+        android:background="@null"
         android:src="@drawable/shimmer_placeholder"
+        app:layout_constraintBottom_toBottomOf="@id/cudo_iv_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/cudo_iv_profile"
-        app:layout_constraintBottom_toBottomOf="@id/cudo_iv_profile"/>
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck,ImageContrastCheck" />
 
     <ImageButton
         android:id="@+id/ib_report"
         android:layout_width="@dimen/button_small"
         android:layout_height="@dimen/button_small"
+        android:layout_marginEnd="@dimen/margin_component"
         android:background="@null"
         android:src="@drawable/shimmer_placeholder"
-        android:layout_marginEnd="@dimen/margin_component"
+        app:layout_constraintBottom_toBottomOf="@id/cudo_iv_profile"
         app:layout_constraintEnd_toStartOf="@id/ib_call"
         app:layout_constraintTop_toTopOf="@id/cudo_iv_profile"
-        app:layout_constraintBottom_toBottomOf="@id/cudo_iv_profile"/>
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck,ImageContrastCheck" />
 
     <TextView
         android:id="@+id/text_1"

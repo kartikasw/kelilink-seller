@@ -14,6 +14,7 @@ import com.example.kelilinkseller.core.domain.model.Invoice
 import com.example.kelilinkseller.core.ui.OrderMenuAdapter
 import com.example.kelilinkseller.databinding.ActivityDetailOrderDoneBinding
 import com.example.kelilinkseller.util.dateFormat
+import com.example.kelilinkseller.util.withCurrencyFormat
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -84,7 +85,7 @@ class DetailOrderDoneActivity : AppCompatActivity() {
         with(binding) {
             dodLayoutInfo.cdoLayoutUser.cudoTvName.text = invoice.id
             dodLayoutInfo.cdoLayoutUser.cudoTvTime.text = dateFormat.format(invoice.time)
-            dodTvTotal.text = "Rp${invoice.total_price}"
+            dodTvTotal.text = invoice.total_price.withCurrencyFormat()
 
             val orderMenuAdapter = OrderMenuAdapter()
 

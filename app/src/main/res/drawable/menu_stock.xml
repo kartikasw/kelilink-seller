@@ -1,12 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
-        <shape android:shape="oval">
-            <solid android:color="@color/light_orange"/>
-            <size android:width="@dimen/button_store_menu"
-                android:height="@dimen/button_store_menu"/>
-        </shape>
-    </item>
-    <item android:gravity="center"
-        android:drawable="@drawable/ic_no_food"/>
-</layer-list>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="60dp"
+    android:height="60dp"
+    android:viewportWidth="60"
+    android:viewportHeight="60">
+  <group>
+    <clip-path
+        android:pathData="M0,0h60v60h-60z"/>
+    <path
+        android:pathData="M30,30m-30,0a30,30 0,1 1,60 0a30,30 0,1 1,-60 0"
+        android:fillColor="#FDF1CC"/>
+    <group>
+      <clip-path
+          android:pathData="M18,18h24v24h-24z"/>
+      <path
+          android:pathData="M34,40C34,40.55 33.55,41 33,41H20C19.45,41 19,40.55 19,40C19,39.45 19.45,39 20,39H33C33.55,39 34,39.45 34,40ZM40.89,24.1C40.95,23.51 40.49,23 39.9,23H36V20C36,19.45 35.55,19 35,19C34.45,19 34,19.45 34,20V23H30.1C29.51,23 29.05,23.51 29.1,24.1L29.34,26.51L36,33.17L39.62,36.79L40.89,24.1ZM39.19,40.61C39.58,40.22 39.58,39.59 39.19,39.2L30,30L27.01,27.01L20.81,20.81C20.42,20.42 19.79,20.42 19.4,20.81C19,21.2 19,21.83 19.39,22.22L24.38,27.21C21.82,27.75 19.62,29.29 19.1,31.84C18.99,32.45 19.49,33 20.1,33H30.17L32.17,35H20C19.45,35 19,35.45 19,36C19,36.55 19.45,37 20,37H33C33.32,37 33.59,36.84 33.78,36.6L37.78,40.6C38.17,41 38.8,41 39.19,40.61Z"
+          android:fillColor="#E55116"/>
+    </group>
+  </group>
+</vector>
