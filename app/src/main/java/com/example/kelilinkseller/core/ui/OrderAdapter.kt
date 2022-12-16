@@ -95,9 +95,7 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                         binding.iowBtnAccept.text = "Terima 00:${(seconds % 60).toString().padStart(2, '0')}"
                     }
 
-                    override fun onFinish() {
-
-                    }
+                    override fun onFinish() {}
                 }.start()
 
                 iowBtnDecline.setOnClickListener {

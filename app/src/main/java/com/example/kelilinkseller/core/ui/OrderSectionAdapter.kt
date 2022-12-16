@@ -1,13 +1,12 @@
 package com.example.kelilinkseller.core.ui
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.kelilinkseller.features.order.done.OrderDoneFragment
 import com.example.kelilinkseller.features.order.new_order.OrderNewFragment
 import com.example.kelilinkseller.features.order.ready.OrderReadyFragment
 
-class OrderSectionAdapter(activity: FragmentActivity): FragmentStateAdapter(activity) {
+class OrderSectionAdapter(fragment: Fragment): FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int = 3
 
     override fun createFragment(position: Int): Fragment {

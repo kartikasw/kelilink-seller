@@ -110,9 +110,9 @@ class StoreFragment : Fragment() {
             sBtnWorkClose.isVisible = !state
             sBtnWorkOpen.isVisible = state
             sTvState.text = if(state) {
-                resources.getString(R.string.state_operating_closed)
+                requireContext().resources.getString(R.string.state_operating_closed)
             } else {
-                resources.getString(R.string.state_operating_open)
+                requireContext().resources.getString(R.string.state_operating_open)
             }
         }
     }
@@ -210,6 +210,12 @@ class StoreFragment : Fragment() {
             else -> {}
         }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
@@ -263,7 +269,7 @@ class StoreFragment : Fragment() {
                     loading.dismiss()
                     Toast.makeText(
                         requireContext(),
-                        resources.getString(R.string.state_no_location),
+                        requireContext().resources.getString(R.string.state_no_location),
                         Toast.LENGTH_SHORT
                     ).show()
                     storeViewModel.updateLocationState(false)

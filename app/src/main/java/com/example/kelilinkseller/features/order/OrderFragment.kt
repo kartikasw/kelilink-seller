@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager2.widget.ViewPager2
 import com.example.kelilinkseller.R
 import com.example.kelilinkseller.core.ui.OrderSectionAdapter
 import com.example.kelilinkseller.databinding.FragmentOrderBinding
@@ -19,6 +20,9 @@ class OrderFragment : Fragment() {
     private var _binding: FragmentOrderBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var sectionAdapter: OrderSectionAdapter
+    private lateinit var viewPager: ViewPager2
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,28 +33,33 @@ class OrderFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        
         setUpToolbar()
 
         setUpSections()
     }
 
     private fun setUpToolbar() {
-        (activity as AppCompatActivity).setSupportActionBar(binding.oToolbar)
-        (activity as AppCompatActivity).supportActionBar?.apply {
-            title = resources.getString(R.string.app_name)
+        (requireActivity() as AppCompatActivity).setSupportActionBar(binding.oToolbar)
+        (requireActivity() as AppCompatActivity).supportActionBar?.apply {
+            title = requireContext().resources.getString(R.string.app_name)
         }
     }
 
     private fun setUpSections() {
         with(binding) {
-            val sectionAdapter = OrderSectionAdapter(requireActivity())
-            val viewPager = oViewpager
+            sectionAdapter = OrderSectionAdapter(this@OrderFragment)
+            viewPager = oViewpager
             viewPager.adapter = sectionAdapter
             TabLayoutMediator(oTab, viewPager) { tab, position ->
                 tab.text = resources.getString(TAB_TITLES[position])
             }.attach()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onDestroy() {

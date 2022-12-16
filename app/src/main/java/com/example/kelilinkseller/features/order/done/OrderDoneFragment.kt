@@ -81,6 +81,11 @@ class OrderDoneFragment : Fragment() {
         binding.crvEmpty.root.isVisible = state
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null

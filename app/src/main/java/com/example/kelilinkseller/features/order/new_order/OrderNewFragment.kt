@@ -24,6 +24,7 @@ import com.example.kelilinkseller.core.ui.OrderAdapter
 import com.example.kelilinkseller.databinding.ContentRecyclerViewBinding
 import com.example.kelilinkseller.features.order.new_order.detail.DetailOrderNewActivity
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
 class OrderNewFragment : Fragment() {
@@ -57,8 +58,9 @@ class OrderNewFragment : Fragment() {
                 if(invoice.id != "") {
                     orderViewModel.getAllOrderMenu(invoice.id).observe(viewLifecycleOwner) { order ->
                         invoice.orders = order
+                        val timeNow = Calendar.getInstance().time.time
                         val list = invoiceList.filter {
-                            it.status == COOKING || it.status == WAITING
+                            it.status == COOKING || (it.status == WAITING && it.time_expire.time >= timeNow)
                         }
                         setUpOrderView(list)
                     }
@@ -130,16 +132,16 @@ class OrderNewFragment : Fragment() {
             is Resource.Success -> {
                 val toastText = when (status) {
                     COOKING -> {
-                        resources.getString(R.string.toast_order_accepted)
+                        requireContext().resources.getString(R.string.toast_order_accepted)
                     }
                     DECLINED -> {
-                        resources.getString(R.string.toast_order_declined)
+                        requireContext().resources.getString(R.string.toast_order_declined)
                     }
                     READY -> {
-                        resources.getString(R.string.toast_order_ready)
+                        requireContext().resources.getString(R.string.toast_order_ready)
                     }
                     else -> {
-                        resources.getString(R.string.toast_order_done)
+                        requireContext().resources.getString(R.string.toast_order_done)
                     }
                 }
                 Toast.makeText(requireContext(), toastText, Toast.LENGTH_SHORT).show()
@@ -154,6 +156,11 @@ class OrderNewFragment : Fragment() {
 
     private fun showEmptyState(state: Boolean) {
         binding.crvEmpty.root.isVisible = state
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onDestroy() {

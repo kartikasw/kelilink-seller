@@ -55,7 +55,7 @@ class OrderMenuAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             with(binding) {
                 iomwnTvName.text = itemView.context.resources.getString(R.string.ordered_menu_format, order.amount, order.name)
                 iomwnTvNote.text = order.note
-                iomwnTvPrice.text = order.price.toString()
+                iomwnTvPrice.text = order.total_price.toString()
             }
         }
     }
@@ -66,7 +66,7 @@ class OrderMenuAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind(order: Order) {
             with(binding) {
                 iomTvName.text = itemView.context.resources.getString(R.string.ordered_menu_format, order.amount, order.name)
-                iomTvPrice.text = order.price.toString()
+                iomTvPrice.text = order.total_price.toString()
             }
         }
     }

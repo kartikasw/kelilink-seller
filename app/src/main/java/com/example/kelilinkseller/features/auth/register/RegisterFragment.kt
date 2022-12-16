@@ -99,7 +99,7 @@ class RegisterFragment : Fragment() {
                 .register(emailData, passwordData, seller, store, image)
                 .observe(viewLifecycleOwner, ::registerResponse)
         } else {
-            Snackbar.make(binding.root, resources.getString(R.string.error_field), Snackbar.LENGTH_LONG)
+            Snackbar.make(binding.root, requireContext().resources.getString(R.string.error_field), Snackbar.LENGTH_LONG)
                 .show()
         }
     }
@@ -118,7 +118,7 @@ class RegisterFragment : Fragment() {
             is Resource.Error -> {
                 loading.dismiss()
                 Log.e(TAG, data.message.toString())
-                Snackbar.make(binding.root,data.message.toString(), Snackbar.LENGTH_LONG).show()
+                Snackbar.make(binding.root, data.message.toString(), Snackbar.LENGTH_LONG).show()
             }
         }
     }
@@ -180,6 +180,11 @@ class RegisterFragment : Fragment() {
                 RoundedCorners(resources.getDimensionPixelOffset(R.dimen.corner_button))
             )
             .into(binding.rIvStoreImage)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onDestroy() {

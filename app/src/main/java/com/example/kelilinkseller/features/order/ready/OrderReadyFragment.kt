@@ -73,7 +73,7 @@ class OrderReadyFragment : Fragment() {
                         is Resource.Success -> {
                             Toast.makeText(
                                 requireContext(),
-                                resources.getString(R.string.toast_order_done),
+                                requireContext().resources.getString(R.string.toast_order_done),
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
@@ -104,6 +104,11 @@ class OrderReadyFragment : Fragment() {
 
     private fun showEmptyState(state: Boolean) {
         binding.crvEmpty.root.isVisible = state
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onDestroy() {
