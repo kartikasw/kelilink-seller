@@ -71,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.KelilinkSeller.Body2"
-            android:text="Total"
+            android:text="@string/title_total"
             app:layout_constraintBottom_toTopOf="@id/don_btn_ready"
             android:layout_marginBottom="@dimen/margin_layout"
             app:layout_constraintStart_toStartOf="@id/don_btn_ready"/>
@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.KelilinkSeller.Body1"
             android:textStyle="bold"
-            android:text="Rp0"
+            android:text="@string/placeholder_total"
             app:layout_constraintTop_toTopOf="@id/don_tv_title_total"
             app:layout_constraintBottom_toBottomOf="@id/don_tv_title_total"
             app:layout_constraintEnd_toEndOf="@id/don_btn_ready"/>

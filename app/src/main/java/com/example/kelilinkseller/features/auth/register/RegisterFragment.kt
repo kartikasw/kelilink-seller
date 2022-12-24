@@ -1,15 +1,16 @@
 package com.example.kelilinkseller.features.auth.register
 
 import android.content.Intent
+import android.content.Intent.EXTRA_EMAIL
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
@@ -20,7 +21,6 @@ import com.example.kelilinkseller.core.domain.Resource
 import com.example.kelilinkseller.core.domain.model.Seller
 import com.example.kelilinkseller.core.domain.model.Store
 import com.example.kelilinkseller.databinding.FragmentRegisterBinding
-import com.example.kelilinkseller.features.MainActivity
 import com.example.kelilinkseller.util.custom_view.KelilinkLoadingDialog
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -39,6 +39,8 @@ class RegisterFragment : Fragment() {
     private lateinit var categoryChipGroup: ChipGroup
 
     private lateinit var loading: KelilinkLoadingDialog
+
+    private lateinit var emailVerification : String
 
     private var categoryMap = mutableMapOf<Int, String>()
 
@@ -66,9 +68,12 @@ class RegisterFragment : Fragment() {
         val storeName = binding.rEtStoreName
         val email = binding.rEtEmail
         val password = binding.rEtPassword
+        val passwordConfirmation = binding.rEtPasswordConfirmation
+
         val storeNameData = storeName.text.toString()
         val emailData = email.text.toString()
         val passwordData = password.text.toString()
+        val passwordConfirmationData = passwordConfirmation.text.toString()
         val selectedCategory = categoryChipGroup.checkedChipIds
         val image = viewModel.uriImage.value
         val token = viewModel.getFcmToken()
@@ -82,22 +87,30 @@ class RegisterFragment : Fragment() {
         if(
             selectedCategory.isNotEmpty() && storeName.error == null && email.error == null
             && password.error == null && storeNameData.isNotEmpty() && emailData.isNotEmpty()
-            && passwordData.isNotEmpty() && token.isNotEmpty() && image != null
+            && passwordData.isNotEmpty() && passwordData.isNotEmpty()
+            && passwordConfirmation.error == null && image != null
         ) {
-            val seller = Seller(
-                uid = "",
-                email = emailData
-            )
+            if(passwordData == passwordConfirmationData) {
+                emailVerification = emailData
 
-            val store = Store(
-                categories = categoryList,
-                fcm_token = token,
-                name = storeNameData
-            )
+                val seller = Seller(
+                    uid = "",
+                    email = emailData
+                )
 
-           viewModel
-                .register(emailData, passwordData, seller, store, image)
-                .observe(viewLifecycleOwner, ::registerResponse)
+                val store = Store(
+                    categories = categoryList,
+                    fcm_token = token,
+                    name = storeNameData
+                )
+
+                viewModel
+                    .register(emailData, passwordData, seller, store, image)
+                    .observe(viewLifecycleOwner, ::registerResponse)
+            } else {
+                val errorText = requireContext().resources.getString(R.string.error_password_confirmation)
+                passwordConfirmation.error = errorText
+            }
         } else {
             Snackbar.make(binding.root, requireContext().resources.getString(R.string.error_field), Snackbar.LENGTH_LONG)
                 .show()
@@ -108,7 +121,9 @@ class RegisterFragment : Fragment() {
         when(data) {
             is Resource.Success -> {
                 loading.dismiss()
-                startActivity(Intent(requireContext(), MainActivity::class.java)).also {
+                val intent = Intent(requireContext(), VerifyEmailActivity::class.java)
+                intent.putExtra(EXTRA_EMAIL, emailVerification)
+                startActivity(intent).also {
                     requireActivity().finish()
                 }
             }

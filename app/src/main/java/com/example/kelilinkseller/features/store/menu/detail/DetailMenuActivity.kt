@@ -135,6 +135,7 @@ class DetailMenuActivity : AppCompatActivity() {
         with(binding) {
             Glide.with(dmIvMenuImage.context)
                 .load(data!!.image)
+                .placeholder(R.drawable.shimmer_placeholder)
                 .transform(
                     CenterCrop(),
                     RoundedCorners(resources.getDimensionPixelOffset(R.dimen.corner_button))

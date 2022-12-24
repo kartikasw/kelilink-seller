@@ -23,6 +23,7 @@ android {
         Properties properties = new Properties()
         properties.load(project.rootProject.file("local.properties").newDataInputStream())
         buildConfigField "String", "SERVER_KEY", "\"${properties.getProperty("SERVER_KEY")}\""
+        signingConfig signingConfigs.debug
     }
 
     buildTypes {

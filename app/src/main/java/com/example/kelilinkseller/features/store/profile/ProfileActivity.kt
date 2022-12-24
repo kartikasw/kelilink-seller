@@ -65,8 +65,10 @@ class ProfileActivity : AppCompatActivity() {
                     }
                     .setPositiveButton(resources.getString(R.string.btn_logout)) { _, _ ->
                         profileViewModel.logout()
-                        startActivity(Intent(this@ProfileActivity, AuthActivity::class.java))
-                        finish()
+                        val intent = Intent(this@ProfileActivity, AuthActivity::class.java)
+                        startActivity(intent).also {
+                            finishAffinity()
+                        }
                     }
                     .show()
             }

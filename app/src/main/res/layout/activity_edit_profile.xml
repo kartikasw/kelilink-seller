@@ -79,8 +79,7 @@
                     android:hint="@string/hint_store_name"
                     android:paddingHorizontal="@dimen/margin_component_more"
                     app:layout_constraintTop_toBottomOf="@id/ep_layout_store_image"
-                    tools:ignore="TextContrastCheck"
-                    tools:layout_editor_absoluteX="16dp" />
+                    tools:ignore="TextContrastCheck"/>
 
                 <LinearLayout
                     android:id="@+id/ep_layout_category"

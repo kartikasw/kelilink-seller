@@ -24,9 +24,9 @@ class KelilinkFirebaseMessagingService: FirebaseMessagingService() {
 
         private var sharedPref: KelilinkPreference? = null
 
-        var token: String? = null
+        var token: String = ""
             set(value) {
-                sharedPref?.setFcmToken(token!!)
+                sharedPref?.setFcmToken(token)
                 field = value
             }
     }
@@ -39,20 +39,24 @@ class KelilinkFirebaseMessagingService: FirebaseMessagingService() {
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
         Log.d(TAG, message.toString())
-        sendNotification("Kamu punya pesanan baru")
+        sendNotification()
     }
 
-    private fun sendNotification(title: String?) {
+    private fun sendNotification() {
         val contentIntent = Intent(applicationContext, MainActivity::class.java)
         val contentPendingIntent = PendingIntent.getActivity(
             applicationContext,
             0,
             contentIntent,
-            PendingIntent.FLAG_IMMUTABLE
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            } else {
+                PendingIntent.FLAG_UPDATE_CURRENT
+            }
         )
         val notificationBuilder = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_logo_notification)
-            .setContentTitle(title)
+            .setContentTitle("Kamu punya pesanan baru")
             .setContentText("Waktu terus berjalan, segera terima pesanan sebelum otomatis tertolak")
             .setContentIntent(contentPendingIntent)
             .setAutoCancel(true)

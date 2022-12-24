@@ -43,13 +43,28 @@ abstract class FirebaseService {
         password: String
     ): Flow<Response<String>> =
         flow {
-            val createUser = auth.createUserWithEmailAndPassword(email, password).await()
-            val user = createUser.user
-            if (user != null) {
-                emit(Response.Success(user.uid))
+            val createUser = auth
+                .createUserWithEmailAndPassword(email, password)
+                .await()
+
+            createUser.user!!.sendEmailVerification()
+            val uid = createUser.user?.uid
+
+            if (uid != null) {
+                emit(Response.Success(uid))
             } else {
-                emit(Response.Empty)
+                emit(Response.Error("Daftar gagal"))
             }
+        }.catch {
+            emit(Response.Error(it.message.toString()))
+        }.flowOn(Dispatchers.IO)
+
+    fun sendEmailVerification(): Flow<Response<Unit>> =
+        flow <Response<Unit>>{
+            getUser()!!.sendEmailVerification()
+            signOut()
+
+            emit(Response.Success(Unit))
         }.catch {
             emit(Response.Error(it.message.toString()))
         }.flowOn(Dispatchers.IO)
@@ -59,12 +74,17 @@ abstract class FirebaseService {
         password: String
     ): Flow<Response<String>> =
         flow {
-            val createUser = auth.signInWithEmailAndPassword(email, password).await()
+            val createUser = auth
+                .signInWithEmailAndPassword(email, password)
+                .await()
+
             val user = createUser.user
-            if (user != null) {
+
+            if (user!!.isEmailVerified) {
                 emit(Response.Success(user.uid))
             } else {
-                emit(Response.Empty)
+                signOut()
+                emit(Response.Error("Email belum diverifikasi"))
             }
         }.catch {
             emit(Response.Error(it.message.toString()))

@@ -65,8 +65,9 @@
                         android:layout_height="@dimen/image_view_input"
                         android:layout_gravity="center"
                         android:layout_marginTop="@dimen/margin_component_more"
+                        android:contentDescription="@string/content_description_image"
                         android:src="@drawable/placeholder_add_image"
-                        tools:ignore="ContentDescription,ImageContrastCheck" />
+                        tools:ignore="ImageContrastCheck" />
 
                 </LinearLayout>
 
@@ -89,11 +90,12 @@
                     android:layout_height="@dimen/height_text_input_long"
                     android:layout_marginHorizontal="@dimen/margin_layout"
                     android:layout_marginTop="@dimen/margin_component_extra"
+                    android:gravity="top"
                     android:hint="@string/hint_description"
                     android:inputType="text"
-                    android:gravity="top"
+                    android:padding="@dimen/margin_component_more"
                     android:singleLine="false"
-                    android:padding="@dimen/margin_component_more"                    app:layout_constraintTop_toBottomOf="@+id/mf_et_name"
+                    app:layout_constraintTop_toBottomOf="@+id/mf_et_name"
                     tools:ignore="TextContrastCheck"
                     tools:layout_editor_absoluteX="16dp" />
 
@@ -149,8 +151,7 @@
                     android:text="@string/btn_save"
                     app:layout_constraintEnd_toEndOf="@+id/mf_layout_menu_image"
                     app:layout_constraintStart_toStartOf="@+id/guideline3"
-                    app:layout_constraintTop_toBottomOf="@+id/textView6"
-                    tools:ignore="TextContrastCheck" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView6"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

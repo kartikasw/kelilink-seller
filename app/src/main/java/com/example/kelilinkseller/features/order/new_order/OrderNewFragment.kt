@@ -80,38 +80,19 @@ class OrderNewFragment : Fragment() {
 
             onAcceptClick = {
                 orderViewModel.acceptOrder(it.id).observe(viewLifecycleOwner) { resource ->
-                    updateResponse(resource, COOKING)
+                    updateResponse(resource, COOKING, it)
                 }
             }
 
             onDeclineClick = {
                 orderViewModel.declineOrder(it.id).observe(viewLifecycleOwner) { resource ->
-                    updateResponse(resource, DECLINED)
+                    updateResponse(resource, DECLINED, it)
                 }
             }
 
             onReadyClick = {
-                orderViewModel.sendFcm(
-                    Fcm(
-                        to = it.user_fcm_token,
-                        FcmData(
-                            invoice_id = it.id,
-                            store_id = it.store_id,
-                            store_name = it.store_name
-                        )
-                    )
-                ).observe(viewLifecycleOwner) { fcmResource ->
-                    when(fcmResource) {
-                        is Resource.Success -> {
-                            orderViewModel.markOrderAsReady(it.id).observe(viewLifecycleOwner) { resource ->
-                                updateResponse(resource, READY)
-                            }
-                        }
-                        is Resource.Error -> {
-                            Log.e(TAG, fcmResource.message.toString())
-                        }
-                        else -> {}
-                    }
+                orderViewModel.markOrderAsReady(it.id).observe(viewLifecycleOwner) { resource ->
+                    updateResponse(resource, READY, it)
                 }
             }
 
@@ -127,7 +108,7 @@ class OrderNewFragment : Fragment() {
         }
     }
 
-    private fun updateResponse(resource: Resource<Unit>, status: String) {
+    private fun updateResponse(resource: Resource<Unit>, status: String, invoice: Invoice) {
         when(resource) {
             is Resource.Success -> {
                 val toastText = when (status) {
@@ -144,6 +125,32 @@ class OrderNewFragment : Fragment() {
                         requireContext().resources.getString(R.string.toast_order_done)
                     }
                 }
+
+                if(status == READY) {
+                    if(invoice.user_fcm_token != "") {
+                        orderViewModel.sendFcm(
+                            Fcm(
+                                to = invoice.user_fcm_token,
+                                FcmData(
+                                    invoice_id = invoice.id,
+                                    store_id = invoice.store_id,
+                                    store_name = invoice.store_name
+                                )
+                            )
+                        ).observe(viewLifecycleOwner) { fcmResource ->
+                            when(fcmResource) {
+                                is Resource.Success -> {
+                                    Log.d(TAG, "FCM sent successfully")
+                                }
+                                is Resource.Error -> {
+                                    Log.e(TAG, fcmResource.message.toString())
+                                }
+                                else -> {}
+                            }
+                        }
+                    }
+                }
+
                 Toast.makeText(requireContext(), toastText, Toast.LENGTH_SHORT).show()
             }
             is Resource.Error -> {

@@ -29,6 +29,7 @@
 
             <include
                 android:id="@+id/dod_layout_info"
+                android:visibility="invisible"
                 layout="@layout/content_detail_order"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -61,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.KelilinkSeller.Body2"
-            android:text="Total"
+            android:text="@string/title_total"
             android:layout_marginStart="@dimen/margin_layout"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="@dimen/margin_layout"
@@ -73,7 +74,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.KelilinkSeller.Body1"
             android:textStyle="bold"
-            android:text="Rp0"
+            android:text="@string/placeholder_total"
             android:layout_marginEnd="@dimen/margin_layout"
             app:layout_constraintTop_toTopOf="@id/dod_tv_title_total"
             app:layout_constraintBottom_toBottomOf="@id/dod_tv_title_total"

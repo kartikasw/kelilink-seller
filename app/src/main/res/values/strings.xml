@@ -37,6 +37,7 @@
     <string name="btn_save">Simpan</string>
     <string name="btn_forgot_password">Lupa kata sandi?</string>
     <string name="btn_send">Kirim</string>
+    <string name="btn_to_login">Ke halaman masuk</string>
 
     <string name="title_login">Selamat datang di Kelilink Seller!</string>
     <string name="content_login">Kelola usaha Anda dengan satu gerakan tangan.</string>
@@ -60,12 +61,17 @@
     <string name="title_stock_management">Stok tersedia</string>
     <string name="content_stock_management">Menu dengan stok tersedia/aktif akan muncul di daftar menu dagangan dan dapat dipesan oleh pelanggan</string>
     <string name="title_order_empty">Tidak ada pesanan</string>
+    <string name="title_total">Total</string>
 
     <string name="title_email">Email</string>
+    <string name="title_signed_email">Email Terdaftar</string>
     <string name="content_reset_password">Isi dengan email yang Anda gunakan ketika mendaftar akun.</string>
 
     <string name="title_delete">Hapus</string>
     <string name="content_delete_menu">Anda yakin ingin menghapus menu ini?</string>
+
+    <string name="title_verify_email">Verifikasi Email</string>
+    <string name="content_verify_email">Link verifikasi telah dikirim ke &lt;b>%1$s&lt;/b>. Segera cek email Anda dan tekan tombol verifikasi untuk melanjutkan proses pendaftaran.</string>
 
     <string name="title_account">Akun</string>
     <string name="title_other">Lainnya</string>
@@ -79,12 +85,14 @@
     <string name="hint_store_name">Nama Dagangan</string>
     <string name="hint_email">Email</string>
     <string name="hint_password">Kata Sandi</string>
+    <string name="hint_password_confirmastion">Konfirmasi Kata Sandi</string>
     <string name="hint_password_new">Kata Sandi Baru</string>
     <string name="hint_password_old">Kata Sandi Lama</string>
 
     <string name="error_field_empty">Data harus diisi</string>
     <string name="error_field_email">Email tidak valid</string>
     <string name="error_field_password">Kata sandi terlalu pendek</string>
+    <string name="error_password_confirmation">Kata sandi tidak sama</string>
     <string name="error_field">Periksa data Anda kembali</string>
 
     <string name="state_loading" tools:ignore="TypographyEllipsis">Sedang memuat...</string>
@@ -101,6 +109,10 @@
     <string name="ordered_menu_format">%2dx \u0020%2$s</string>
 
     <string name="placeholder_whatsapp_message">Saya (nama), domisili (nama daerah), ingin mengajukan laporan mengenai (maksud)</string>
+    <string name="placeholder_total">Rp0,00</string>
+
+    <string name="content_description_image">Gambar</string>
+
     <string-array name="menu_name">
         <item>Profil</item>
         <item>Menu</item>
@@ -123,6 +135,5 @@
         <item>Nasi</item>
         <item>Sate</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
