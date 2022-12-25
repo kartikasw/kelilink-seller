@@ -7,6 +7,7 @@ import com.example.kelilinkseller.core.data.source.remote.RemoteDataSource
 import com.example.kelilinkseller.core.domain.Resource
 import com.example.kelilinkseller.core.domain.model.Seller
 import com.example.kelilinkseller.core.domain.repository.SellerRepository
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
@@ -18,6 +19,9 @@ class SellerRepositoryImpl @Inject constructor(
     private val local: LocalDataSource,
     private val remote: RemoteDataSource
 ): SellerRepository {
+
+    override fun getUser(): FirebaseUser =
+        remote.getUser()!!
 
     override fun setFcmToken(token: String) {
         local.setFcmToken(token)

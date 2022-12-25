@@ -65,6 +65,7 @@ class ProfileActivity : AppCompatActivity() {
                     }
                     .setPositiveButton(resources.getString(R.string.btn_logout)) { _, _ ->
                         profileViewModel.logout()
+                        Log.d(TAG, Firebase.auth.currentUser?.uid.toString())
                         val intent = Intent(this@ProfileActivity, AuthActivity::class.java)
                         startActivity(intent).also {
                             finishAffinity()

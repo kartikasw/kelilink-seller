@@ -2,6 +2,7 @@ package com.example.kelilinkseller.core.ui
 
 import android.annotation.SuppressLint
 import android.os.CountDownTimer
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -87,9 +88,7 @@ class OrderAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         @SuppressLint("SetTextI18n")
         fun bind(invoice: Invoice) {
             with(binding) {
-                val timeNow = Calendar.getInstance().time.time
-                val millisInFuture = invoice.time_expire.time - timeNow
-                val timer: CountDownTimer = object : CountDownTimer(millisInFuture, 1000) {
+                val timer: CountDownTimer = object : CountDownTimer(24000, 1000) {
                     override fun onTick(millisUntilFinished: Long) {
                         val seconds = millisUntilFinished/1000
                         binding.iowBtnAccept.text = "Terima 00:${(seconds % 60).toString().padStart(2, '0')}"

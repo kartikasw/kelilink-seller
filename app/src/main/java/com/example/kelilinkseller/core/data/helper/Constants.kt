@@ -15,6 +15,7 @@ object Constants {
 
     object PreferenceValue {
         const val FCM_TOKEN = "fcm_token"
+        const val FIRST_RUN = "first_run"
         const val INVOICE_ID = "invoice_id"
     }
 

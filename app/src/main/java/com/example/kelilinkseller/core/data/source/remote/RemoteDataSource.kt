@@ -73,6 +73,8 @@ class RemoteDataSource @Inject constructor(
             emit(Response.Error(it.message.toString()))
         }.flowOn(Dispatchers.IO)
 
+    fun getUser() = seller.getUser()
+
     fun updatePassword(oldPassword: String, newPassword: String) =
         seller.updatePassword(oldPassword, newPassword)
 
