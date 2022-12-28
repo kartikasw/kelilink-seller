@@ -70,7 +70,7 @@
 
                 </LinearLayout>
 
-                <com.example.kelilinkseller.util.custom_view.KelilinkEditText
+                <com.kartikasw.kelilinkseller.util.custom_view.KelilinkEditText
                     android:id="@+id/ep_et_store_name"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_text_input"

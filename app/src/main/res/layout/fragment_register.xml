@@ -45,7 +45,7 @@
             android:textAppearance="@style/TextAppearance.KelilinkSeller.Body2"
             app:layout_constraintTop_toBottomOf="@+id/r_tv_title_regiter" />
 
-        <com.example.kelilinkseller.util.custom_view.KelilinkEditText
+        <com.kartikasw.kelilinkseller.util.custom_view.KelilinkEditText
             android:id="@+id/r_et_store_name"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_text_input"
@@ -131,7 +131,7 @@
 
         </LinearLayout>
 
-        <com.example.kelilinkseller.util.custom_view.KelilinkEditText
+        <com.kartikasw.kelilinkseller.util.custom_view.KelilinkEditText
             android:id="@+id/r_et_email"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_text_input"
@@ -143,7 +143,7 @@
             app:layout_constraintTop_toBottomOf="@id/r_layout_category"
             tools:ignore="TextContrastCheck"/>
 
-        <com.example.kelilinkseller.util.custom_view.KelilinkEditText
+        <com.kartikasw.kelilinkseller.util.custom_view.KelilinkEditText
             android:id="@+id/r_et_password"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_text_input"
@@ -155,7 +155,7 @@
             app:layout_constraintTop_toBottomOf="@id/r_et_email"
             tools:ignore="TextContrastCheck"/>
 
-        <com.example.kelilinkseller.util.custom_view.KelilinkEditText
+        <com.kartikasw.kelilinkseller.util.custom_view.KelilinkEditText
             android:id="@+id/r_et_password_confirmation"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_text_input"

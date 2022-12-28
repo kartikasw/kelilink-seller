@@ -8,15 +8,15 @@ plugins {
 }
 
 android {
-    namespace 'com.example.kelilinkseller'
+    namespace 'com.kartikasw.kelilinkseller'
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.example.kelilinkseller"
+        applicationId "com.kartikasw.kelilinkseller"
         minSdk 21
         targetSdk 32
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.2z"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 

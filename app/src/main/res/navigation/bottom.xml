@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/bottom_nav_order"
-        android:name="com.example.kelilinkseller.features.order.OrderFragment"
+        android:name="com.kartikasw.kelilinkseller.features.order.OrderFragment"
         android:label="fragment_order"
         tools:layout="@layout/fragment_order" />
     <fragment
         android:id="@+id/bottom_nav_store"
-        android:name="com.example.kelilinkseller.features.store.StoreFragment"
+        android:name="com.kartikasw.kelilinkseller.features.store.StoreFragment"
         android:label="fragment_store"
         tools:layout="@layout/fragment_store" />
 </navigation>
